@@ -1,0 +1,61 @@
+<html>
+
+    <head>
+        <title></title>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    </head>
+
+    <body>
+        <div id='wrapper'>
+
+            <div id='infoWrapper'>
+            </div>
+
+            <div id="toggleWrapper">
+            </div>
+
+            <div id='contentWrapper'>
+                <x3d id='x3dwrapper'>
+                    <scene>
+                        <inline nameSpaceName='anatomicalModel' mapDEFToID='true' url='../database/clients/patient950/anatomicalModel.x3d' />
+                    </scene>
+                </x3d>
+
+                <div id='twoDeeDrawing'>
+                    <img id='imageDisplayID'>
+                </div>
+
+                <div id='HTMLdiv'>
+                    <div id='displayHTML'>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //Patient 950
+            let xmlFile = '../database/clients/patient950/example.x3d';
+            let diagHTML = [{
+                    "p": "Example p tag"
+                },
+                {
+                    "container": {
+                        "outerType": "ul",
+                        "innerType": "li",
+                        "contents": [
+                            "example list and list items",
+                            "example list and list items",
+                            "example list and list items",
+                            "example list and list items"
+                        ]
+                    }
+                }
+            ];
+        </script>
+        <script type='text/javascript' src='../X3DOM/x3dom.js'></script>
+        <link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
+        <script type='text/javascript' src='js/index.js'></script>
+        <link rel='stylesheet' type='text/css' href='css/style.css' />
+    </body>
+
+</html>
