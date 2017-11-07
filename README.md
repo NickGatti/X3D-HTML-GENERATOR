@@ -1,6 +1,6 @@
 # X3DOM HTML Generator
 
-## Auto-Render HTML From your X3Dom files or 3D Printer compatible files
+## Auto-Render HTML From your X3Dom or 3D Printer compatible files
 
 X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to sDEF XML value (will soon parse XML for Shape DEF) and also appends colors to the sDEF through the diffuseColorHex value. Manually added XML values. Later on to decide more to add and which way to add them.
 
