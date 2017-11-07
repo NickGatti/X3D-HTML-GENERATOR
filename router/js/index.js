@@ -1,6 +1,5 @@
 /*
 ** Author  : Nick Gatti
-** For     : Phoenix Childrens Hospital, 3D Print Lab
 ** Contact : https://www.linkedin.com/in/nick-gatti/
 ** Nick    : https://github.com/NickGatti
 ** Licence : MIT License
