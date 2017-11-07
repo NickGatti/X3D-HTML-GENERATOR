@@ -1,5 +1,10 @@
 # X3DOM HTML Generator
 
+[logo]: http://www.codn.io/img/portfolio/x3dom.jpg "X3Dom HTML Generator"
+![X3Dom HTML Generator][logo]
+
+[Running code on my site](http://www.codn.io/x3dom-html-generator/)
+
 ## Auto-Render HTML From your X3Dom or 3D Printer compatible files
 
 X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to sDEF XML value (will soon parse XML for Shape DEF) and also appends colors to the sDEF through the diffuseColorHex value. Manually added XML values. Later on to decide more to add and which way to add them.
@@ -37,3 +42,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+http://www.codn.io/x3dom-html-generator/
