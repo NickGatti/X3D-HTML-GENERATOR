@@ -1,21 +1,18 @@
 /*
 ** Author  : Nick Gatti
+** For     : Phoenix Childrens Hospital, 3D Print Lab
 ** Contact : https://www.linkedin.com/in/nick-gatti/
 ** Nick    : https://github.com/NickGatti
 ** Licence : MIT License
-
 Copyright (c) 2017 Nicholas Gatti
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,194 +20,343 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 */
+
 let instructionsJSON = [ {
-    h2: "Instructions"
-}, {
-    p: "Mouse Button"
-}, {
-    p: "LMB (Left Mouse Button) - Rotate, hold and move"
-}, {
-    p: "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
-}, {
-    p: "RMB (Right Mouse Button) - Pan, hold and move"
-} ];
-window.onresize = () => {
-    document.getElementById( "toggleWrapper" )
-        .style.display = 601 < window.innerWidth ? "flex" : "block"
-};
+        "h2": "Instructions"
+    },
+    {
+        "p": "Mouse Button"
+    },
+    {
+        "p": "LMB (Left Mouse Button) - Rotate, hold and move"
+    },
+    {
+        "p": "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
+    },
+    {
+        "p": "RMB (Right Mouse Button) - Pan, hold and move"
+    }
+]; // This variable exists because we dont have a back end running
+
+
+window.onresize = ( () => {
+    if ( window.innerWidth > 601 ) {
+        document.getElementById( 'toggleWrapper' )
+            .style.display = 'flex';
+    } else {
+        document.getElementById( 'toggleWrapper' )
+            .style.display = 'block';
+    }
+} );
+
 let buttonToggle = {
     x3dwrapper: {
-        id: "x3dwrapper",
-        toggle: !0
+        id: 'x3dwrapper',
+        toggle: true
     },
     instructions: {
-        id: "HTMLdiv",
-        toggle: !1
+        id: 'HTMLdiv',
+        toggle: false
     },
     compareThreeDee: {
-        id: "HTMLdiv",
-        toggle: !1
+        id: 'HTMLdiv',
+        toggle: false
     },
     diagnosis: {
-        id: "HTMLdiv",
-        toggle: !1
+        id: 'HTMLdiv',
+        toggle: false
     },
     twoDeeDrawing: {
-        id: "twoDeeDrawing",
-        toggle: !1
+        id: 'twoDeeDrawing',
+        toggle: false
     }
 };
-var oReq = new XMLHttpRequest;
+
+var oReq = new XMLHttpRequest();
+
 let dataObj = {
-        toggleBar: {},
-        anatomicalModel: {},
-        IPCCCID: {}
-    },
-    quoteParse = ( a, b, c, d ) => {
-        let e = null;
-        for ( let f = b; !d.slice( a, a + f )
-            .endsWith( "\"" ); f++ ) e = d.slice( a + c, a + f );
-        return e
-    },
-    createParseArray = ( a, b ) => {
-        let c = b.indexOf( a ),
-            d = 0,
-            e = [],
-            f = [];
-        for ( let g = c; 0 >= d; c + g++ ) - 1 == c && d++, 0 < c && e.push( c ), c = b.indexOf( a, g + c );
-        for ( let g = 0; g < e.length; g++ ) f.push( quoteParse( e[ g ], a.length + 3, a.length + 2, b ) );
-        return f
-    },
-    createParse = ( a, b ) => {
-        return quoteParse( b.indexOf( a ), a.length + 3, a.length + 2, b )
-    },
-    appendToggleButtons = () => {
-        let a = document.getElementById( "toggleWrapper" ),
-            b = document.createElement( "div" );
-        for ( let c = 0; c < dataObj.toggleBar.ID.length; c++ ) b.className = "selectTab", b.innerHTML = dataObj.toggleBar.text[ c ] + "<br> ON", b.id = dataObj.toggleBar.ID[ c ], a.appendChild( b ), a = document.getElementById( "toggleWrapper" ), b = document.createElement( "div" ), document.getElementById( dataObj.toggleBar.ID[ c ] )
-            .addEventListener( "click", () => {
-                let d = document.getElementById( dataObj.anatomicalModel.ID[ c ] );
-                d && ( void 0 === typeof d.renderToggle ? ( d.setAttribute( "render", !1 ), d.renderToggle = !0 ) : d.renderToggle ? ( d.setAttribute( "render", !0 ), d.renderToggle = !1, document.getElementById( dataObj.toggleBar.ID[ c ] )
-                    .innerHTML = dataObj.toggleBar.text[ c ] + "<br> ON" ) : ( d.setAttribute( "render", !1 ), d.renderToggle = !0, document.getElementById( dataObj.toggleBar.ID[ c ] )
-                    .innerHTML = dataObj.toggleBar.text[ c ] + "<br> OFF" ) )
-            } )
-    },
-    hoverTransition = ( a, b ) => {
-        document.getElementById( a )
-            .addEventListener( "mouseover", () => {
-                document.getElementById( a )
-                    .style.backgroundColor = "lime"
-            } ), document.getElementById( a )
-            .addEventListener( "mouseout", () => {
-                document.getElementById( a )
-                    .style.backgroundColor = b
-            } ), document.getElementById( a )
-            .addEventListener( "touchstart", () => {
-                document.getElementById( a )
-                    .style.backgroundColor = "lime"
-            } ), document.getElementById( a )
-            .addEventListener( "touchend", () => {
-                document.getElementById( a )
-                    .style.backgroundColor = b
-            } )
-    },
-    colorToggleButtons = () => {
-        for ( let a = 0; a < dataObj.toggleBar.ID.length; a++ ) document.getElementById( dataObj.toggleBar.ID[ a ] )
-            .style.backgroundColor = dataObj.toggleBar.color[ a ], hoverTransition( dataObj.toggleBar.ID[ a ], dataObj.toggleBar.color[ a ] )
-    },
-    useButtonToggleObj = () => {
-        let a = "";
-        for ( let b in buttonToggle ) buttonToggle[ b ].toggle ? a = buttonToggle[ b ].id : document.getElementById( buttonToggle[ b ].id )
-            .style.display = "none";
-        document.getElementById( a )
-            .style.display = "flex"
-    },
-    switchDefaultButton = () => {
-        buttonToggle.x3dwrapper.toggle = !buttonToggle.x3dwrapper.toggle
-    },
-    switchSelectedButton = a => {
-        if ( buttonToggle[ a ].toggle ) return buttonToggle.x3dwrapper.toggle = !0, void( buttonToggle[ a ].toggle = !1 );
-        for ( let b in buttonToggle ) buttonToggle[ b ].toggle = !1;
-        buttonToggle[ a ].toggle = !0
-    },
-    toggleDivs = a => {
-        switchDefaultButton(), switchSelectedButton( a ), useButtonToggleObj( a )
-    },
-    toggleHTML = a => {
-        document.getElementById( "displayHTML" )
-            .innerHTML = "";
-        let b = null,
-            c = null,
-            d = null;
-        for ( let f, e = 0; e < a.length; e++ ) {
-            if ( f = Object.keys( a[ e ] ), "container" == f ) {
-                c = document.createElement( a[ e ].container.outerType );
-                for ( let g = 0; g < a[ e ].container.contents.length; g++ ) b = document.createElement( a[ e ].container.innerType ), b.innerHTML = a[ e ].container.contents[ g ], c.appendChild( b );
-                document.getElementById( "displayHTML" )
-                    .appendChild( c )
-            } else b = document.createElement( f ), b.innerHTML = a[ e ][ f ], document.getElementById( "displayHTML" )
-                .appendChild( b );
-            if ( e === a.length - 1 )
-                for ( let g = 0; 6 > g; g++ ) d = document.createElement( "br" ), document.getElementById( "displayHTML" )
-                    .appendChild( d )
+    toggleBar: {},
+    anatomicalModel: {},
+    IPCCCID: {}
+};
+
+let quoteParse = ( ( startPos, aPos, bPos, res ) => {
+    let output = null;
+    for ( let i = aPos; !( res.slice( startPos, startPos + i )
+            .endsWith( '"' ) ); i++ ) {
+        output = res.slice( startPos + bPos, startPos + i );
+    }
+    return output;
+} );
+
+let createParseArray = ( ( input, text ) => {
+    let startPos = text.indexOf( input ),
+        stop = 0,
+        XMLArray = [],
+        output = [];
+    for ( let i = startPos; stop <= 0; startPos + i++ ) {
+        if ( startPos == -1 ) stop++;
+        if ( startPos > 0 ) XMLArray.push( startPos );
+        startPos = text.indexOf( input, i + startPos );
+    }
+    for ( let z = 0; z < XMLArray.length; z++ ) {
+        output.push( quoteParse( XMLArray[ z ], input.length + 3, input.length + 2, text ) );
+    }
+    return output;
+} );
+
+let createParse = ( ( input, text ) => {
+    return quoteParse( text.indexOf( input ), input.length + 3, input.length + 2, text );
+} );
+
+let appendToggleButtons = ( () => {
+    let form = document.getElementById( 'toggleWrapper' ),
+        div = document.createElement( 'div' );
+    for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
+        div.className = 'selectTab';
+        div.innerHTML = dataObj.toggleBar.text[ i ] + '<br> ON';
+        div.id = dataObj.toggleBar.ID[ i ];
+        form.appendChild( div );
+        form = document.getElementById( 'toggleWrapper' );
+        div = document.createElement( 'div' );
+        document.getElementById( dataObj.toggleBar.ID[ i ] )
+            .addEventListener( 'click', ( () => {
+                let anatomicalModel = document.getElementById( dataObj.anatomicalModel.ID[ i ] );
+                if ( anatomicalModel ) {
+                    if ( typeof anatomicalModel.renderToggle === undefined ) {
+                        anatomicalModel.setAttribute( 'render', false );
+                        anatomicalModel.renderToggle = true;
+                    } else if ( anatomicalModel.renderToggle ) {
+                        anatomicalModel.setAttribute( 'render', true );
+                        anatomicalModel.renderToggle = false;
+                        document.getElementById( dataObj.toggleBar.ID[ i ] )
+                            .innerHTML = dataObj.toggleBar.text[ i ] + '<br> ON';
+                    } else {
+                        anatomicalModel.setAttribute( 'render', false );
+                        anatomicalModel.renderToggle = true;
+                        document.getElementById( dataObj.toggleBar.ID[ i ] )
+                            .innerHTML = dataObj.toggleBar.text[ i ] + '<br> OFF';
+                    }
+                }
+            } ) );
+    }
+} );
+
+let hoverTransition = ( ( id, originalColor ) => {
+    document.getElementById( id )
+        .addEventListener( 'mouseover', ( () => {
+            document.getElementById( id )
+                .style.backgroundColor = 'lime';
+        } ) );
+    document.getElementById( id )
+        .addEventListener( 'mouseout', ( () => {
+            document.getElementById( id )
+                .style.backgroundColor = originalColor;
+        } ) );
+    document.getElementById( id )
+        .addEventListener( 'touchstart', ( () => {
+            document.getElementById( id )
+                .style.backgroundColor = 'lime';
+        } ) );
+    document.getElementById( id )
+        .addEventListener( 'touchend', ( () => {
+            document.getElementById( id )
+                .style.backgroundColor = originalColor;
+        } ) );
+} );
+
+let colorToggleButtons = ( () => {
+    for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
+        document.getElementById( dataObj.toggleBar.ID[ i ] )
+            .style.backgroundColor = dataObj.toggleBar.color[ i ];
+        hoverTransition( dataObj.toggleBar.ID[ i ], dataObj.toggleBar.color[ i ] );
+    }
+} );
+
+let useButtonToggleObj = ( () => {
+    let output = '';
+    for ( let key in buttonToggle ) {
+        if ( buttonToggle[ key ].toggle ) {
+            output = buttonToggle[ key ].id;
+        } else {
+            document.getElementById( buttonToggle[ key ].id )
+                .style.display = 'none';
         }
-    },
-    appendInfoButtons = () => {
-        let a = document.getElementById( "infoWrapper" ),
-            b = ( c, d, e, f ) => {
-                c.className = "selectTab", f && ( c.id = f ), c.innerHTML = e, c.style.background = "deepskyblue", a.appendChild( c )
-            };
-        b( document.createElement( "div" ), "deepskyblue", "Instructions", "instructionsButton" ), b( document.createElement( "div" ), "deepskyblue", "Hide/Show", "showToggleWrapperButton" ), b( document.createElement( "div" ), "deepskyblue", "Compare 3D", "compareThreeDeeButton" ), b( document.createElement( "div" ), "deepskyblue", "Diag Info", "diagnosisButton" ), b( document.createElement( "div" ), "deepskyblue", "2D Drawing", "twoDeeDrawingButton" ), b( document.createElement( "div" ), "deepskyblue", "IPCCCID: " + dataObj.IPCCCID.ID ), document.getElementById( "showToggleWrapperButton" )
-            .addEventListener( "click", () => {
-                "hidden" === document.getElementById( "toggleWrapper" )
-                    .style.visibility ? ( document.getElementById( "toggleWrapper" )
-                        .style.visibility = "visible", document.getElementById( "toggleWrapper" )
-                        .style.display = 600 < window.innerWidth ? "flex" : "block" ) : ( document.getElementById( "toggleWrapper" )
-                        .style.visibility = "hidden", document.getElementById( "toggleWrapper" )
-                        .style.display = "none" )
-            } ), document.getElementById( "instructionsButton" )
-            .addEventListener( "click", () => {
-                toggleHTML( instructionsJSON ), toggleDivs( "instructions" )
-            } ), document.getElementById( "compareThreeDeeButton" )
-            .addEventListener( "click", () => {
-                console.log( "Nothing for this button yet!" )
-            } ), document.getElementById( "diagnosisButton" )
-            .addEventListener( "click", () => {
-                toggleHTML( diagHTML ), toggleDivs( "diagnosis" )
-            } ), document.getElementById( "twoDeeDrawingButton" )
-            .addEventListener( "click", () => {
-                document.getElementById( "imageDisplayID" )
-                    .src = "../database/IPCCCID/2Dimages/" + dataObj.IPCCCID.ID + ".png", toggleDivs( "twoDeeDrawing" )
-            } ), hoverTransition( "instructionsButton", "deepskyblue" ), hoverTransition( "compareThreeDeeButton", "deepskyblue" ), hoverTransition( "diagnosisButton", "deepskyblue" ), hoverTransition( "twoDeeDrawingButton", "deepskyblue" ), hoverTransition( "showToggleWrapperButton", "deepskyblue" )
-    },
-    readXml = () => {
-        oReq.open( "GET", xmlFile ), oReq.send();
-        let b = d => {
-                let e = createParseArray( "sDEF", d );
-                dataObj.toggleBar.text = e.map( f => {
-                    return f
-                } ), dataObj.toggleBar.ID = e.map( f => {
-                    return f
-                } );
-                for ( let f = 0; f < dataObj.toggleBar.ID.length; f++ ) dataObj.toggleBar.ID[ f ] = dataObj.toggleBar.ID[ f ].replace( " ", "_" );
-                dataObj.anatomicalModel.ID = e.map( f => {
-                    return f
-                } );
-                for ( let f = 0; f < dataObj.anatomicalModel.ID.length; f++ ) dataObj.anatomicalModel.ID[ f ] = "anatomicalModel__" + dataObj.anatomicalModel.ID[ f ];
-                e = createParseArray( "diffuseColorHex", d ), dataObj.toggleBar.color = e.map( f => {
-                    return f
-                } ), dataObj.IPCCCID.ID = createParse( "EACTSID", d )
-            },
-            c = () => {
-                appendToggleButtons(), colorToggleButtons(), appendInfoButtons(), document.getElementById( "x3dwrapper" )
-                    .style.display = "flex", document.getElementById( "twoDeeDrawing" )
-                    .style.display = "none", document.getElementById( "HTMLdiv" )
-                    .style.display = "none"
-            };
-        oReq.addEventListener( "load", function () {
-            b( this.responseText ), c()
-        } )
-    };
+    }
+    document.getElementById( output )
+        .style.display = 'flex';
+} );
+
+let switchDefaultButton = ( () => {
+    if ( buttonToggle.x3dwrapper.toggle ) {
+        buttonToggle.x3dwrapper.toggle = false;
+    } else {
+        buttonToggle.x3dwrapper.toggle = true;
+    }
+} );
+
+let switchSelectedButton = ( ( show ) => {
+    if ( buttonToggle[ show ].toggle ) {
+        buttonToggle[ 'x3dwrapper' ].toggle = true;
+        buttonToggle[ show ].toggle = false;
+        return;
+    }
+    for ( let key in buttonToggle ) {
+        buttonToggle[ key ].toggle = false;
+    }
+    buttonToggle[ show ].toggle = true;
+} );
+
+let toggleDivs = ( ( show ) => {
+    switchDefaultButton();
+    switchSelectedButton( show );
+    useButtonToggleObj( show );
+} );
+
+let toggleHTML = ( ( which ) => {
+    document.getElementById( 'displayHTML' )
+        .innerHTML = '';
+    let create = null;
+    let container = null;
+    let br = null;
+    for ( let i = 0; i < which.length; i++ ) {
+        let key = Object.keys( which[ i ] );
+        if ( key == 'container' ) {
+            container = document.createElement( which[ i ].container.outerType );
+            for ( let z = 0; z < which[ i ].container.contents.length; z++ ) {
+                create = document.createElement( which[ i ].container.innerType );
+                create.innerHTML = which[ i ].container.contents[ z ];
+                container.appendChild( create );
+            }
+            document.getElementById( 'displayHTML' )
+                .appendChild( container );
+        } else {
+            create = document.createElement( key );
+            create.innerHTML = which[ i ][ key ];
+            document.getElementById( 'displayHTML' )
+                .appendChild( create );
+        }
+        if ( i === which.length - 1 ) {
+            for ( let x = 0; x < 6; x++ ) {
+                br = document.createElement( 'br' );
+                document.getElementById( 'displayHTML' )
+                    .appendChild( br );
+            }
+        }
+    }
+} );
+
+let appendInfoButtons = ( () => {
+    let form = document.getElementById( 'infoWrapper' );
+
+    let createButton = ( ( node, color, text, id ) => {
+        node.className = 'selectTab';
+        if ( id ) node.id = id;
+        node.innerHTML = text;
+        node.style.background = 'deepskyblue';
+        form.appendChild( node );
+    } );
+
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'showToggleWrapperButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'compareThreeDeeButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Diag Info', 'diagnosisButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'twoDeeDrawingButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'IPCCCID: ' + dataObj.IPCCCID.ID );
+
+    document.getElementById( 'showToggleWrapperButton' )
+        .addEventListener( 'click', ( () => {
+            if ( document.getElementById( 'toggleWrapper' )
+                .style.visibility === 'hidden' ) {
+                document.getElementById( 'toggleWrapper' )
+                    .style.visibility = 'visible';
+                if ( window.innerWidth > 600 ) {
+                    document.getElementById( 'toggleWrapper' )
+                        .style.display = 'flex';
+                } else {
+                    document.getElementById( 'toggleWrapper' )
+                        .style.display = 'block';
+                }
+            } else {
+                document.getElementById( 'toggleWrapper' )
+                    .style.visibility = 'hidden';
+                document.getElementById( 'toggleWrapper' )
+                    .style.display = 'none';
+            }
+        } ) );
+    document.getElementById( 'instructionsButton' )
+        .addEventListener( 'click', ( () => {
+            toggleHTML( instructionsJSON );
+            toggleDivs( 'instructions' );
+        } ) );
+    document.getElementById( 'compareThreeDeeButton' )
+        .addEventListener( 'click', ( () => {
+            console.log( 'Nothing for this button yet!' );
+        } ) );
+    document.getElementById( 'diagnosisButton' )
+        .addEventListener( 'click', ( () => {
+            toggleHTML( diagHTML );
+            toggleDivs( 'diagnosis' );
+        } ) );
+    document.getElementById( 'twoDeeDrawingButton' )
+        .addEventListener( 'click', ( () => {
+            document.getElementById( 'imageDisplayID' )
+                .src = '../database/IPCCCID/2Dimages/' + dataObj.IPCCCID.ID + '.png';
+            toggleDivs( 'twoDeeDrawing' );
+        } ) );
+
+    hoverTransition( 'instructionsButton', 'deepskyblue' );
+    hoverTransition( 'compareThreeDeeButton', 'deepskyblue' );
+    hoverTransition( 'diagnosisButton', 'deepskyblue' );
+    hoverTransition( 'twoDeeDrawingButton', 'deepskyblue' );
+    hoverTransition( 'showToggleWrapperButton', 'deepskyblue' );
+} );
+
+let readXml = ( () => {
+    oReq.open( 'GET', xmlFile );
+    oReq.send();
+
+    let popDataObject = ( ( text ) => {
+        let value = createParseArray( 'sDEF', text );
+        dataObj.toggleBar.text = value.map( ( data ) => {
+            return data;
+        } );
+        dataObj.toggleBar.ID = value.map( ( data ) => {
+            return data;
+        } );
+        for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
+            dataObj.toggleBar.ID[ i ] = dataObj.toggleBar.ID[ i ].replace( ' ', '_' );
+        }
+        dataObj.anatomicalModel.ID = value.map( ( data ) => {
+            return data;
+        } );
+        for ( let i = 0; i < dataObj.anatomicalModel.ID.length; i++ ) {
+            dataObj.anatomicalModel.ID[ i ] = 'anatomicalModel__' + dataObj.anatomicalModel.ID[ i ];
+        }
+        value = createParseArray( 'diffuseColorHex', text );
+        dataObj.toggleBar.color = value.map( ( data ) => {
+            return data;
+        } );
+        dataObj.IPCCCID.ID = createParse( 'EACTSID', text );
+    } );
+
+    let run = ( () => {
+        appendToggleButtons();
+        colorToggleButtons();
+        appendInfoButtons();
+        document.getElementById( 'x3dwrapper' )
+            .style.display = 'flex';
+        document.getElementById( 'twoDeeDrawing' )
+            .style.display = 'none';
+        document.getElementById( 'HTMLdiv' )
+            .style.display = 'none';
+    } );
+
+    function reqListener() {
+        popDataObject( this.responseText );
+        run();
+    }
+    oReq.addEventListener( 'load', reqListener );
+} );
 readXml();
