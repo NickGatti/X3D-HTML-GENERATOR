@@ -3,6 +3,5 @@
 ```
 Authors and Credits:
 
-Nick Gatti
-
+Nicholas Gatti
 ```

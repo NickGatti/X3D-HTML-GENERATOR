@@ -1,7 +1,7 @@
 <html>
 
     <head>
-        <title></title>
+        <title>X3Dom Aorta - X3DOM-HTML-GENERATOR</title>
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     </head>
@@ -18,7 +18,7 @@
             <div id='contentWrapper'>
                 <x3d id='x3dwrapper'>
                     <scene>
-                        <inline nameSpaceName='anatomicalModel' mapDEFToID='true' url='../database/clients/patient730/anatomicalModel.x3d' />
+                        <inline nameSpaceName='x3dModelFile' mapDEFToID='true' url='../database/clients/example-aorta/modelFile.x3d' />
                     </scene>
                 </x3d>
 
@@ -34,10 +34,23 @@
         </div>
         <script type="text/javascript">
             //Patient 730
-            let xmlFile = '../database/clients/patient730/example.x3d';
+            let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
             let diagHTML = [{
-                "p": "To be filled out."
-            }];
+                    "p": "Example p tag"
+                },
+                {
+                    "container": {
+                        "outerType": "ul",
+                        "innerType": "li",
+                        "contents": [
+                            "example list and list items",
+                            "example list and list items",
+                            "example list and list items",
+                            "example list and list items"
+                        ]
+                    }
+                }
+            ];
         </script>
         <script type='text/javascript' src='../X3DOM/x3dom.js'></script>
         <link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
