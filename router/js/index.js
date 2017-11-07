@@ -77,7 +77,7 @@ var oReq = new XMLHttpRequest();
 
 let dataObj = {
     toggleBar: {},
-    anatomicalModel: {},
+    x3DomObject: {},
     IPCCCID: {}
 };
 
@@ -122,19 +122,19 @@ let appendToggleButtons = ( () => {
         div = document.createElement( 'div' );
         document.getElementById( dataObj.toggleBar.ID[ i ] )
             .addEventListener( 'click', ( () => {
-                let anatomicalModel = document.getElementById( dataObj.anatomicalModel.ID[ i ] );
-                if ( anatomicalModel ) {
-                    if ( typeof anatomicalModel.renderToggle === undefined ) {
-                        anatomicalModel.setAttribute( 'render', false );
-                        anatomicalModel.renderToggle = true;
-                    } else if ( anatomicalModel.renderToggle ) {
-                        anatomicalModel.setAttribute( 'render', true );
-                        anatomicalModel.renderToggle = false;
+                let x3DomObject = document.getElementById( dataObj.x3DomObject.ID[ i ] );
+                if ( x3DomObject ) {
+                    if ( typeof x3DomObject.renderToggle === undefined ) {
+                        x3DomObject.setAttribute( 'render', false );
+                        x3DomObject.renderToggle = true;
+                    } else if ( x3DomObject.renderToggle ) {
+                        x3DomObject.setAttribute( 'render', true );
+                        x3DomObject.renderToggle = false;
                         document.getElementById( dataObj.toggleBar.ID[ i ] )
                             .innerHTML = dataObj.toggleBar.text[ i ] + '<br> ON';
                     } else {
-                        anatomicalModel.setAttribute( 'render', false );
-                        anatomicalModel.renderToggle = true;
+                        x3DomObject.setAttribute( 'render', false );
+                        x3DomObject.renderToggle = true;
                         document.getElementById( dataObj.toggleBar.ID[ i ] )
                             .innerHTML = dataObj.toggleBar.text[ i ] + '<br> OFF';
                     }
@@ -328,11 +328,11 @@ let readXml = ( () => {
         for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
             dataObj.toggleBar.ID[ i ] = dataObj.toggleBar.ID[ i ].replace( ' ', '_' );
         }
-        dataObj.anatomicalModel.ID = value.map( ( data ) => {
+        dataObj.x3DomObject.ID = value.map( ( data ) => {
             return data;
         } );
-        for ( let i = 0; i < dataObj.anatomicalModel.ID.length; i++ ) {
-            dataObj.anatomicalModel.ID[ i ] = 'anatomicalModel__' + dataObj.anatomicalModel.ID[ i ];
+        for ( let i = 0; i < dataObj.x3DomObject.ID.length; i++ ) {
+            dataObj.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObj.x3DomObject.ID[ i ];
         }
         value = createParseArray( 'diffuseColorHex', text );
         dataObj.toggleBar.color = value.map( ( data ) => {
