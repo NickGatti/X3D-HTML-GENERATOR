@@ -242,7 +242,7 @@ let appendInfoButtons = ( () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'showToggleWrapperButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'compareThreeDeeButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Diag Info', 'diagnosisButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', displayHTMLinfoButtonText, 'displayHTMLinfoButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'twoDeeDrawingButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObj.metaDataInfo.ID );
 
@@ -275,7 +275,7 @@ let appendInfoButtons = ( () => {
         .addEventListener( 'click', ( () => {
             console.log( 'Nothing for this button yet!' );
         } ) );
-    document.getElementById( 'diagnosisButton' )
+    document.getElementById( 'displayHTMLinfoButton' )
         .addEventListener( 'click', ( () => {
             toggleHTML( diagHTML );
             toggleDivs( 'diagnosis' );
@@ -289,7 +289,7 @@ let appendInfoButtons = ( () => {
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
     hoverTransition( 'compareThreeDeeButton', 'deepskyblue' );
-    hoverTransition( 'diagnosisButton', 'deepskyblue' );
+    hoverTransition( 'displayHTMLinfoButton', 'deepskyblue' );
     hoverTransition( 'twoDeeDrawingButton', 'deepskyblue' );
     hoverTransition( 'showToggleWrapperButton', 'deepskyblue' );
 } );
