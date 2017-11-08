@@ -268,7 +268,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'instructionsButton' )
         .addEventListener( 'click', ( () => {
-            toggleHTML( instructionsJSON );
+            toggleHTML( instructionsHTML );
             toggleDivs( 'instructions' );
         } ) );
     document.getElementById( 'compareThreeDeeButton' )
