@@ -58,7 +58,7 @@ These values represent how button appending will work
 
 ```html
 <script type="text/javascript">
-    //Which X3Dom file to render
+    //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
     //The text for the 'displayHTMLinfoButton'
     let displayHTMLinfoButtonText = 'Diagnosis Info';
@@ -126,12 +126,18 @@ The full path would be ../database/metaDataInfo/2Dimages/aorta.png
 #### Lookout!
 Some servers are caps sensitive, if you are not super savvy and something is not working check the caps, try to keep it consistent!
 
-### Authors Credits and License Info
+### Authors, Credits and License Info
 
 ```
-Authors and Credits:
+Authors and Credits (not including X3DOM)
 
+Author of Button appending JavaScript and CSS:
 Nicholas Gatti
+
+Credit of idea to implement through automatic appending by XML 3D Print / X3D file parse
+Nicholas Gatti
+
+Credit to Justin Ryan for consultation regarding X3D file specification
 ```
 
 ```
