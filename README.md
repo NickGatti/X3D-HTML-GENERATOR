@@ -110,7 +110,7 @@ The next line is the button appending JavaScript
 <link rel='stylesheet' type='text/css' href='css/style.css' />
 ```
 
-The X3Dom script can be loaded from the top of bottom, but prefer here
+The X3Dom script can be loaded from the top or bottom, but prefer here
 
 ```html
 <script type='text/javascript' src='../X3DOM/x3dom.js'></script>
