@@ -123,6 +123,8 @@ In the example-aorta case the metaDataInfo is 'aorta' so the file name must be a
 We locate the file in ../database/metaDataInfo/2Dimages
 The full path would be ../database/metaDataInfo/2Dimages/aorta.png
 
+#### Lookout!
+Some servers are caps sensitive, if you are not super savvy and something is not working check the caps, try to keep it consistent!
 
 ### Authors Credits and License Info
 
