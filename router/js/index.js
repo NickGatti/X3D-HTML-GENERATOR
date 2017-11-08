@@ -277,7 +277,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'displayHTMLinfoButton' )
         .addEventListener( 'click', ( () => {
-            toggleHTML( diagHTML );
+            toggleHTML( displayHTMLinfoHTML );
             toggleDivs( 'diagnosis' );
         } ) );
     document.getElementById( 'twoDeeDrawingButton' )
