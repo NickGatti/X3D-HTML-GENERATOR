@@ -117,6 +117,13 @@ The X3Dom script can be loaded from the top of bottom, but prefer here
 <link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
 ```
 
+#### To get the 2D drawing to work:
+Its filename must match the metaDataInfo text and (at the moment) must be a png file.
+In the example-aorta case the metaDataInfo is 'aorta' so the file name must be aorta.png
+We locate the file in ../database/metaDataInfo/2Dimages
+The full path would be ../database/metaDataInfo/2Dimages/aorta.png
+
+
 ### Authors Credits and License Info
 
 ```
