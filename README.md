@@ -15,6 +15,14 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 
 ### Documentation
 
+#### At the head:
+I use Lato as a nice readable text and viewport
+```html
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+```
+
+#### At the top of the body:
 HTML Containing the Inline X3D must be a copy of this code (examples in the git)
 ```html
 <div id='wrapper'>
@@ -44,6 +52,7 @@ HTML Containing the Inline X3D must be a copy of this code (examples in the git)
 </div>
 ```
 
+#### At the bottom of the body:
 Then this JavaScript must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery)
 These values represent how button appending will work
 
