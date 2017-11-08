@@ -21,24 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-let instructionsJSON = [ {
-        "h2": "Instructions"
-    },
-    {
-        "p": "Mouse Button"
-    },
-    {
-        "p": "LMB (Left Mouse Button) - Rotate, hold and move"
-    },
-    {
-        "p": "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
-    },
-    {
-        "p": "RMB (Right Mouse Button) - Pan, hold and move"
-    }
-]; // This variable exists because we dont have a back end running
-
-
 window.onresize = ( () => {
     if ( window.innerWidth > 601 ) {
         document.getElementById( 'toggleWrapper' )
@@ -77,7 +59,7 @@ var oReq = new XMLHttpRequest();
 let dataObj = {
     toggleBar: {},
     x3DomObject: {},
-    IPCCCID: {}
+    metaDataInfo: {}
 };
 
 let quoteParse = ( ( startPos, aPos, bPos, res ) => {
@@ -262,7 +244,7 @@ let appendInfoButtons = ( () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'compareThreeDeeButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Diag Info', 'diagnosisButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'twoDeeDrawingButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'IPCCCID: ' + dataObj.IPCCCID.ID );
+    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObj.metaDataInfo.ID );
 
     document.getElementById( 'showToggleWrapperButton' )
         .addEventListener( 'click', ( () => {
@@ -301,7 +283,7 @@ let appendInfoButtons = ( () => {
     document.getElementById( 'twoDeeDrawingButton' )
         .addEventListener( 'click', ( () => {
             document.getElementById( 'imageDisplayID' )
-                .src = '../database/IPCCCID/2Dimages/' + dataObj.IPCCCID.ID + '.png';
+                .src = '../database/metaDataInfo/2Dimages/' + dataObj.metaDataInfo.ID + '.png';
             toggleDivs( 'twoDeeDrawing' );
         } ) );
 
@@ -337,7 +319,7 @@ let readXml = ( () => {
         dataObj.toggleBar.color = value.map( ( data ) => {
             return data;
         } );
-        dataObj.IPCCCID.ID = createParse( 'EACTSID', text );
+        dataObj.metaDataInfo.ID = createParse( metaDataInfo, text );
     } );
 
     let run = ( () => {

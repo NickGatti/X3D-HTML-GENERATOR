@@ -13,6 +13,8 @@ The parser also looks for one Meta Info value called EACTSID which extracts the 
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diag Info' to work around not using an iFrame. In the future will use react.js to accomplish more of the appending.
 
+
+
 ```
 Authors and Credits:
 
@@ -42,5 +44,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-http://www.codn.io/x3dom-html-generator/

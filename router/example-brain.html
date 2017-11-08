@@ -33,8 +33,13 @@
             </div>
         </div>
         <script type="text/javascript">
-            //Patient 950
+            //Which X3Dom file to render
             let xmlFile = '../database/clients/example-brain/modelFile.x3d';
+            //The text for the 'metaDataButton'
+            let metaDataInfoButtonText = 'MetaData Info'
+            //Which XML tag to look for to display on the metaDataButton
+            let metaDataInfo = 'EACTSID';
+            //What HTML to display when the Diag Info button is clicked
             let diagHTML = [{
                     "p": "Example p tag"
                 },
@@ -49,6 +54,23 @@
                             "example list and list items"
                         ]
                     }
+                }
+            ];
+            // What HTML to display when the instructions button is clicked
+            let instructions = [{
+                    "h2": "Instructions"
+                },
+                {
+                    "p": "Mouse Button"
+                },
+                {
+                    "p": "LMB (Left Mouse Button) - Rotate, hold and move"
+                },
+                {
+                    "p": "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
+                },
+                {
+                    "p": "RMB (Right Mouse Button) - Pan, hold and move"
                 }
             ];
         </script>
