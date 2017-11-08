@@ -13,7 +13,102 @@ The parser also looks for one Meta Info value called EACTSID which extracts the 
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diag Info' to work around not using an iFrame. In the future will use react.js to accomplish more of the appending.
 
+### Documentation
 
+HTML Containing the Inline X3D must be a copy of this code (examples in the git)
+```html
+<div id='wrapper'>
+
+    <div id='infoWrapper'>
+    </div>
+
+    <div id="toggleWrapper">
+    </div>
+
+    <div id='contentWrapper'>
+        <x3d id='x3dwrapper'>
+            <scene>
+                <inline nameSpaceName='x3dModelFile' mapDEFToID='true' url='../database/clients/example-aorta/modelFile.x3d' />
+            </scene>
+        </x3d>
+
+        <div id='twoDeeDrawing'>
+            <img id='imageDisplayID'>
+        </div>
+
+        <div id='HTMLdiv'>
+            <div id='displayHTML'>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+Then this JavaScript must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery)
+These values represent how button appending will work
+
+```javascript
+<script type="text/javascript">
+    //Which X3Dom file to render
+    let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
+    //The text for the 'displayHTMLinfoButton'
+    let displayHTMLinfoButtonText = 'Diagnosis Info';
+    //The text for the 'metaDataButton'
+    let metaDataInfoButtonText = 'MetaData Info';
+    //Which XML tag to look for to display on the metaDataButton
+    let metaDataInfo = 'EACTSID';
+    //What HTML to display when the Diag Info button is clicked
+    let displayHTMLinfoHTML = [{
+            "p": "Example p tag"
+        },
+        {
+            "container": {
+                "outerType": "ul",
+                "innerType": "li",
+                "contents": [
+                    "example list and list items",
+                    "example list and list items",
+                    "example list and list items",
+                    "example list and list items"
+                ]
+            }
+        }
+    ];
+    // What HTML to display when the instructions button is clicked
+    let instructions = [{
+            "h2": "Instructions"
+        },
+        {
+            "p": "Mouse Button"
+        },
+        {
+            "p": "LMB (Left Mouse Button) - Rotate, hold and move"
+        },
+        {
+            "p": "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
+        },
+        {
+            "p": "RMB (Right Mouse Button) - Pan, hold and move"
+        }
+    ];
+</script>
+```
+
+The next line is the button appending JavaScript
+
+```javascript
+<script type='text/javascript' src='js/index.js'></script>
+<link rel='stylesheet' type='text/css' href='css/style.css' />
+```
+
+The X3Dom script can be loaded from the top of bottom, but prefer here
+
+```javascript
+<script type='text/javascript' src='../X3DOM/x3dom.js'></script>
+<link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
+```
+
+### Authors Credits and License Info
 
 ```
 Authors and Credits:
