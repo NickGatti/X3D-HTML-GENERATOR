@@ -66,7 +66,7 @@ These values represent how button appending will work
     let metaDataInfoButtonText = 'MetaData Info';
     //Which XML tag to look for to display on the metaDataButton
     let metaDataInfo = 'EACTSID';
-    //What HTML to display when the Diag Info button is clicked
+    //What HTML to display when the 'displayHTMLinfo' button is clicked
     let displayHTMLinfoHTML = [{
             "p": "Example p tag"
         },
