@@ -84,7 +84,7 @@ These values represent how button appending will work
         }
     ];
     // What HTML to display when the instructions button is clicked
-    let instructions = [{
+    let instructionsHTML = [{
             "h2": "Instructions"
         },
         {
