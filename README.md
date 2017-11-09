@@ -20,7 +20,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 2. ~Soon Add support for .jpg, .svg and .png in the 2D images
 3. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
 4. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
-4. ~Unknown ETA Wait to see what to do about the Compare 3D button
+5. ~Unknown ETA Wait to see what to do about the Compare 3D button
 ```
 
 ### Documentation
