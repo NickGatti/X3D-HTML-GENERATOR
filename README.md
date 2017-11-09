@@ -13,6 +13,16 @@ The parser also looks for one Meta Info value called EACTSID which extracts the 
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diag Info' to work around not using an iFrame. In the future will use react.js to accomplish more of the appending.
 
+## Future Plans and TODO list
+
+```
+1. ~Soon Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
+2. ~Soon Add support for .jpg, .svg and .png in the 2D images
+3. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
+4. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
+4. ~Unknown ETA Wait to see what to do about the Compare 3D button
+```
+
 ### Documentation
 
 #### At the head:
