@@ -1,11 +1,11 @@
-# X3DOM HTML Generator
+# X3DOM HTML Generator:
 
 [logo]: http://www.codn.io/img/portfolio/x3dom.jpg "X3Dom HTML Generator"
 ![X3Dom HTML Generator][logo]
 
 [Running code on my site](http://www.codn.io/x3dom-html-generator/)
 
-## Auto-Render HTML From your X3Dom or 3D Printer compatible files
+## Auto-Render HTML From your X3Dom or 3D Printer compatible files:
 
 X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to sDEF XML value (will soon parse XML for Shape DEF) and also appends colors to the sDEF through the diffuseColorHex value. Manually added XML values. Later on to decide more to add and which way to add them.
 
@@ -16,15 +16,17 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 ### Documentation
 
 #### At the head:
-I use Lato as a nice readable text and viewport
+I use Lato as a nice readable text and viewport.
 ```html
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 ```
 
 #### At the top of the body:
-HTML Containing the Inline X3D must be a copy of this code (examples in the git)
-The url in the inline for the X3D file must point to the relative location pertaining to the content included in the HTML
+HTML Containing the Inline X3D must be a copy of this code (examples in the git).
+
+The url in the inline for the X3D file must point to the relative location pertaining to the content included in the HTML.
+
 ```html
 <div id='wrapper'>
 
@@ -54,8 +56,9 @@ The url in the inline for the X3D file must point to the relative location perta
 ```
 
 #### At the bottom of the body:
-Then this JavaScript must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery)
-These values represent how button appending will work
+Then this JavaScript must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery).
+
+These values represent how button appending will work.
 
 ```html
 <script type="text/javascript">
@@ -104,14 +107,14 @@ These values represent how button appending will work
 </script>
 ```
 
-The next line is the button appending JavaScript
+The next line is the button appending JavaScript.
 
 ```html
 <script type='text/javascript' src='js/index.js'></script>
 <link rel='stylesheet' type='text/css' href='css/style.css' />
 ```
 
-The X3Dom script can be loaded from the top or bottom, but prefer here
+The X3Dom script can be loaded from the top or bottom, but prefer here.
 
 ```html
 <script type='text/javascript' src='../X3DOM/x3dom.js'></script>
@@ -119,11 +122,17 @@ The X3Dom script can be loaded from the top or bottom, but prefer here
 ```
 
 #### To get the 2D drawing to work:
-Its filename must match the metaDataInfo text and (at the moment) must be a png file.
-In the example-aorta case the metaDataInfo is 'aorta' so the file name must be aorta.png
-We locate the file in ../database/metaDataInfo/2Dimages
-The full path would be ../database/metaDataInfo/2Dimages/aorta.png
 
+Its filename must match the 'metaDataInfo' text and (at the moment) must be a .png file.
+
+In the 'example-aorta.html' case the 'metaDataInfo' is 'aorta' so the file name must be 'aorta.png'.
+___
+ We locate the file in:
+ '../database/metaDataInfo/2Dimages'
+___
+ The full path would be:
+ '../database/metaDataInfo/2Dimages/aorta.png'
+___
 #### Lookout!
 Some servers are caps sensitive, if you are not super savvy and something is not working check the caps, try to keep it consistent!
 
