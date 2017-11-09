@@ -9,7 +9,7 @@
 
 X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to sDEF XML value (will soon parse XML for Shape DEF) and also appends colors to the sDEF through the diffuseColorHex value. Manually added XML values. Later on to decide more to add and which way to add them.
 
-The parser also looks for one Meta Info value called EACTSID which extracts the now current IPCCCID value, which will change to a more dynamic and agnostic value later on.
+The parser also looks for one XML Meta Info value called 'metaDataInfo' that will display that value on a button and also be the name of the 2d image file.
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diag Info' to work around not using an iFrame. In the future will use react.js to accomplish more of the appending.
 
