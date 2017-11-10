@@ -61,35 +61,6 @@ let dataObj = {
     x3DomObject: {},
     metaDataInfo: {}
 };
-//
-// let quoteParse = ( ( startPos, aPos, bPos, res ) => {
-//     let output = null;
-//     for ( let i = aPos; !( res.slice( startPos, startPos + i )
-//             .endsWith( '"' ) ); i++ ) {
-//         output = res.slice( startPos + bPos, startPos + i );
-//     }
-//     return output;
-// } );
-//
-// let createParseArray = ( ( input, text ) => {
-//     let startPos = text.indexOf( input ),
-//         stop = 0,
-//         XMLArray = [],
-//         output = [];
-//     for ( let i = startPos; stop <= 0; startPos + i++ ) {
-//         if ( startPos == -1 ) stop++;
-//         if ( startPos > 0 ) XMLArray.push( startPos );
-//         startPos = text.indexOf( input, i + startPos );
-//     }
-//     for ( let z = 0; z < XMLArray.length; z++ ) {
-//         output.push( quoteParse( XMLArray[ z ], input.length + 3, input.length + 2, text ) );
-//     }
-//     return output;
-// } );
-//
-// let createParse = ( ( input, text ) => {
-//     return quoteParse( text.indexOf( input ), input.length + 3, input.length + 2, text );
-// } );
 
 let parseXML = ( ( fileText, element, attribute ) => {
     if ( window.DOMParser ) {
