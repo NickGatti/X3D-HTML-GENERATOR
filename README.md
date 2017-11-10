@@ -88,8 +88,14 @@ These values represent how button appending will work.
     let displayHTMLinfoButtonText = 'Diagnosis Info';
     //The text for the 'metaDataButton'
     let metaDataInfoButtonText = 'MetaData Info';
-    //Which XML tag to look for to display on the metaDataButton
-    let metaDataInfo = 'EACTSID';
+    //The XML element to find the metaDataInfoAttribute in
+    let metaDataInfoElement = 'MetadataInteger';
+    //The XML element for MetadataInteger must contain
+    let mustContainElement = 'name';
+    //The XML value for mustContainElement to look for
+    let mustContainValue = 'IPCCCID';
+    //Which XML attribute to look for to display on the metaDataButton
+    let metaDataInfoAttribute = 'value';
     //What HTML to display when the 'displayHTMLinfo' button is clicked
     let displayHTMLinfoHTML = [{
             "p": "Example p tag"
