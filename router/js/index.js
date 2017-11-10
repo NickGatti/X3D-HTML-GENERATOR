@@ -77,7 +77,7 @@ let parseXML = ( ( fileText, element, attribute ) => {
 
     let output = [];
     for ( let i = 0; i < elementAttribute.length; i++ ) {
-        output.push( elementAttribute[ i ].getAttribute( attribute ) )
+        if ( elementAttribute[ i ].getAttribute( attribute ) ) output.push( elementAttribute[ i ].getAttribute( attribute ) );
     }
 
     return output;
