@@ -1,6 +1,6 @@
 # X3DOM HTML Generator:
 
-[logo]: http://www.codn.io/img/portfolio/x3dom.jpg "X3Dom HTML Generator"
+[logo]: http://www.codn.io/img/portfolio/x3dom.png "X3Dom HTML Generator"
 ![X3Dom HTML Generator][logo]
 
 [Running code on my site](http://www.codn.io/x3dom-html-generator/)
