@@ -194,7 +194,7 @@ ___
 ```
 Authors and Credits (not including X3DOM)
 
-Author of Button appending JavaScript and CSS:
+Author of Button appending JavaScript CSS and HTML:
 Nicholas Gatti
 
 Credit of idea to implement through automatic appending by XML 3D Print / X3D file parse
