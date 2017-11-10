@@ -16,7 +16,7 @@ Also custom set values any 1 attribute within an element (usually "MetadataInteg
 We currently set these in the HTML itself.
 
 Example:
-We want the value 'aorta' but only the value aorta where the XML element contains IPCCCID
+We want the value 'aorta' in 'MetadataInteger' but only the value aorta where the XML element contains IPCCCID and theres more than one 'MetadataInterger' element in the XML.
 ```
 <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
 ```
