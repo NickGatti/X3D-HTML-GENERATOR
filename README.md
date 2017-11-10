@@ -31,13 +31,13 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 2. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
 3. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
 4. ~Unknown ETA Wait to see what to do about the Compare 3D button
-5. ~After framework add way to make navbar fix
 ```
 
 ## Patch Notes
 
 ```
 10-11-2017 Added Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
+10-11-2017 Added overflow-auto to html-div no more need to add a floating nav bar
 ```
 
 ### Documentation
