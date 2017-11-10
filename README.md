@@ -153,8 +153,19 @@ ___
  The full path would be:
  '../database/metaDataInfo/2Dimages/aorta.png'
 ___
+
 #### Lookout!
 Some servers are caps sensitive, if you are not super savvy and something is not working check the caps, try to keep it consistent!
+
+
+In the 'example-heart.html' case the 'metaDataInfo' is 'Heart' so the file name must be 'Heart.png'.
+___
+ We locate the file in:
+ '../database/metaDataInfo/2Dimages'
+___
+ The full path would be:
+ '../database/metaDataInfo/2Dimages/Heart.png'
+___
 
 ### Authors, Credits and License Info
 
