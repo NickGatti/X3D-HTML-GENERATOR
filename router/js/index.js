@@ -61,35 +61,57 @@ let dataObj = {
     x3DomObject: {},
     metaDataInfo: {}
 };
+//
+// let quoteParse = ( ( startPos, aPos, bPos, res ) => {
+//     let output = null;
+//     for ( let i = aPos; !( res.slice( startPos, startPos + i )
+//             .endsWith( '"' ) ); i++ ) {
+//         output = res.slice( startPos + bPos, startPos + i );
+//     }
+//     return output;
+// } );
+//
+// let createParseArray = ( ( input, text ) => {
+//     let startPos = text.indexOf( input ),
+//         stop = 0,
+//         XMLArray = [],
+//         output = [];
+//     for ( let i = startPos; stop <= 0; startPos + i++ ) {
+//         if ( startPos == -1 ) stop++;
+//         if ( startPos > 0 ) XMLArray.push( startPos );
+//         startPos = text.indexOf( input, i + startPos );
+//     }
+//     for ( let z = 0; z < XMLArray.length; z++ ) {
+//         output.push( quoteParse( XMLArray[ z ], input.length + 3, input.length + 2, text ) );
+//     }
+//     return output;
+// } );
+//
+// let createParse = ( ( input, text ) => {
+//     return quoteParse( text.indexOf( input ), input.length + 3, input.length + 2, text );
+// } );
 
-let quoteParse = ( ( startPos, aPos, bPos, res ) => {
-    let output = null;
-    for ( let i = aPos; !( res.slice( startPos, startPos + i )
-            .endsWith( '"' ) ); i++ ) {
-        output = res.slice( startPos + bPos, startPos + i );
+let parseXML = ( ( fileText, element, attribute ) => {
+    if ( window.DOMParser ) {
+        parser = new DOMParser();
+        xmlDoc = parser.parseFromString( fileText, "text/xml" );
+    } else // Internet Explorer
+    {
+        xmlDoc = new ActiveXObject( "Microsoft.XMLDOM" );
+        xmlDoc.async = false;
+        xmlDoc.loadXML( fileText );
     }
+
+    let elementAttribute = xmlDoc.getElementsByTagName( element );
+
+    let output = [];
+    for ( let i = 0; i < elementAttribute.length; i++ ) {
+        output.push( elementAttribute[ i ].getAttribute( attribute ) )
+    }
+
     return output;
 } );
 
-let createParseArray = ( ( input, text ) => {
-    let startPos = text.indexOf( input ),
-        stop = 0,
-        XMLArray = [],
-        output = [];
-    for ( let i = startPos; stop <= 0; startPos + i++ ) {
-        if ( startPos == -1 ) stop++;
-        if ( startPos > 0 ) XMLArray.push( startPos );
-        startPos = text.indexOf( input, i + startPos );
-    }
-    for ( let z = 0; z < XMLArray.length; z++ ) {
-        output.push( quoteParse( XMLArray[ z ], input.length + 3, input.length + 2, text ) );
-    }
-    return output;
-} );
-
-let createParse = ( ( input, text ) => {
-    return quoteParse( text.indexOf( input ), input.length + 3, input.length + 2, text );
-} );
 
 let appendToggleButtons = ( () => {
     let form = document.getElementById( 'toggleWrapper' ),
@@ -299,7 +321,7 @@ let readXml = ( () => {
     oReq.send();
 
     let popDataObject = ( ( text ) => {
-        let value = createParseArray( 'sDEF', text );
+        let value = parseXML( text, 'Shape', 'DEF' );
         dataObj.toggleBar.text = value.map( ( data ) => {
             return data;
         } );
@@ -315,11 +337,11 @@ let readXml = ( () => {
         for ( let i = 0; i < dataObj.x3DomObject.ID.length; i++ ) {
             dataObj.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObj.x3DomObject.ID[ i ];
         }
-        value = createParseArray( 'diffuseColorHex', text );
+        value = parseXML( text, 'Material', 'diffuseColorHex' );
         dataObj.toggleBar.color = value.map( ( data ) => {
             return data;
         } );
-        dataObj.metaDataInfo.ID = createParse( metaDataInfo, text );
+        dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute )[ 0 ];
     } );
 
     let run = ( () => {
