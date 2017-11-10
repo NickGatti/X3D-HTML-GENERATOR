@@ -89,6 +89,8 @@ body {
     padding-right: 2rem;
     margin-right: 2rem;
     padding-left: 2rem;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 #x3dwrapper {
