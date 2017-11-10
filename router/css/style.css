@@ -132,52 +132,7 @@ body {
     flex-wrap: wrap;
 }
 
-@media (max-width: 600px) {
-    #wrapper {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: stretch;
-        justify-content: flex-start;
-    }
-    .selectTab {
-        height: 100%;
-        width: auto;
-        border: 1px solid black;
-    }
-    #toggleWrapper, #infoWrapper {
-        display: block;
-        height: 20%;
-        min-height: 20%;
-        width: auto;
-        overflow: scroll;
-        margin-left: 10px;
-        font-size: 3vh;
-        overflow-x: hidden;
-    }
-    #HTMLdiv, #displayHTML {
-        min-width: 100%;
-        min-height: 100%;
-    }
-    #imageDisplayID {
-        max-height: 60%;
-    }
-    #x3dwrapper {
-        display: flex;
-        min-height: 60%;
-        max-height: 60%;
-        width: 100%;
-    }
-    #displayHTML {
-        min-width: 90%;
-        max-width: 90%;
-        margin-left: -2.5%;
-    }
-    #contentWrapper {
-        max-width: none;
-    }
-}
-
-@media (max-device-width: 600px) {
+@media only screen and (max-width: 1100px) {
     #wrapper {
         flex-direction: column;
         flex-wrap: nowrap;

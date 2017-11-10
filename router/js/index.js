@@ -22,7 +22,7 @@ SOFTWARE.
 */
 
 window.onresize = ( () => {
-    if ( window.innerWidth > 601 ) {
+    if ( window.innerWidth > 1101 ) {
         document.getElementById( 'toggleWrapper' )
             .style.display = 'flex';
     } else {
