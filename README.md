@@ -133,6 +133,36 @@ These values represent how button appending will work.
 </script>
 ```
 
+#### In the Aorta Example:
+
+```javascript
+let metaDataInfoElement = 'MetadataInteger';
+//The XML element for MetadataInteger must contain
+//We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
+let mustContainElement = 'name';
+//The XML value for mustContainElement to look for
+//We are looking for name = 'IPCCCID'
+let mustContainValue = 'IPCCCID';
+//Which XML attribute to look for to display on the metaDataButton
+//Here value = "aorta"
+let metaDataInfoAttribute = 'value';
+```
+
+#### In the Heart Example:
+
+```javascript
+let metaDataInfoElement = 'MetadataInteger';
+//The XML element for MetadataInteger must contain
+//We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='Heart'>
+let mustContainElement = 'name';
+//The XML value for mustContainElement to look for
+//We are looking for name = 'IPCCCID'
+let mustContainValue = 'IPCCCID';
+//Which XML attribute to look for to display on the metaDataButton
+//Here value = "Heart"
+let metaDataInfoAttribute = 'value';
+```
+
 The next line is the button appending JavaScript.
 
 ```html
