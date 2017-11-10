@@ -143,8 +143,14 @@ let hoverTransition = ( ( id, originalColor ) => {
 let colorToggleButtons = ( () => {
     for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
         document.getElementById( dataObj.toggleBar.ID[ i ] )
-            .style.backgroundColor = dataObj.toggleBar.color[ i ];
-        hoverTransition( dataObj.toggleBar.ID[ i ], dataObj.toggleBar.color[ i ] );
+            .style.backgroundColor = `rgb(
+                      ${Math.round( ( dataObj.toggleBar.color[i][0]) * 255 )} ,
+                      ${Math.round( ( dataObj.toggleBar.color[i][1]) * 255 )} ,
+                      ${Math.round( ( dataObj.toggleBar.color[i][2]) * 255 )}`;
+        hoverTransition( dataObj.toggleBar.ID[ i ], `rgb(
+                  ${Math.round( ( dataObj.toggleBar.color[i][0]) * 255 )} ,
+                  ${Math.round( ( dataObj.toggleBar.color[i][1]) * 255 )} ,
+                  ${Math.round( ( dataObj.toggleBar.color[i][2]) * 255 )}` );
     }
 } );
 
@@ -308,9 +314,9 @@ let readXml = ( () => {
         for ( let i = 0; i < dataObj.x3DomObject.ID.length; i++ ) {
             dataObj.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObj.x3DomObject.ID[ i ];
         }
-        value = parseXML( text, 'Material', 'diffuseColorHex' );
+        value = parseXML( text, 'Material', 'diffuseColor' );
         dataObj.toggleBar.color = value.map( ( data ) => {
-            return data;
+            return data.split( ' ' );
         } );
         dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute )[ 0 ];
     } );
