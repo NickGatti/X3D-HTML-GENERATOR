@@ -82,20 +82,28 @@ These values represent how button appending will work.
 
 ```html
 <script type="text/javascript">
+    //IF USING THE AORTA EXAMPLE
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
+
     //The text for the 'displayHTMLinfoButton'
     let displayHTMLinfoButtonText = 'Diagnosis Info';
-    //The text for the 'metaDataButton'
-    let metaDataInfoButtonText = 'MetaData Info';
+
     //The XML element to find the metaDataInfoAttribute in
     let metaDataInfoElement = 'MetadataInteger';
+
     //The XML element for MetadataInteger must contain
+    //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
     let mustContainElement = 'name';
+
     //The XML value for mustContainElement to look for
+    //We are looking for name = 'IPCCCID'
     let mustContainValue = 'IPCCCID';
+
     //Which XML attribute to look for to display on the metaDataButton
+    //Here value = "aorta"
     let metaDataInfoAttribute = 'value';
+
     //What HTML to display when the 'displayHTMLinfo' button is clicked
     let displayHTMLinfoHTML = [{
             "p": "Example p tag"
@@ -131,36 +139,6 @@ These values represent how button appending will work.
         }
     ];
 </script>
-```
-
-#### In the Aorta Example:
-
-```javascript
-let metaDataInfoElement = 'MetadataInteger';
-//The XML element for MetadataInteger must contain
-//We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
-let mustContainElement = 'name';
-//The XML value for mustContainElement to look for
-//We are looking for name = 'IPCCCID'
-let mustContainValue = 'IPCCCID';
-//Which XML attribute to look for to display on the metaDataButton
-//Here value = "aorta"
-let metaDataInfoAttribute = 'value';
-```
-
-#### In the Heart Example:
-
-```javascript
-let metaDataInfoElement = 'MetadataInteger';
-//The XML element for MetadataInteger must contain
-//We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='Heart'>
-let mustContainElement = 'name';
-//The XML value for mustContainElement to look for
-//We are looking for name = 'IPCCCID'
-let mustContainValue = 'IPCCCID';
-//Which XML attribute to look for to display on the metaDataButton
-//Here value = "Heart"
-let metaDataInfoAttribute = 'value';
 ```
 
 The next line is the button appending JavaScript.
