@@ -7,20 +7,30 @@
 
 ## Auto-Render HTML From your X3Dom or 3D Printer compatible files:
 
-X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to sDEF XML value (will soon parse XML for Shape DEF) and also appends colors to the sDEF through the diffuseColorHex value. Manually added XML values. Later on to decide more to add and which way to add them.
+X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to:
 
-The parser also looks for one XML Meta Info value called 'metaDataInfo' that will display that value on a button and also be the name of the 2d image file.
+* Shape element and DEF attribute
+* Material element and diffuseColor attribute
 
-Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diag Info' to work around not using an iFrame. In the future will use react.js to accomplish more of the appending.
+Also custom set values any 1 attribute within an element (usually Meta Data info), appended to button text.
+We currently set these in the HTML itself.
+
+Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diagnosis Info' to work around not using an iFrame. In the future will use a framework to accomplish more of the appending.
 
 ## Future Plans and TODO list
 
 ```
-1. ~Soon Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
-2. ~Soon Add support for .jpg, .svg and .png in the 2D images
-3. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
-4. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
-5. ~Unknown ETA Wait to see what to do about the Compare 3D button
+1. ~Soon Add support for .jpg, .svg and .png in the 2D images
+2. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
+3. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
+4. ~Unknown ETA Wait to see what to do about the Compare 3D button
+5. ~After framework add way to make navbar fix
+```
+
+## Patch Notes
+
+```
+10-11-2017 Added Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
 ```
 
 ### Documentation
