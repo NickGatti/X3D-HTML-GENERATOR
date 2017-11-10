@@ -101,6 +101,7 @@ These values represent how button appending will work.
     let metaDataInfoElement = 'MetadataInteger';
 
     //The XML element for MetadataInteger must contain
+    //We are looking for name = 'IPCCCID'
     let mustContainElement = 'name';
 
     //The XML value for mustContainElement to look for
