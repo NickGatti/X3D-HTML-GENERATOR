@@ -62,7 +62,7 @@ let dataObj = {
     metaDataInfo: {}
 };
 
-let parseXML = ( ( fileText, element, attribute ) => {
+let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
     if ( window.DOMParser ) {
         parser = new DOMParser();
         xmlDoc = parser.parseFromString( fileText, "text/xml" );
@@ -76,8 +76,16 @@ let parseXML = ( ( fileText, element, attribute ) => {
     let elementAttribute = xmlDoc.getElementsByTagName( element );
 
     let output = [];
+
     for ( let i = 0; i < elementAttribute.length; i++ ) {
-        if ( elementAttribute[ i ].getAttribute( attribute ) ) output.push( elementAttribute[ i ].getAttribute( attribute ) );
+        if ( mustContainElement && mustContainValue ) {
+            if ( elementAttribute[ i ].getAttribute( mustContainElement ) == mustContainValue ) {
+                if ( elementAttribute[ i ].getAttribute( attribute ) ) output.push( elementAttribute[ i ].getAttribute( attribute ) );
+            }
+        } else {
+            if ( elementAttribute[ i ].getAttribute( attribute ) ) output.push( elementAttribute[ i ].getAttribute( attribute ) );
+        }
+
     }
 
     return output;
@@ -318,7 +326,7 @@ let readXml = ( () => {
         dataObj.toggleBar.color = value.map( ( data ) => {
             return data.split( ' ' );
         } );
-        dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute )[ 0 ];
+        dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
     } );
 
     let run = ( () => {
