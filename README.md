@@ -97,10 +97,10 @@ These values represent how button appending will work.
     let displayHTMLinfoButtonText = 'Diagnosis Info';
 
     //The XML element to find the metaDataInfoAttribute in
+    //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
     let metaDataInfoElement = 'MetadataInteger';
 
     //The XML element for MetadataInteger must contain
-    //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
     let mustContainElement = 'name';
 
     //The XML value for mustContainElement to look for
