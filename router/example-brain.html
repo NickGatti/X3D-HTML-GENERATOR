@@ -43,10 +43,11 @@
             let metaDataInfoButtonText = 'MetaData Info';
 
             //The XML element to find the metaDataInfoAttribute in
+            //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='brain'>
             let metaDataInfoElement = 'MetadataInteger';
 
             //The XML element for MetadataInteger must contain
-            //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='brain'>
+            //We are looking for name = 'IPCCCID'
             let mustContainElement = 'name';
 
             //The XML value for mustContainElement to look for
