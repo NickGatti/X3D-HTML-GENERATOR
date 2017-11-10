@@ -12,8 +12,15 @@ X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends
 * Shape element and DEF attribute
 * Material element and diffuseColor attribute
 
-Also custom set values any 1 attribute within an element (usually Meta Data info), appended to button text.
+Also custom set values any 1 attribute within an element (usually "MetadataInteger") that contains another value, appended to button text.
 We currently set these in the HTML itself.
+
+Example:
+We want the value 'aorta' but only the value aorta where the XML element contains IPCCCID
+```
+<MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
+```
+This is set in the HTML.
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diagnosis Info' to work around not using an iFrame. In the future will use a framework to accomplish more of the appending.
 
