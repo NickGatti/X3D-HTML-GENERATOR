@@ -7,6 +7,7 @@
     </head>
 
     <body>
+
         <div id='wrapper'>
 
             <div id='infoWrapper'>
@@ -17,8 +18,7 @@
 
             <div id='contentWrapper'>
                 <x3d id='x3dwrapper'>
-                    <scene>
-                        <inline nameSpaceName='x3dModelFile' mapDEFToID='true' url='../database/clients/example-brain/modelFile.x3d' />
+                    <scene id='x3dHTMLinlineScene'>
                     </scene>
                 </x3d>
 
@@ -32,6 +32,7 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript">
             //Which X3D file to render
             let xmlFile = '../database/clients/example-brain/modelFile.x3d';
