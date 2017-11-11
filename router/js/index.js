@@ -193,7 +193,7 @@ let toggleDivs = ( ( show ) => {
 } );
 
 let toggleHTML = ( ( which ) => {
-    document.getElementById( 'html_inner_div' )
+    document.getElementById( 'html_inner_div_ID' )
         .innerHTML = '';
     let create = null;
     let container = null;
@@ -207,18 +207,18 @@ let toggleHTML = ( ( which ) => {
                 create.innerHTML = which[ i ].container.contents[ z ];
                 container.appendChild( create );
             }
-            document.getElementById( 'html_inner_div' )
+            document.getElementById( 'html_inner_div_ID' )
                 .appendChild( container );
         } else {
             create = document.createElement( key );
             create.innerHTML = which[ i ][ key ];
-            document.getElementById( 'html_inner_div' )
+            document.getElementById( 'html_inner_div_ID' )
                 .appendChild( create );
         }
         if ( i === which.length - 1 ) {
             for ( let x = 0; x < 6; x++ ) {
                 br = document.createElement( 'br' );
-                document.getElementById( 'html_inner_div' )
+                document.getElementById( 'html_inner_div_ID' )
                     .appendChild( br );
             }
         }

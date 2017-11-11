@@ -83,7 +83,7 @@ body {
     object-fit: contain;
 }
 
-#html_inner_div {
+#html_inner_div_ID {
     width: 100%;
     height: 100%;
     padding-right: 2rem;
@@ -156,7 +156,7 @@ body {
         font-size: 3vh;
         overflow-x: hidden;
     }
-    #html_outer_div, #html_inner_div {
+    #html_outer_div, #html_inner_div_ID {
         min-width: 100%;
         min-height: 100%;
     }
@@ -169,7 +169,7 @@ body {
         max-height: 60%;
         width: 100%;
     }
-    #html_inner_div {
+    #html_inner_div_ID {
         min-width: 90%;
         max-width: 90%;
         margin-left: -2.5%;
