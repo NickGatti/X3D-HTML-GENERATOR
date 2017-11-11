@@ -348,3 +348,28 @@ let readXml = ( () => {
     oReq.addEventListener( 'load', reqListener );
 } );
 readXml();
+
+let inline = document.createElement( 'inline' );
+inline.id = 'x3dHTMLinlineInline';
+document.getElementById( 'x3dHTMLinlineScene' )
+    .appendChild( inline );
+
+let loadScene = setInterval( () => {
+    console.log( 'Attempting to load..' )
+    if ( document.getElementById( 'x3dHTMLinlineInline' )
+        .load ) {
+        console.log( 'Loaded X3D Scene' );
+        clearInterval( loadScene );
+    }
+    document.getElementById( 'x3dHTMLinlineInline' )
+        .url = xmlFile;
+    document.getElementById( 'x3dHTMLinlineInline' )
+        .namespacename = 'x3dModelFile';
+    document.getElementById( 'x3dHTMLinlineInline' )
+        .mapdeftoid = true;
+}, 50 );
+
+document.addEventListener( "DOMContentLoaded", ( () => {
+    console.log( 'Loaded DOM Content' );
+    loadScene();
+} ) );
