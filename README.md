@@ -36,8 +36,9 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 ## Patch Notes
 
 ```
-10-11-2017 Added Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
-10-11-2017 Added overflow-auto to html-div no more need to add a floating nav bar
+10-10-2017 Added Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
+10-10-2017 Added overflow-auto to html-div no more need to add a floating nav bar
+10-11-2017 Removed need to add inline X3D html tag
 ```
 
 ### Documentation
@@ -52,26 +53,26 @@ I use Lato as a nice readable text and viewport.
 #### At the top of the body:
 
 ```html
-<div id='wrapper'>
+<div id='x3d_gen_wrapper'>
 
-    <div id='infoWrapper'>
+    <div id='x3d_gen_info_button_wrapper'>
     </div>
 
-    <div id="toggleWrapper">
+    <div id="x3d_gen_shape_def_button_wrapper">
     </div>
 
-    <div id='contentWrapper'>
-        <x3d id='x3dwrapper'>
-            <scene id='x3dHTMLinlineScene'>
+    <div id='x3d_gen_x3d_content_wrapper'>
+        <x3d id='x3d_gen_x3d_wrapper'>
+            <scene id='x3d_gen_x3d_scene'>
             </scene>
         </x3d>
 
-        <div id='twoDeeDrawing'>
-            <img id='imageDisplayID'>
+        <div id='x3d_gen_image_div'>
+            <img id='x3d_gen_image_img_element'>
         </div>
 
-        <div id='HTMLdiv'>
-            <div id='displayHTML'>
+        <div id='x3d_gen_html_outer_div'>
+            <div id='x3d_gen_html_inner_div'>
             </div>
         </div>
     </div>
@@ -89,15 +90,15 @@ These values represent how button appending will work.
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
 
-    //The text for the 'displayHTMLinfoButton'
-    let displayHTMLinfoButtonText = 'Diagnosis Info';
+    //The text for the 'metaDataButton'
+    let metaDataInfoButtonText = 'MetaData Info';
 
     //The XML element to find the metaDataInfoAttribute in
     //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
     let metaDataInfoElement = 'MetadataInteger';
 
     //The XML element for MetadataInteger must contain
-    //We are looking for name = 'IPCCCID'
+    //We are looking for name='IPCCCID'
     let mustContainElement = 'name';
 
     //The XML value for mustContainElement to look for
@@ -108,8 +109,11 @@ These values represent how button appending will work.
     //Here value = "aorta"
     let metaDataInfoAttribute = 'value';
 
+    //The text for the 'htmlInfoButton'
+    let htmlInfoButtonText = 'Diagnosis Info';
+
     //What HTML to display when the 'displayHTMLinfo' button is clicked
-    let displayHTMLinfoHTML = [{
+    let htmlInfoButtonHTML = [{
             "p": "Example p tag"
         },
         {
@@ -125,6 +129,7 @@ These values represent how button appending will work.
             }
         }
     ];
+
     // What HTML to display when the instructions button is clicked
     let instructionsHTML = [{
             "h2": "Instructions"
