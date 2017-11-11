@@ -27,19 +27,19 @@ let buttonObject = {
         state: true
     },
     instructionsToggle: {
-        id: 'html_outer_div_ID',
+        id: 'x3d_gen_html_outer_div',
         state: false
     },
     comparisonToggle: {
-        id: 'html_outer_div_ID',
+        id: 'x3d_gen_html_outer_div',
         state: false
     },
     htmlInfoToggle: {
-        id: 'html_outer_div_ID',
+        id: 'x3d_gen_html_outer_div',
         state: false
     },
     imageDisplayToggle: {
-        id: 'image_div_ID',
+        id: 'x3d_gen_image_div',
         state: false
     }
 };
@@ -193,7 +193,7 @@ let toggleDivs = ( ( show ) => {
 } );
 
 let toggleHTML = ( ( which ) => {
-    document.getElementById( 'html_inner_div_ID' )
+    document.getElementById( 'x3d_gen_html_inner_div' )
         .innerHTML = '';
     let create = null;
     let container = null;
@@ -207,18 +207,18 @@ let toggleHTML = ( ( which ) => {
                 create.innerHTML = which[ i ].container.contents[ z ];
                 container.appendChild( create );
             }
-            document.getElementById( 'html_inner_div_ID' )
+            document.getElementById( 'x3d_gen_html_inner_div' )
                 .appendChild( container );
         } else {
             create = document.createElement( key );
             create.innerHTML = which[ i ][ key ];
-            document.getElementById( 'html_inner_div_ID' )
+            document.getElementById( 'x3d_gen_html_inner_div' )
                 .appendChild( create );
         }
         if ( i === which.length - 1 ) {
             for ( let x = 0; x < 6; x++ ) {
                 br = document.createElement( 'br' );
-                document.getElementById( 'html_inner_div_ID' )
+                document.getElementById( 'x3d_gen_html_inner_div' )
                     .appendChild( br );
             }
         }
@@ -279,7 +279,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', ( () => {
-            document.getElementById( 'image_img_ID' )
+            document.getElementById( 'x3d_gen_image_img_element' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.png';
             toggleDivs( 'imageDisplayToggle' );
         } ) );
@@ -325,9 +325,9 @@ let readXml = ( () => {
         appendInfoButtons();
         document.getElementById( 'x3d_gen_x3d_wrapper' )
             .style.display = 'flex';
-        document.getElementById( 'image_div_ID' )
+        document.getElementById( 'x3d_gen_image_div' )
             .style.display = 'none';
-        document.getElementById( 'html_outer_div_ID' )
+        document.getElementById( 'x3d_gen_html_outer_div' )
             .style.display = 'none';
     } );
 
@@ -340,7 +340,7 @@ let readXml = ( () => {
 
 let inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID';
-document.getElementById( 'x3d_scene_ID' )
+document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
