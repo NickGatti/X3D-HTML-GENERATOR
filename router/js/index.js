@@ -23,7 +23,7 @@ SOFTWARE.
 
 let buttonObject = {
     x3dwrapperToggle: {
-        id: 'x3d_wrapper_ID',
+        id: 'x3d_gen_x3d_wrapper',
         state: true
     },
     instructionsToggle: {
@@ -83,14 +83,14 @@ let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContain
 
 
 let appendToggleButtons = ( () => {
-    let form = document.getElementById( 'toggleWrapper' ),
+    let form = document.getElementById( 'x3d_gen_shape_def_button_wrapper' ),
         div = document.createElement( 'div' );
     for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
         div.className = 'selectTab';
         div.innerHTML = dataObject.navBarData.text[ i ] + '<br> ON';
         div.id = dataObject.navBarData.ID[ i ];
         form.appendChild( div );
-        form = document.getElementById( 'toggleWrapper' );
+        form = document.getElementById( 'x3d_gen_shape_def_button_wrapper' );
         div = document.createElement( 'div' );
         document.getElementById( dataObject.navBarData.ID[ i ] )
             .addEventListener( 'click', ( () => {
@@ -226,7 +226,7 @@ let toggleHTML = ( ( which ) => {
 } );
 
 let appendInfoButtons = ( () => {
-    let form = document.getElementById( 'infoWrapper' );
+    let form = document.getElementById( 'x3d_gen_info_button_wrapper' );
 
     let createButton = ( ( node, color, text, id ) => {
         node.className = 'selectTab';
@@ -245,21 +245,21 @@ let appendInfoButtons = ( () => {
 
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', ( () => {
-            if ( document.getElementById( 'toggleWrapper' )
+            if ( document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                 .style.visibility === 'hidden' ) {
-                document.getElementById( 'toggleWrapper' )
+                document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                     .style.visibility = 'visible';
                 if ( window.innerWidth > 600 ) {
-                    document.getElementById( 'toggleWrapper' )
+                    document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                         .style.display = 'flex';
                 } else {
-                    document.getElementById( 'toggleWrapper' )
+                    document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                         .style.display = 'block';
                 }
             } else {
-                document.getElementById( 'toggleWrapper' )
+                document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                     .style.visibility = 'hidden';
-                document.getElementById( 'toggleWrapper' )
+                document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                     .style.display = 'none';
             }
         } ) );
@@ -323,7 +323,7 @@ let readXml = ( () => {
         appendToggleButtons();
         colorToggleButtons();
         appendInfoButtons();
-        document.getElementById( 'x3d_wrapper_ID' )
+        document.getElementById( 'x3d_gen_x3d_wrapper' )
             .style.display = 'flex';
         document.getElementById( 'image_div_ID' )
             .style.display = 'none';
@@ -364,10 +364,10 @@ document.addEventListener( "load", ( () => {
 
 window.onresize = ( () => {
     if ( window.innerWidth > 1101 ) {
-        document.getElementById( 'toggleWrapper' )
+        document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'flex';
     } else {
-        document.getElementById( 'toggleWrapper' )
+        document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'block';
     }
 } );

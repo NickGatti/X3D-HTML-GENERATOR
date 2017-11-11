@@ -35,7 +35,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-#wrapper {
+#x3d_gen_wrapper {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -44,7 +44,7 @@ body {
     flex-wrap: nowrap;
 }
 
-#infoWrapper, #toggleWrapper {
+#x3d_gen_info_button_wrapper, #x3d_gen_shape_def_button_wrapper {
     box-sizing: border-box;
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 1);
     font-weight: bold;
@@ -62,11 +62,11 @@ body {
     overflow-x: hidden;
 }
 
-#infoWrapper {
+#x3d_gen_info_button_wrapper {
     margin-left: 10px;
 }
 
-#html_outer_div_ID, #x3d_wrapper_ID {
+#html_outer_div_ID, #x3d_gen_x3d_wrapper {
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -93,7 +93,7 @@ body {
     overflow-x: hidden;
 }
 
-#x3d_wrapper_ID {
+#x3d_gen_x3d_wrapper {
     display: flex;
     border: none;
     width: 100%;
@@ -123,7 +123,7 @@ body {
     transition: background-color 250ms linear;
 }
 
-#contentWrapper {
+#x3d_gen_x3d_content_wrapper {
     height: auto;
     width: 100%;
     max-width: 70vw;
@@ -135,7 +135,7 @@ body {
 }
 
 @media only screen and (max-width: 1100px) {
-    #wrapper {
+    #x3d_gen_wrapper {
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: stretch;
@@ -146,7 +146,7 @@ body {
         width: auto;
         border: 1px solid black;
     }
-    #toggleWrapper, #infoWrapper {
+    #x3d_gen_shape_def_button_wrapper, #x3d_gen_info_button_wrapper {
         display: block;
         height: 20%;
         min-height: 20%;
@@ -163,7 +163,7 @@ body {
     #image_img_ID {
         max-height: 60%;
     }
-    #x3d_wrapper_ID {
+    #x3d_gen_x3d_wrapper {
         display: flex;
         min-height: 60%;
         max-height: 60%;
@@ -174,7 +174,7 @@ body {
         max-width: 90%;
         margin-left: -2.5%;
     }
-    #contentWrapper {
+    #x3d_gen_x3d_content_wrapper {
         max-width: none;
     }
 }
