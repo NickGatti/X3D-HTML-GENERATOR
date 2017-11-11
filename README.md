@@ -65,8 +65,7 @@ The url in the inline for the X3D file must point to the relative location perta
 
     <div id='contentWrapper'>
         <x3d id='x3dwrapper'>
-            <scene>
-                <inline nameSpaceName='x3dModelFile' mapDEFToID='true' url='../database/clients/example-aorta/modelFile.x3d' />
+            <scene id='x3dHTMLinlineScene'>
             </scene>
         </x3d>
 
@@ -149,18 +148,18 @@ These values represent how button appending will work.
 </script>
 ```
 
-The next line is the button appending JavaScript.
-
-```html
-<script type='text/javascript' src='js/index.js'></script>
-<link rel='stylesheet' type='text/css' href='css/style.css' />
-```
-
-The X3Dom script can be loaded from the top or bottom, but prefer here.
+The X3Dom script can be loaded from the top or bottom, but it is best performing to load it right here before the button appending JavaScript
 
 ```html
 <script type='text/javascript' src='../X3DOM/x3dom.js'></script>
 <link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
+```
+
+The next line is the button appending JavaScript and must be below the inline JavaScript in the HTML above
+
+```html
+<script type='text/javascript' src='js/index.js'></script>
+<link rel='stylesheet' type='text/css' href='css/style.css' />
 ```
 
 #### To get the 2D drawing to work:
