@@ -280,7 +280,7 @@ let appendInfoButtons = ( () => {
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', ( () => {
             document.getElementById( 'x3d_gen_image_img_element' )
-                .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileType;
+                .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
         } ) );
 
