@@ -279,7 +279,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', ( () => {
-            document.getElementById( 'imageDisplayID' )
+            document.getElementById( 'image_img_ID' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.png';
             toggleDivs( 'imageDisplayToggle' );
         } ) );

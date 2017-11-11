@@ -77,7 +77,7 @@ body {
     margin-right: auto;
 }
 
-#imageDisplayID {
+#image_img_ID {
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -160,7 +160,7 @@ body {
         min-width: 100%;
         min-height: 100%;
     }
-    #imageDisplayID {
+    #image_img_ID {
         max-height: 60%;
     }
     #x3d_wrapper_ID {
