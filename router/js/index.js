@@ -26,15 +26,15 @@ let buttonObject = {
         id: 'x3d_wrapper_ID',
         state: true
     },
-    instructions: {
+    instructionsToggle: {
         id: 'HTMLdiv',
         state: false
     },
-    compareThreeDee: {
+    comparisonToggle: {
         id: 'HTMLdiv',
         state: false
     },
-    diagnosis: {
+    htmlInfoToggle: {
         id: 'HTMLdiv',
         state: false
     },
@@ -46,7 +46,7 @@ let buttonObject = {
 
 var oReq = new XMLHttpRequest();
 
-let dataObj = {
+let dataObject = {
     navBarData: {},
     x3DomObject: {},
     metaDataInfo: {}
@@ -85,16 +85,16 @@ let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContain
 let appendToggleButtons = ( () => {
     let form = document.getElementById( 'toggleWrapper' ),
         div = document.createElement( 'div' );
-    for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
+    for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
         div.className = 'selectTab';
-        div.innerHTML = dataObj.navBarData.text[ i ] + '<br> ON';
-        div.id = dataObj.navBarData.ID[ i ];
+        div.innerHTML = dataObject.navBarData.text[ i ] + '<br> ON';
+        div.id = dataObject.navBarData.ID[ i ];
         form.appendChild( div );
         form = document.getElementById( 'toggleWrapper' );
         div = document.createElement( 'div' );
-        document.getElementById( dataObj.navBarData.ID[ i ] )
+        document.getElementById( dataObject.navBarData.ID[ i ] )
             .addEventListener( 'click', ( () => {
-                let x3DomObject = document.getElementById( dataObj.x3DomObject.ID[ i ] );
+                let x3DomObject = document.getElementById( dataObject.x3DomObject.ID[ i ] );
                 if ( x3DomObject ) {
                     if ( typeof x3DomObject.renderToggle === undefined ) {
                         x3DomObject.setAttribute( 'render', false );
@@ -102,13 +102,13 @@ let appendToggleButtons = ( () => {
                     } else if ( x3DomObject.renderToggle ) {
                         x3DomObject.setAttribute( 'render', true );
                         x3DomObject.renderToggle = false;
-                        document.getElementById( dataObj.navBarData.ID[ i ] )
-                            .innerHTML = dataObj.navBarData.text[ i ] + '<br> ON';
+                        document.getElementById( dataObject.navBarData.ID[ i ] )
+                            .innerHTML = dataObject.navBarData.text[ i ] + '<br> ON';
                     } else {
                         x3DomObject.setAttribute( 'render', false );
                         x3DomObject.renderToggle = true;
-                        document.getElementById( dataObj.navBarData.ID[ i ] )
-                            .innerHTML = dataObj.navBarData.text[ i ] + '<br> OFF';
+                        document.getElementById( dataObject.navBarData.ID[ i ] )
+                            .innerHTML = dataObject.navBarData.text[ i ] + '<br> OFF';
                     }
                 }
             } ) );
@@ -139,16 +139,16 @@ let hoverTransition = ( ( id, originalColor ) => {
 } );
 
 let colorToggleButtons = ( () => {
-    for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
-        document.getElementById( dataObj.navBarData.ID[ i ] )
+    for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
+        document.getElementById( dataObject.navBarData.ID[ i ] )
             .style.backgroundColor = `rgb(
-                      ${Math.round( ( dataObj.navBarData.color[i][0]) * 255 )} ,
-                      ${Math.round( ( dataObj.navBarData.color[i][1]) * 255 )} ,
-                      ${Math.round( ( dataObj.navBarData.color[i][2]) * 255 )}`;
-        hoverTransition( dataObj.navBarData.ID[ i ], `rgb(
-                  ${Math.round( ( dataObj.navBarData.color[i][0]) * 255 )} ,
-                  ${Math.round( ( dataObj.navBarData.color[i][1]) * 255 )} ,
-                  ${Math.round( ( dataObj.navBarData.color[i][2]) * 255 )}` );
+                      ${Math.round( ( dataObject.navBarData.color[i][0]) * 255 )} ,
+                      ${Math.round( ( dataObject.navBarData.color[i][1]) * 255 )} ,
+                      ${Math.round( ( dataObject.navBarData.color[i][2]) * 255 )}`;
+        hoverTransition( dataObject.navBarData.ID[ i ], `rgb(
+                  ${Math.round( ( dataObject.navBarData.color[i][0]) * 255 )} ,
+                  ${Math.round( ( dataObject.navBarData.color[i][1]) * 255 )} ,
+                  ${Math.round( ( dataObject.navBarData.color[i][2]) * 255 )}` );
     }
 } );
 
@@ -241,7 +241,7 @@ let appendInfoButtons = ( () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'comparisonButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', htmlInfoButtonText, 'htmlInfoButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObj.metaDataInfo.ID );
+    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObject.metaDataInfo.ID );
 
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', ( () => {
@@ -266,7 +266,7 @@ let appendInfoButtons = ( () => {
     document.getElementById( 'instructionsButton' )
         .addEventListener( 'click', ( () => {
             toggleHTML( instructionsHTML );
-            toggleDivs( 'instructions' );
+            toggleDivs( 'instructionsToggle' );
         } ) );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', ( () => {
@@ -275,12 +275,12 @@ let appendInfoButtons = ( () => {
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', ( () => {
             toggleHTML( displayHTMLinfoHTML );
-            toggleDivs( 'diagnosis' );
+            toggleDivs( 'htmlInfoToggle' );
         } ) );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', ( () => {
             document.getElementById( 'imageDisplayID' )
-                .src = '../database/metaDataInfo/2Dimages/' + dataObj.metaDataInfo.ID + '.png';
+                .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.png';
             toggleDivs( 'imageDisplayToggle' );
         } ) );
 
@@ -295,28 +295,28 @@ let readXml = ( () => {
     oReq.open( 'GET', xmlFile );
     oReq.send();
 
-    let popDataObject = ( ( text ) => {
+    let popdataObjectect = ( ( text ) => {
         let value = parseXML( text, 'Shape', 'DEF' );
-        dataObj.navBarData.text = value.map( ( data ) => {
+        dataObject.navBarData.text = value.map( ( data ) => {
             return data;
         } );
-        dataObj.navBarData.ID = value.map( ( data ) => {
+        dataObject.navBarData.ID = value.map( ( data ) => {
             return data;
         } );
-        for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
-            dataObj.navBarData.ID[ i ] = dataObj.navBarData.ID[ i ].replace( ' ', '_' );
+        for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
+            dataObject.navBarData.ID[ i ] = dataObject.navBarData.ID[ i ].replace( ' ', '_' );
         }
-        dataObj.x3DomObject.ID = value.map( ( data ) => {
+        dataObject.x3DomObject.ID = value.map( ( data ) => {
             return data;
         } );
-        for ( let i = 0; i < dataObj.x3DomObject.ID.length; i++ ) {
-            dataObj.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObj.x3DomObject.ID[ i ];
+        for ( let i = 0; i < dataObject.x3DomObject.ID.length; i++ ) {
+            dataObject.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObject.x3DomObject.ID[ i ];
         }
         value = parseXML( text, 'Material', 'diffuseColor' );
-        dataObj.navBarData.color = value.map( ( data ) => {
+        dataObject.navBarData.color = value.map( ( data ) => {
             return data.split( ' ' );
         } );
-        dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
+        dataObject.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
     } );
 
     let run = ( () => {
@@ -332,7 +332,7 @@ let readXml = ( () => {
     } );
 
     function reqListener() {
-        popDataObject( this.responseText );
+        popdataObjectect( this.responseText );
         run();
     }
     oReq.addEventListener( 'load', reqListener );
