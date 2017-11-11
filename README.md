@@ -39,6 +39,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 10-10-2017 Added overflow-auto to html-div no more need to add a floating nav bar
 10-11-2017 Removed need to add inline X3D html tag
 10-11-2017 Added support for all extensions on the image file
+10-11-2017 No longer need to ship X3Dom with the package
 ```
 
 ### Documentation
