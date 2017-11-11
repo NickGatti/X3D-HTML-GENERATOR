@@ -50,9 +50,6 @@ I use Lato as a nice readable text and viewport.
 ```
 
 #### At the top of the body:
-HTML Containing the Inline X3D must be a copy of this code (examples in the git).
-
-The url in the inline for the X3D file must point to the relative location pertaining to the content included in the HTML.
 
 ```html
 <div id='wrapper'>
