@@ -347,7 +347,6 @@ document.getElementById( 'x3d_gen_x3d_scene' )
 document.addEventListener( "load", ( () => {
     console.log( 'Loaded document...' );
     console.log( 'Attempting to render buttons...' );
-    readXml();
     let loadScene = setInterval( () => {
         console.log( 'Attempting to set X3D attributes...' );
         if ( document.getElementById( 'x3d_inline_ID' )
@@ -373,3 +372,31 @@ window.onresize = ( () => {
             .style.display = 'block';
     }
 } );
+
+let loadScript = ( ( url, callback ) => {
+
+    let script = document.createElement( 'script' );
+    script.type = 'text/javascript';
+
+    if ( script.readyState ) { //IE
+        script.onreadystatechange = ( () => {
+            if ( script.readyState === 'loaded' ||
+                script.readyState === 'complete' ) {
+                script.onreadystatechange = null;
+                callback();
+            }
+        } );
+    } else { //Others
+        script.onload = ( () => {
+            callback();
+        } );
+    }
+
+    script.src = url;
+    document.getElementsByTagName( 'body' )[ 0 ].appendChild( script );
+    readXml();
+} );
+
+loadScript( 'http://www.x3dom.org/download/x3dom.js', ( () => {
+    return;
+} ) );
