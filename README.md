@@ -90,6 +90,9 @@ These values represent how button appending will work.
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
 
+    //Image file type
+    let imageFileType = 'png';
+
     //The text for the 'metaDataButton'
     let metaDataInfoButtonText = 'MetaData Info';
 
