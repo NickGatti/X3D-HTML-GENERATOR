@@ -27,15 +27,15 @@ let buttonObject = {
         state: true
     },
     instructionsToggle: {
-        id: 'HTMLdiv',
+        id: 'html_outer_div',
         state: false
     },
     comparisonToggle: {
-        id: 'HTMLdiv',
+        id: 'html_outer_div',
         state: false
     },
     htmlInfoToggle: {
-        id: 'HTMLdiv',
+        id: 'html_outer_div',
         state: false
     },
     imageDisplayToggle: {
@@ -327,7 +327,7 @@ let readXml = ( () => {
             .style.display = 'flex';
         document.getElementById( 'twoDeeDrawing' )
             .style.display = 'none';
-        document.getElementById( 'HTMLdiv' )
+        document.getElementById( 'html_outer_div' )
             .style.display = 'none';
     } );
 
