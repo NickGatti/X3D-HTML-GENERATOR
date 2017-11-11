@@ -329,6 +329,7 @@ let readXml = ( () => {
             .style.display = 'none';
         document.getElementById( 'x3d_gen_html_outer_div' )
             .style.display = 'none';
+        console.log( 'Buttons rendered' );
     } );
 
     function reqListener() {
@@ -344,13 +345,14 @@ document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
-    readXml();
     console.log( 'Loaded document...' );
+    console.log( 'Attempting to render buttons...' );
+    readXml();
     let loadScene = setInterval( () => {
-        console.log( 'Attempting to load X3D Scene..' );
+        console.log( 'Attempting to set X3D attributes...' );
         if ( document.getElementById( 'x3d_inline_ID' )
             .load ) {
-            console.log( 'Loaded X3D Scene' );
+            console.log( 'X3D attributes set, rendering scene...' );
             clearInterval( loadScene );
         }
         document.getElementById( 'x3d_inline_ID' )
