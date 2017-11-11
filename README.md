@@ -153,11 +153,10 @@ These values represent how button appending will work.
 </script>
 ```
 
-The X3Dom script can be loaded from the top or bottom, but it is best performing to load it right here before the button appending JavaScript
+The X3Dom script is loaded by the button appending JavaScript, but we are loading the CSS from the HTML here:
 
 ```html
-<script type='text/javascript' src='../X3DOM/x3dom.js'></script>
-<link rel='stylesheet' type='text/css' href='../X3DOM/x3dom.css' />
+<link rel='stylesheet' type='text/css' href='http://www.x3dom.org/x3dom/release/x3dom.css' />
 ```
 
 The next line is the button appending JavaScript and must be below the inline JavaScript in the HTML above
