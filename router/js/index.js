@@ -193,7 +193,7 @@ let toggleDivs = ( ( show ) => {
 } );
 
 let toggleHTML = ( ( which ) => {
-    document.getElementById( 'displayHTML' )
+    document.getElementById( 'html_inner_div' )
         .innerHTML = '';
     let create = null;
     let container = null;
@@ -207,18 +207,18 @@ let toggleHTML = ( ( which ) => {
                 create.innerHTML = which[ i ].container.contents[ z ];
                 container.appendChild( create );
             }
-            document.getElementById( 'displayHTML' )
+            document.getElementById( 'html_inner_div' )
                 .appendChild( container );
         } else {
             create = document.createElement( key );
             create.innerHTML = which[ i ][ key ];
-            document.getElementById( 'displayHTML' )
+            document.getElementById( 'html_inner_div' )
                 .appendChild( create );
         }
         if ( i === which.length - 1 ) {
             for ( let x = 0; x < 6; x++ ) {
                 br = document.createElement( 'br' );
-                document.getElementById( 'displayHTML' )
+                document.getElementById( 'html_inner_div' )
                     .appendChild( br );
             }
         }
@@ -274,7 +274,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', ( () => {
-            toggleHTML( displayHTMLinfoHTML );
+            toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
         } ) );
     document.getElementById( 'imageButton' )

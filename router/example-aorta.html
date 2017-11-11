@@ -27,7 +27,7 @@
                 </div>
 
                 <div id='HTMLdiv'>
-                    <div id='displayHTML'>
+                    <div id='html_inner_div'>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,6 @@
         <script type="text/javascript">
             //Which X3D file to render
             let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
-
-            //The text for the 'displayHTMLinfoButton'
-            let htmlInfoButtonText = 'Diagnosis Info';
 
             //The text for the 'metaDataButton'
             let metaDataInfoButtonText = 'MetaData Info';
@@ -59,8 +56,11 @@
             //Here value = "aorta"
             let metaDataInfoAttribute = 'value';
 
+            //The text for the 'htmlInfoButton'
+            let htmlInfoButtonText = 'Diagnosis Info';
+
             //What HTML to display when the 'displayHTMLinfo' button is clicked
-            let displayHTMLinfoHTML = [{
+            let htmlInfoButtonHTML = [{
                     "p": "Example p tag"
                 }, {
                     "p": "Example p tag"
