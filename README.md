@@ -27,10 +27,9 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 ## Future Plans and TODO list
 
 ```
-1. ~Soon Add support for .jpg, .svg and .png in the 2D images
-2. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
-3. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
-4. ~Unknown ETA Wait to see what to do about the Compare 3D button
+1. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
+2. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
+3. ~Unknown ETA Wait to see what to do about the Compare 3D button
 ```
 
 ## Patch Notes
@@ -39,6 +38,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 10-10-2017 Added Proper XML parsing support (no more sDEF or diffuseColorHex) total automatic file reading
 10-10-2017 Added overflow-auto to html-div no more need to add a floating nav bar
 10-11-2017 Removed need to add inline X3D html tag
+10-11-2017 Added support for all extensions on the image file
 ```
 
 ### Documentation
@@ -90,8 +90,8 @@ These values represent how button appending will work.
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
 
-    //Image file type
-    let imageFileType = 'png';
+    //Image file extension
+    let imageFileExtension = 'png';
 
     //The text for the 'metaDataButton'
     let metaDataInfoButtonText = 'MetaData Info';
