@@ -27,15 +27,15 @@ let buttonObject = {
         state: true
     },
     instructionsToggle: {
-        id: 'html_outer_div',
+        id: 'html_outer_div_ID',
         state: false
     },
     comparisonToggle: {
-        id: 'html_outer_div',
+        id: 'html_outer_div_ID',
         state: false
     },
     htmlInfoToggle: {
-        id: 'html_outer_div',
+        id: 'html_outer_div_ID',
         state: false
     },
     imageDisplayToggle: {
@@ -327,7 +327,7 @@ let readXml = ( () => {
             .style.display = 'flex';
         document.getElementById( 'image_div_ID' )
             .style.display = 'none';
-        document.getElementById( 'html_outer_div' )
+        document.getElementById( 'html_outer_div_ID' )
             .style.display = 'none';
     } );
 
