@@ -39,7 +39,7 @@ let buttonObject = {
         state: false
     },
     imageDisplayToggle: {
-        id: 'twoDeeDrawing',
+        id: 'image_div_ID',
         state: false
     }
 };
@@ -325,7 +325,7 @@ let readXml = ( () => {
         appendInfoButtons();
         document.getElementById( 'x3d_wrapper_ID' )
             .style.display = 'flex';
-        document.getElementById( 'twoDeeDrawing' )
+        document.getElementById( 'image_div_ID' )
             .style.display = 'none';
         document.getElementById( 'html_outer_div' )
             .style.display = 'none';
