@@ -21,43 +21,33 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-window.onresize = ( () => {
-    if ( window.innerWidth > 1101 ) {
-        document.getElementById( 'toggleWrapper' )
-            .style.display = 'flex';
-    } else {
-        document.getElementById( 'toggleWrapper' )
-            .style.display = 'block';
-    }
-} );
-
-let buttonToggle = {
-    x3dwrapper: {
-        id: 'x3dwrapper',
-        toggle: true
+let buttonObject = {
+    x3dwrapperToggle: {
+        id: 'x3d_wrapper_ID',
+        state: true
     },
     instructions: {
         id: 'HTMLdiv',
-        toggle: false
+        state: false
     },
     compareThreeDee: {
         id: 'HTMLdiv',
-        toggle: false
+        state: false
     },
     diagnosis: {
         id: 'HTMLdiv',
-        toggle: false
+        state: false
     },
-    twoDeeDrawing: {
+    imageDisplayToggle: {
         id: 'twoDeeDrawing',
-        toggle: false
+        state: false
     }
 };
 
 var oReq = new XMLHttpRequest();
 
 let dataObj = {
-    toggleBar: {},
+    navBarData: {},
     x3DomObject: {},
     metaDataInfo: {}
 };
@@ -95,14 +85,14 @@ let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContain
 let appendToggleButtons = ( () => {
     let form = document.getElementById( 'toggleWrapper' ),
         div = document.createElement( 'div' );
-    for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
+    for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
         div.className = 'selectTab';
-        div.innerHTML = dataObj.toggleBar.text[ i ] + '<br> ON';
-        div.id = dataObj.toggleBar.ID[ i ];
+        div.innerHTML = dataObj.navBarData.text[ i ] + '<br> ON';
+        div.id = dataObj.navBarData.ID[ i ];
         form.appendChild( div );
         form = document.getElementById( 'toggleWrapper' );
         div = document.createElement( 'div' );
-        document.getElementById( dataObj.toggleBar.ID[ i ] )
+        document.getElementById( dataObj.navBarData.ID[ i ] )
             .addEventListener( 'click', ( () => {
                 let x3DomObject = document.getElementById( dataObj.x3DomObject.ID[ i ] );
                 if ( x3DomObject ) {
@@ -112,13 +102,13 @@ let appendToggleButtons = ( () => {
                     } else if ( x3DomObject.renderToggle ) {
                         x3DomObject.setAttribute( 'render', true );
                         x3DomObject.renderToggle = false;
-                        document.getElementById( dataObj.toggleBar.ID[ i ] )
-                            .innerHTML = dataObj.toggleBar.text[ i ] + '<br> ON';
+                        document.getElementById( dataObj.navBarData.ID[ i ] )
+                            .innerHTML = dataObj.navBarData.text[ i ] + '<br> ON';
                     } else {
                         x3DomObject.setAttribute( 'render', false );
                         x3DomObject.renderToggle = true;
-                        document.getElementById( dataObj.toggleBar.ID[ i ] )
-                            .innerHTML = dataObj.toggleBar.text[ i ] + '<br> OFF';
+                        document.getElementById( dataObj.navBarData.ID[ i ] )
+                            .innerHTML = dataObj.navBarData.text[ i ] + '<br> OFF';
                     }
                 }
             } ) );
@@ -149,26 +139,26 @@ let hoverTransition = ( ( id, originalColor ) => {
 } );
 
 let colorToggleButtons = ( () => {
-    for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
-        document.getElementById( dataObj.toggleBar.ID[ i ] )
+    for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
+        document.getElementById( dataObj.navBarData.ID[ i ] )
             .style.backgroundColor = `rgb(
-                      ${Math.round( ( dataObj.toggleBar.color[i][0]) * 255 )} ,
-                      ${Math.round( ( dataObj.toggleBar.color[i][1]) * 255 )} ,
-                      ${Math.round( ( dataObj.toggleBar.color[i][2]) * 255 )}`;
-        hoverTransition( dataObj.toggleBar.ID[ i ], `rgb(
-                  ${Math.round( ( dataObj.toggleBar.color[i][0]) * 255 )} ,
-                  ${Math.round( ( dataObj.toggleBar.color[i][1]) * 255 )} ,
-                  ${Math.round( ( dataObj.toggleBar.color[i][2]) * 255 )}` );
+                      ${Math.round( ( dataObj.navBarData.color[i][0]) * 255 )} ,
+                      ${Math.round( ( dataObj.navBarData.color[i][1]) * 255 )} ,
+                      ${Math.round( ( dataObj.navBarData.color[i][2]) * 255 )}`;
+        hoverTransition( dataObj.navBarData.ID[ i ], `rgb(
+                  ${Math.round( ( dataObj.navBarData.color[i][0]) * 255 )} ,
+                  ${Math.round( ( dataObj.navBarData.color[i][1]) * 255 )} ,
+                  ${Math.round( ( dataObj.navBarData.color[i][2]) * 255 )}` );
     }
 } );
 
-let useButtonToggleObj = ( () => {
+let usebuttonObject = ( () => {
     let output = '';
-    for ( let key in buttonToggle ) {
-        if ( buttonToggle[ key ].toggle ) {
-            output = buttonToggle[ key ].id;
+    for ( let key in buttonObject ) {
+        if ( buttonObject[ key ].state ) {
+            output = buttonObject[ key ].id;
         } else {
-            document.getElementById( buttonToggle[ key ].id )
+            document.getElementById( buttonObject[ key ].id )
                 .style.display = 'none';
         }
     }
@@ -177,29 +167,29 @@ let useButtonToggleObj = ( () => {
 } );
 
 let switchDefaultButton = ( () => {
-    if ( buttonToggle.x3dwrapper.toggle ) {
-        buttonToggle.x3dwrapper.toggle = false;
+    if ( buttonObject.x3dwrapperToggle.state ) {
+        buttonObject.x3dwrapperToggle.state = false;
     } else {
-        buttonToggle.x3dwrapper.toggle = true;
+        buttonObject.x3dwrapperToggle.state = true;
     }
 } );
 
 let switchSelectedButton = ( ( show ) => {
-    if ( buttonToggle[ show ].toggle ) {
-        buttonToggle[ 'x3dwrapper' ].toggle = true;
-        buttonToggle[ show ].toggle = false;
+    if ( buttonObject[ show ].state ) {
+        buttonObject[ 'x3dwrapperToggle' ].state = true;
+        buttonObject[ show ].state = false;
         return;
     }
-    for ( let key in buttonToggle ) {
-        buttonToggle[ key ].toggle = false;
+    for ( let key in buttonObject ) {
+        buttonObject[ key ].state = false;
     }
-    buttonToggle[ show ].toggle = true;
+    buttonObject[ show ].state = true;
 } );
 
 let toggleDivs = ( ( show ) => {
     switchDefaultButton();
     switchSelectedButton( show );
-    useButtonToggleObj( show );
+    usebuttonObject( show );
 } );
 
 let toggleHTML = ( ( which ) => {
@@ -250,7 +240,7 @@ let appendInfoButtons = ( () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'showToggleWrapperButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'compareThreeDeeButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', displayHTMLinfoButtonText, 'displayHTMLinfoButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'twoDeeDrawingButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObj.metaDataInfo.ID );
 
     document.getElementById( 'showToggleWrapperButton' )
@@ -287,17 +277,17 @@ let appendInfoButtons = ( () => {
             toggleHTML( displayHTMLinfoHTML );
             toggleDivs( 'diagnosis' );
         } ) );
-    document.getElementById( 'twoDeeDrawingButton' )
+    document.getElementById( 'imageButton' )
         .addEventListener( 'click', ( () => {
             document.getElementById( 'imageDisplayID' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObj.metaDataInfo.ID + '.png';
-            toggleDivs( 'twoDeeDrawing' );
+            toggleDivs( 'imageDisplayToggle' );
         } ) );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
     hoverTransition( 'compareThreeDeeButton', 'deepskyblue' );
     hoverTransition( 'displayHTMLinfoButton', 'deepskyblue' );
-    hoverTransition( 'twoDeeDrawingButton', 'deepskyblue' );
+    hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'showToggleWrapperButton', 'deepskyblue' );
 } );
 
@@ -307,14 +297,14 @@ let readXml = ( () => {
 
     let popDataObject = ( ( text ) => {
         let value = parseXML( text, 'Shape', 'DEF' );
-        dataObj.toggleBar.text = value.map( ( data ) => {
+        dataObj.navBarData.text = value.map( ( data ) => {
             return data;
         } );
-        dataObj.toggleBar.ID = value.map( ( data ) => {
+        dataObj.navBarData.ID = value.map( ( data ) => {
             return data;
         } );
-        for ( let i = 0; i < dataObj.toggleBar.ID.length; i++ ) {
-            dataObj.toggleBar.ID[ i ] = dataObj.toggleBar.ID[ i ].replace( ' ', '_' );
+        for ( let i = 0; i < dataObj.navBarData.ID.length; i++ ) {
+            dataObj.navBarData.ID[ i ] = dataObj.navBarData.ID[ i ].replace( ' ', '_' );
         }
         dataObj.x3DomObject.ID = value.map( ( data ) => {
             return data;
@@ -323,7 +313,7 @@ let readXml = ( () => {
             dataObj.x3DomObject.ID[ i ] = 'x3dModelFile__' + dataObj.x3DomObject.ID[ i ];
         }
         value = parseXML( text, 'Material', 'diffuseColor' );
-        dataObj.toggleBar.color = value.map( ( data ) => {
+        dataObj.navBarData.color = value.map( ( data ) => {
             return data.split( ' ' );
         } );
         dataObj.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
@@ -333,7 +323,7 @@ let readXml = ( () => {
         appendToggleButtons();
         colorToggleButtons();
         appendInfoButtons();
-        document.getElementById( 'x3dwrapper' )
+        document.getElementById( 'x3d_wrapper_ID' )
             .style.display = 'flex';
         document.getElementById( 'twoDeeDrawing' )
             .style.display = 'none';
@@ -347,27 +337,37 @@ let readXml = ( () => {
     }
     oReq.addEventListener( 'load', reqListener );
 } );
-readXml();
 
 let inline = document.createElement( 'inline' );
-inline.id = 'x3dHTMLinlineInline';
-document.getElementById( 'x3dHTMLinlineScene' )
+inline.id = 'x3d_inline_ID';
+document.getElementById( 'x3d_scene_ID' )
     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
+    readXml();
     console.log( 'Loaded document...' );
     let loadScene = setInterval( () => {
         console.log( 'Attempting to load X3D Scene..' );
-        if ( document.getElementById( 'x3dHTMLinlineInline' )
+        if ( document.getElementById( 'x3d_inline_ID' )
             .load ) {
             console.log( 'Loaded X3D Scene' );
             clearInterval( loadScene );
         }
-        document.getElementById( 'x3dHTMLinlineInline' )
+        document.getElementById( 'x3d_inline_ID' )
             .url = xmlFile;
-        document.getElementById( 'x3dHTMLinlineInline' )
+        document.getElementById( 'x3d_inline_ID' )
             .namespacename = 'x3dModelFile';
-        document.getElementById( 'x3dHTMLinlineInline' )
+        document.getElementById( 'x3d_inline_ID' )
             .mapdeftoid = true;
     }, 10 );
 } ) );
+
+window.onresize = ( () => {
+    if ( window.innerWidth > 1101 ) {
+        document.getElementById( 'toggleWrapper' )
+            .style.display = 'flex';
+    } else {
+        document.getElementById( 'toggleWrapper' )
+            .style.display = 'block';
+    }
+} );

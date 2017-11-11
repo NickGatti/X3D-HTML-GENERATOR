@@ -66,7 +66,7 @@ body {
     margin-left: 10px;
 }
 
-#HTMLdiv, #x3dwrapper {
+#HTMLdiv, #x3d_wrapper_ID {
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -93,7 +93,7 @@ body {
     overflow-x: hidden;
 }
 
-#x3dwrapper {
+#x3d_wrapper_ID {
     display: flex;
     border: none;
     width: 100%;
@@ -163,7 +163,7 @@ body {
     #imageDisplayID {
         max-height: 60%;
     }
-    #x3dwrapper {
+    #x3d_wrapper_ID {
         display: flex;
         min-height: 60%;
         max-height: 60%;
