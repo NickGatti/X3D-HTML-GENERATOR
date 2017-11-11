@@ -237,13 +237,13 @@ let appendInfoButtons = ( () => {
     } );
 
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'showToggleWrapperButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'compareThreeDeeButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', displayHTMLinfoButtonText, 'displayHTMLinfoButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'comparisonButton' );
+    createButton( document.createElement( 'div' ), 'deepskyblue', htmlInfoButtonText, 'htmlInfoButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObj.metaDataInfo.ID );
 
-    document.getElementById( 'showToggleWrapperButton' )
+    document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', ( () => {
             if ( document.getElementById( 'toggleWrapper' )
                 .style.visibility === 'hidden' ) {
@@ -268,11 +268,11 @@ let appendInfoButtons = ( () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructions' );
         } ) );
-    document.getElementById( 'compareThreeDeeButton' )
+    document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', ( () => {
             console.log( 'Nothing for this button yet!' );
         } ) );
-    document.getElementById( 'displayHTMLinfoButton' )
+    document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', ( () => {
             toggleHTML( displayHTMLinfoHTML );
             toggleDivs( 'diagnosis' );
@@ -285,10 +285,10 @@ let appendInfoButtons = ( () => {
         } ) );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
-    hoverTransition( 'compareThreeDeeButton', 'deepskyblue' );
-    hoverTransition( 'displayHTMLinfoButton', 'deepskyblue' );
+    hoverTransition( 'comparisonButton', 'deepskyblue' );
+    hoverTransition( 'htmlInfoButton', 'deepskyblue' );
     hoverTransition( 'imageButton', 'deepskyblue' );
-    hoverTransition( 'showToggleWrapperButton', 'deepskyblue' );
+    hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 } );
 
 let readXml = ( () => {
