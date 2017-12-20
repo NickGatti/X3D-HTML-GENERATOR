@@ -343,8 +343,12 @@ let inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID';
 document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
+// inline.id = 'x3d_inline_ID_ref';
+// document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
+//     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
+    µµ
     console.log( 'Loaded document...' );
     console.log( 'Attempting to render buttons...' );
     let loadScene = setInterval( () => {

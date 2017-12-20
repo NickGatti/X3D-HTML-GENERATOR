@@ -134,6 +134,14 @@ body {
     flex-wrap: wrap;
 }
 
+#x3d_gen_x3d_wrapper_ref {
+    position: fixed;
+    top: 85vh;
+    left: 91.5vw;
+    width: 100px;
+    height: 100px;
+}
+
 @media only screen and (max-width: 1100px) {
     #x3d_gen_wrapper {
         flex-direction: column;
