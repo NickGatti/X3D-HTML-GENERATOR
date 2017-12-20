@@ -348,7 +348,6 @@ document.getElementById( 'x3d_gen_x3d_scene' )
 //     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
-    µµ
     console.log( 'Loaded document...' );
     console.log( 'Attempting to render buttons...' );
     let loadScene = setInterval( () => {
