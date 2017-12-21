@@ -343,19 +343,20 @@ let inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID';
 document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
-// inline.id = 'x3d_inline_ID_ref';
-// document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
-//     .appendChild( inline );
+inline = document.createElement( 'inline' );
+inline.id = 'x3d_inline_ID_ref';
+document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
+    .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
     console.log( 'Loaded document...' );
     console.log( 'Attempting to render buttons...' );
-    let loadScene = setInterval( () => {
-        console.log( 'Attempting to set X3D attributes...' );
+    let loadMainScene = setInterval( () => {
+        console.log( 'Attempting to set X3D Main Scene attributes...' );
         if ( document.getElementById( 'x3d_inline_ID' )
             .load ) {
-            console.log( 'X3D attributes set, rendering scene...' );
-            clearInterval( loadScene );
+            console.log( 'X3D main scene attributes set, rendering scene...' );
+            clearInterval( loadMainScene );
         }
         document.getElementById( 'x3d_inline_ID' )
             .url = xmlFile;
@@ -363,7 +364,21 @@ document.addEventListener( "load", ( () => {
             .namespacename = 'x3dModelFile';
         document.getElementById( 'x3d_inline_ID' )
             .mapdeftoid = true;
-    }, 10 );
+    }, 5000 );
+    let loadPaperDollScene = setInterval( () => {
+        console.log( 'Attempting to set X3D Paperdoll attributes...' );
+        if ( document.getElementById( 'x3d_inline_ID_ref' )
+            .load ) {
+            console.log( 'X3D paperdoll attributes set, rendering scene...' );
+            clearInterval( loadPaperDollScene );
+        }
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/metaDataInfo/paperdoll/paperdoll.x3d';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .namespacename = 'referenceModel';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .mapdeftoid = true;
+    }, 5000 );
 } ) );
 
 window.onresize = ( () => {
