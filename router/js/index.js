@@ -365,15 +365,15 @@ document.addEventListener( "load", ( () => {
         document.getElementById( 'x3d_inline_ID' )
             .mapdeftoid = true;
     }, 5000 );
-    let loadPaperDollScene = setInterval( () => {
-        console.log( 'Attempting to set X3D Paperdoll attributes...' );
+    let loadAxisIndicatorScene = setInterval( () => {
+        console.log( 'Attempting to set X3D Axis Indicator attributes...' );
         if ( document.getElementById( 'x3d_inline_ID_ref' )
             .load ) {
-            console.log( 'X3D paperdoll attributes set, rendering scene...' );
-            clearInterval( loadPaperDollScene );
+            console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
+            clearInterval( loadAxisIndicatorScene );
         }
         document.getElementById( 'x3d_inline_ID_ref' )
-            .url = '../database/metaDataInfo/paperdoll/paperdoll.x3d';
+            .url = '../database/metaDataInfo/axisIndicator/axisIndicator.x3d';
         document.getElementById( 'x3d_inline_ID_ref' )
             .namespacename = 'referenceModel';
         document.getElementById( 'x3d_inline_ID_ref' )
