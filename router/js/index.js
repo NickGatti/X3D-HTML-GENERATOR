@@ -289,6 +289,7 @@ let appendInfoButtons = ( () => {
     hoverTransition( 'htmlInfoButton', 'deepskyblue' );
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
+    console.log( 'Buttons rendered' );
 } );
 
 let readXml = ( () => {
@@ -329,7 +330,6 @@ let readXml = ( () => {
             .style.display = 'none';
         document.getElementById( 'x3d_gen_html_outer_div' )
             .style.display = 'none';
-        console.log( 'Buttons rendered' );
     } );
 
     function reqListener() {
