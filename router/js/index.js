@@ -235,9 +235,6 @@ let toggleCompare3D = () => {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = '../database/referenceModels/aorta/referenceModel.x3d';
         compare3Dtoggle.state = 'reference'
-        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '400px'
-        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '400px'
-        compare3Dtoggle.size = 400
         pipResize()
     } else {
         document.getElementById( 'x3d_inline_ID_ref' )
@@ -414,10 +411,27 @@ document.addEventListener( "load", ( () => {
 } ) );
 
 function pipResize() {
+    if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
     let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
     pip.style.visibility = 'visible'
     pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
     pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
+}
+
+function referenceResizer() {
+    if ( window.innerWidth > 1601 ) {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '370px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '370px'
+        compare3Dtoggle.size = 370
+    } else if ( window.innerWidth > 1101 ) {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '275px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '275px'
+        compare3Dtoggle.size = 275
+    } else {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '150px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '150px'
+        compare3Dtoggle.size = 150
+    }
 }
 
 window.onresize = ( () => {
