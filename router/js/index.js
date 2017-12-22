@@ -289,7 +289,6 @@ let appendInfoButtons = ( () => {
     hoverTransition( 'htmlInfoButton', 'deepskyblue' );
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
-    console.log( 'Buttons rendered' );
 } );
 
 let readXml = ( () => {
@@ -334,7 +333,8 @@ let readXml = ( () => {
 
     function reqListener() {
         popdataObjectect( this.responseText );
-        run();
+        console.log( 'Attempting to render buttons...' );
+        document.addEventListener( "load", () => run() )
     }
     oReq.addEventListener( 'load', reqListener );
 } );
@@ -349,8 +349,9 @@ document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
-    console.log( 'Loaded document...' );
-    console.log( 'Attempting to render buttons...' );
+    document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).addEventListener( 'DOMNodeInserted', () => {
+        console.log( 'Buttons Rendered' );
+    } )
     let loadMainScene = setInterval( () => {
         console.log( 'Attempting to set X3D Main Scene attributes...' );
         if ( document.getElementById( 'x3d_inline_ID' )
