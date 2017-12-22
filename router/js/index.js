@@ -345,41 +345,45 @@ document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
 inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID_ref';
-document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
+document.getElementById( 'x3d_gen_x3d_scene_ref' )
     .appendChild( inline );
 
 document.addEventListener( "load", ( () => {
-    document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).addEventListener( 'DOMNodeInserted', () => {
-        console.log( 'Buttons Rendered' );
-    } )
-    let loadMainScene = setInterval( () => {
+    let load = () => {
+        console.log( 'Loaded Buttons' );
         console.log( 'Attempting to set X3D Main Scene attributes...' );
-        if ( document.getElementById( 'x3d_inline_ID' )
-            .load ) {
-            console.log( 'X3D main scene attributes set, rendering scene...' );
-            clearInterval( loadMainScene );
-        }
-        document.getElementById( 'x3d_inline_ID' )
-            .url = xmlFile;
-        document.getElementById( 'x3d_inline_ID' )
-            .namespacename = 'x3dModelFile';
-        document.getElementById( 'x3d_inline_ID' )
-            .mapdeftoid = true;
-    }, 5000 );
-    let loadAxisIndicatorScene = setInterval( () => {
         console.log( 'Attempting to set X3D Axis Indicator attributes...' );
-        if ( document.getElementById( 'x3d_inline_ID_ref' )
-            .load ) {
-            console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
-            clearInterval( loadAxisIndicatorScene );
-        }
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .url = '../database/metaDataInfo/axisIndicator/axisIndicator.x3d';
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .namespacename = 'referenceModel';
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .mapdeftoid = true;
-    }, 5000 );
+        document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).removeEventListener( 'DOMNodeInserted', load )
+        let loadMainScene = setInterval( () => {
+            if ( document.getElementById( 'x3d_inline_ID' )
+                .load ) {
+                console.log( 'X3D main scene attributes set, rendering scene...' );
+                clearInterval( loadMainScene );
+            }
+            document.getElementById( 'x3d_inline_ID' )
+                .url = xmlFile;
+            document.getElementById( 'x3d_inline_ID' )
+                .namespacename = 'x3dModelFile';
+            document.getElementById( 'x3d_inline_ID' )
+                .mapdeftoid = true;
+        }, 5000 );
+        let loadAxisIndicatorScene = setInterval( () => {
+            if ( document.getElementById( 'x3d_inline_ID_ref' )
+                .load ) {
+                console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
+                clearInterval( loadAxisIndicatorScene );
+            }
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .url = '../database/axisIndicator/axisIndicator.x3d';
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .namespacename = 'referenceModel';
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .mapdeftoid = true;
+        }, 5000 );
+    }
+
+    document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).addEventListener( 'DOMNodeInserted', load )
+
 } ) );
 
 window.onresize = ( () => {
