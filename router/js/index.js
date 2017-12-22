@@ -231,20 +231,19 @@ let compare3Dtoggle = {
     size: 100
 }
 let toggleCompare3D = () => {
-    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
     if ( compare3Dtoggle.state === 'indicator' ) {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = '../database/referenceModels/aorta/referenceModel.x3d';
         compare3Dtoggle.state = 'reference'
-        pipResize()
+        pipPlacer()
     } else {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = '../database/axisIndicator/axisIndicator.x3d';
         compare3Dtoggle.state = 'indicator'
-        pip.style.width = '100px'
-        pip.style.height = '100px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '100px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '100px'
         compare3Dtoggle.size = 100
-        pipResize()
+        pipPlacer()
     }
 }
 
@@ -396,7 +395,7 @@ document.addEventListener( "load", ( () => {
                 .load ) {
                 console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
                 clearInterval( loadAxisIndicatorScene );
-                pipResize()
+                pipPlacer()
             }
             document.getElementById( 'x3d_inline_ID_ref' )
                 .url = '../database/axisIndicator/axisIndicator.x3d';
@@ -412,36 +411,52 @@ document.addEventListener( "load", ( () => {
 } ) );
 
 function pipPlacer() {
-    pipResizer()
+    if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
+    if ( compare3Dtoggle.state === 'indicator' ) indicatorResizer()
     let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
     pip.style.visibility = 'visible'
     pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
     pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
 }
 
-function pipResizer() {
-    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+function indicatorResizer() {
+    if ( window.innerWidth > 1101 ) {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '150px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '150px'
+        compare3Dtoggle.size = 150
+    } else if ( window.innerWidth > 601 ) {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '100px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '100px'
+        compare3Dtoggle.size = 100
+    } else {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '75px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '75px'
+        compare3Dtoggle.size = 75
+    }
+}
+
+function referenceResizer() {
     if ( window.innerWidth > 1601 ) {
-        pip.style.width = '370px'
-        pip.style.height = '370px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '370px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '370px'
         compare3Dtoggle.size = 370
     } else if ( window.innerWidth > 1101 ) {
-        pip.style.width = '275px'
-        pip.style.height = '275px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '275px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '275px'
         compare3Dtoggle.size = 275
     } else if ( window.innerWidth > 601 ) {
-        pip.style.width = '150px'
-        pip.style.height = '150px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '150px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '150px'
         compare3Dtoggle.size = 150
     } else {
-        pip.style.width = '75px'
-        pip.style.height = '75px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '75px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '75px'
         compare3Dtoggle.size = 75
     }
 }
 
 window.onresize = ( () => {
-    pipResize()
+    pipPlacer()
     if ( window.innerWidth > 1101 ) {
         document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'flex';
