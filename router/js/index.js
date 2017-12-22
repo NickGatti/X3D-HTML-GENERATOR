@@ -270,7 +270,9 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', ( () => {
-            console.log( 'Nothing for this button yet!' );
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .url = '../database/referenceModels/aorta/referenceModel.x3d';
+            //HERE
         } ) );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', ( () => {
