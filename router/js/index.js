@@ -44,7 +44,10 @@ let buttonObject = {
     }
 };
 
-var oReq = new XMLHttpRequest();
+let compare3Dtoggle = {
+    state: 'indicator',
+    size: 100
+}
 
 let dataObject = {
     navBarData: {},
@@ -52,7 +55,9 @@ let dataObject = {
     metaDataInfo: {}
 };
 
-let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
+var oReq = new XMLHttpRequest();
+
+let parseXML = ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
     if ( window.DOMParser ) {
         parser = new DOMParser();
         xmlDoc = parser.parseFromString( fileText, "text/xml" );
@@ -79,10 +84,9 @@ let parseXML = ( ( fileText, element, attribute, mustContainElement, mustContain
     }
 
     return output;
-} );
+};
 
-
-let appendToggleButtons = ( () => {
+let appendToggleButtons = () => {
     let form = document.getElementById( 'x3d_gen_shape_def_button_wrapper' ),
         div = document.createElement( 'div' );
     for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
@@ -93,7 +97,7 @@ let appendToggleButtons = ( () => {
         form = document.getElementById( 'x3d_gen_shape_def_button_wrapper' );
         div = document.createElement( 'div' );
         document.getElementById( dataObject.navBarData.ID[ i ] )
-            .addEventListener( 'click', ( () => {
+            .addEventListener( 'click', () => {
                 let x3DomObject = document.getElementById( dataObject.x3DomObject.ID[ i ] );
                 if ( x3DomObject ) {
                     if ( typeof x3DomObject.renderToggle === undefined ) {
@@ -111,34 +115,34 @@ let appendToggleButtons = ( () => {
                             .innerHTML = dataObject.navBarData.text[ i ] + '<br> OFF';
                     }
                 }
-            } ) );
+            } );
     }
-} );
+};
 
-let hoverTransition = ( ( id, originalColor ) => {
+let hoverTransition = ( id, originalColor ) => {
     document.getElementById( id )
-        .addEventListener( 'mouseover', ( () => {
+        .addEventListener( 'mouseover', () => {
             document.getElementById( id )
                 .style.backgroundColor = 'lime';
-        } ) );
+        } );
     document.getElementById( id )
-        .addEventListener( 'mouseout', ( () => {
+        .addEventListener( 'mouseout', () => {
             document.getElementById( id )
                 .style.backgroundColor = originalColor;
-        } ) );
+        } );
     document.getElementById( id )
-        .addEventListener( 'touchstart', ( () => {
+        .addEventListener( 'touchstart', () => {
             document.getElementById( id )
                 .style.backgroundColor = 'lime';
-        } ) );
+        } );
     document.getElementById( id )
-        .addEventListener( 'touchend', ( () => {
+        .addEventListener( 'touchend', () => {
             document.getElementById( id )
                 .style.backgroundColor = originalColor;
-        } ) );
-} );
+        } );
+};
 
-let colorToggleButtons = ( () => {
+let colorToggleButtons = () => {
     for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
         document.getElementById( dataObject.navBarData.ID[ i ] )
             .style.backgroundColor = `rgb(
@@ -150,9 +154,9 @@ let colorToggleButtons = ( () => {
                   ${Math.round( ( dataObject.navBarData.color[i][1]) * 255 )} ,
                   ${Math.round( ( dataObject.navBarData.color[i][2]) * 255 )}` );
     }
-} );
+};
 
-let usebuttonObject = ( () => {
+let usebuttonObject = () => {
     let output = '';
     for ( let key in buttonObject ) {
         if ( buttonObject[ key ].state ) {
@@ -164,17 +168,17 @@ let usebuttonObject = ( () => {
     }
     document.getElementById( output )
         .style.display = 'flex';
-} );
+};
 
-let switchDefaultButton = ( () => {
+let switchDefaultButton = () => {
     if ( buttonObject.x3dwrapperToggle.state ) {
         buttonObject.x3dwrapperToggle.state = false;
     } else {
         buttonObject.x3dwrapperToggle.state = true;
     }
-} );
+};
 
-let switchSelectedButton = ( ( show ) => {
+let switchSelectedButton = ( show ) => {
     if ( buttonObject[ show ].state ) {
         buttonObject[ 'x3dwrapperToggle' ].state = true;
         buttonObject[ show ].state = false;
@@ -184,15 +188,15 @@ let switchSelectedButton = ( ( show ) => {
         buttonObject[ key ].state = false;
     }
     buttonObject[ show ].state = true;
-} );
+};
 
-let toggleDivs = ( ( show ) => {
+let toggleDivs = ( show ) => {
     switchDefaultButton();
     switchSelectedButton( show );
     usebuttonObject( show );
-} );
+};
 
-let toggleHTML = ( ( which ) => {
+let toggleHTML = ( which ) => {
     document.getElementById( 'x3d_gen_html_inner_div' )
         .innerHTML = '';
     let create = null;
@@ -223,18 +227,36 @@ let toggleHTML = ( ( which ) => {
             }
         }
     }
-} );
+};
 
-let appendInfoButtons = ( () => {
+let toggleCompare3D = () => {
+    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+    if ( compare3Dtoggle.state === 'indicator' ) {
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/referenceModels/aorta/referenceModel.x3d';
+        compare3Dtoggle.state = 'reference'
+        pipPlacer()
+    } else {
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/axisIndicator/axisIndicator.x3d';
+        compare3Dtoggle.state = 'indicator'
+        pip.style.width = '100px'
+        pip.style.height = '100px'
+        compare3Dtoggle.size = 100
+        pipPlacer()
+    }
+}
+
+let appendInfoButtons = () => {
     let form = document.getElementById( 'x3d_gen_info_button_wrapper' );
 
-    let createButton = ( ( node, color, text, id ) => {
+    let createButton = ( node, color, text, id ) => {
         node.className = 'selectTab';
         if ( id ) node.id = id;
         node.innerHTML = text;
         node.style.background = 'deepskyblue';
         form.appendChild( node );
-    } );
+    };
 
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton' );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle' );
@@ -244,7 +266,7 @@ let appendInfoButtons = ( () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObject.metaDataInfo.ID );
 
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
-        .addEventListener( 'click', ( () => {
+        .addEventListener( 'click', () => {
             if ( document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                 .style.visibility === 'hidden' ) {
                 document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
@@ -262,36 +284,36 @@ let appendInfoButtons = ( () => {
                 document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
                     .style.display = 'none';
             }
-        } ) );
+        } );
     document.getElementById( 'instructionsButton' )
-        .addEventListener( 'click', ( () => {
+        .addEventListener( 'click', () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructionsToggle' );
-        } ) );
+        } );
     document.getElementById( 'comparisonButton' )
-        .addEventListener( 'click', ( () => {
-            console.log( 'Nothing for this button yet!' );
-        } ) );
+        .addEventListener( 'click', () => {
+            toggleCompare3D()
+        } );
     document.getElementById( 'htmlInfoButton' )
-        .addEventListener( 'click', ( () => {
+        .addEventListener( 'click', () => {
             toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
-        } ) );
+        } );
     document.getElementById( 'imageButton' )
-        .addEventListener( 'click', ( () => {
+        .addEventListener( 'click', () => {
             document.getElementById( 'x3d_gen_image_img_element' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
-        } ) );
+        } );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
     hoverTransition( 'comparisonButton', 'deepskyblue' );
     hoverTransition( 'htmlInfoButton', 'deepskyblue' );
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
-} );
+};
 
-let readXml = ( () => {
+let readXml = () => {
     oReq.open( 'GET', xmlFile );
     oReq.send();
 
@@ -319,7 +341,7 @@ let readXml = ( () => {
         dataObject.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
     } );
 
-    let run = ( () => {
+    let run = () => {
         appendToggleButtons();
         colorToggleButtons();
         appendInfoButtons();
@@ -329,44 +351,113 @@ let readXml = ( () => {
             .style.display = 'none';
         document.getElementById( 'x3d_gen_html_outer_div' )
             .style.display = 'none';
-        console.log( 'Buttons rendered' );
-    } );
+    };
 
     function reqListener() {
         popdataObjectect( this.responseText );
-        run();
+        console.log( 'Attempting to render buttons...' );
+        document.addEventListener( "load", () => run() )
     }
     oReq.addEventListener( 'load', reqListener );
-} );
+};
 
 let inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID';
 document.getElementById( 'x3d_gen_x3d_scene' )
     .appendChild( inline );
-// inline.id = 'x3d_inline_ID_ref';
-// document.getElementById( 'x3d_gen_x3d_wrapper_ref' )
-//     .appendChild( inline );
+inline = document.createElement( 'inline' );
+inline.id = 'x3d_inline_ID_ref';
+document.getElementById( 'x3d_gen_x3d_scene_ref' )
+    .appendChild( inline );
 
-document.addEventListener( "load", ( () => {
-    console.log( 'Loaded document...' );
-    console.log( 'Attempting to render buttons...' );
-    let loadScene = setInterval( () => {
-        console.log( 'Attempting to set X3D attributes...' );
-        if ( document.getElementById( 'x3d_inline_ID' )
-            .load ) {
-            console.log( 'X3D attributes set, rendering scene...' );
-            clearInterval( loadScene );
-        }
-        document.getElementById( 'x3d_inline_ID' )
-            .url = xmlFile;
-        document.getElementById( 'x3d_inline_ID' )
-            .namespacename = 'x3dModelFile';
-        document.getElementById( 'x3d_inline_ID' )
-            .mapdeftoid = true;
-    }, 10 );
-} ) );
+document.addEventListener( "load", () => {
+    let load = () => {
+        console.log( 'Loaded Buttons' );
+        console.log( 'Attempting to set X3D Main Scene attributes...' );
+        console.log( 'Attempting to set X3D Axis Indicator attributes...' );
+        document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).removeEventListener( 'DOMNodeInserted', load )
+        let loadMainScene = setInterval( () => {
+            if ( document.getElementById( 'x3d_inline_ID' )
+                .load ) {
+                console.log( 'X3D main scene attributes set, rendering scene...' );
+                clearInterval( loadMainScene );
+            }
+            document.getElementById( 'x3d_inline_ID' )
+                .url = xmlFile;
+            document.getElementById( 'x3d_inline_ID' )
+                .namespacename = 'x3dModelFile';
+            document.getElementById( 'x3d_inline_ID' )
+                .mapdeftoid = true;
+        }, 5000 );
+        let loadAxisIndicatorScene = setInterval( () => {
+            if ( document.getElementById( 'x3d_inline_ID_ref' )
+                .load ) {
+                console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
+                clearInterval( loadAxisIndicatorScene );
+                pipPlacer()
+            }
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .url = '../database/axisIndicator/axisIndicator.x3d';
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .namespacename = 'referenceModel';
+            document.getElementById( 'x3d_inline_ID_ref' )
+                .mapdeftoid = true;
+        }, 5000 );
+    }
 
-window.onresize = ( () => {
+    document.querySelector( '#x3d_gen_shape_def_button_wrapper' ).addEventListener( 'DOMNodeInserted', load )
+
+} );
+
+function pipPlacer() {
+    if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
+    if ( compare3Dtoggle.state === 'indicator' ) indicatorResizer()
+    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+    pip.style.visibility = 'visible'
+    pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
+    pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
+}
+
+function indicatorResizer() {
+    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+    if ( window.innerWidth > 1101 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        compare3Dtoggle.size = 150
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '100px'
+        pip.style.height = '100px'
+        compare3Dtoggle.size = 100
+    } else {
+        pip.style.width = '75px'
+        pip.style.height = '75px'
+        compare3Dtoggle.size = 75
+    }
+}
+
+function referenceResizer() {
+    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+    if ( window.innerWidth > 1601 ) {
+        pip.style.width = '370px'
+        pip.style.height = '370px'
+        compare3Dtoggle.size = 370
+    } else if ( window.innerWidth > 1101 ) {
+        pip.style.width = '275px'
+        pip.style.height = '275px'
+        compare3Dtoggle.size = 275
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        compare3Dtoggle.size = 150
+    } else {
+        pip.style.width = '75px'
+        pip.style.height = '75px'
+        compare3Dtoggle.size = 75
+    }
+}
+
+window.onresize = () => {
+    pipPlacer()
     if ( window.innerWidth > 1101 ) {
         document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'flex';
@@ -374,32 +465,32 @@ window.onresize = ( () => {
         document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'block';
     }
-} );
+};
 
-let loadScript = ( ( url, callback ) => {
+let loadScript = ( url, callback ) => {
 
     let script = document.createElement( 'script' );
     script.type = 'text/javascript';
 
     if ( script.readyState ) { //IE
-        script.onreadystatechange = ( () => {
+        script.onreadystatechange = () => {
             if ( script.readyState === 'loaded' ||
                 script.readyState === 'complete' ) {
                 script.onreadystatechange = null;
                 callback();
             }
-        } );
+        };
     } else { //Others
-        script.onload = ( () => {
+        script.onload = () => {
             callback();
-        } );
+        };
     }
 
     script.src = url;
     document.getElementsByTagName( 'body' )[ 0 ].appendChild( script );
     readXml();
-} );
+};
 
-loadScript( 'http://www.x3dom.org/download/x3dom.js', ( () => {
+loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
     return;
-} ) );
+} );
