@@ -227,7 +227,8 @@ let toggleHTML = ( ( which ) => {
 
 //HERE
 let compare3Dtoggle = {
-    state: 'indicator'
+    state: 'indicator',
+    size: 100
 }
 let toggleCompare3D = () => {
     if ( compare3Dtoggle.state === 'indicator' ) {
@@ -236,12 +237,16 @@ let toggleCompare3D = () => {
         compare3Dtoggle.state = 'reference'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '400px'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '400px'
+        compare3Dtoggle.size = 400
+        pipResize()
     } else {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = '../database/axisIndicator/axisIndicator.x3d';
         compare3Dtoggle.state = 'indicator'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '100px'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '100px'
+        compare3Dtoggle.size = 100
+        pipResize()
     }
 }
 
@@ -311,10 +316,6 @@ let appendInfoButtons = ( () => {
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 } );
-
-let runAxisIndicatorPlacement = () => {
-
-}
 
 let readXml = ( () => {
     oReq.open( 'GET', xmlFile );
@@ -397,7 +398,7 @@ document.addEventListener( "load", ( () => {
                 .load ) {
                 console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
                 clearInterval( loadAxisIndicatorScene );
-                runAxisIndicatorPlacement()
+                pipResize()
             }
             document.getElementById( 'x3d_inline_ID_ref' )
                 .url = '../database/axisIndicator/axisIndicator.x3d';
@@ -412,7 +413,15 @@ document.addEventListener( "load", ( () => {
 
 } ) );
 
+function pipResize() {
+    let pip = document.querySelector( '#x3d_gen_x3d_wrapper_ref' )
+    pip.style.visibility = 'visible'
+    pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
+    pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
+}
+
 window.onresize = ( () => {
+    pipResize()
     if ( window.innerWidth > 1101 ) {
         document.getElementById( 'x3d_gen_shape_def_button_wrapper' )
             .style.display = 'flex';

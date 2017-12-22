@@ -136,10 +136,10 @@ body {
 
 #x3d_gen_x3d_wrapper_ref {
     position: fixed;
-    top: 85vh;
-    left: 91.5vw;
+    visibility: hidden;
     width: 100px;
     height: 100px;
+    box-shadow: 2px 1px 3px 0px rgba(0, 0, 0, 0.75);
 }
 
 @media only screen and (max-width: 1100px) {
