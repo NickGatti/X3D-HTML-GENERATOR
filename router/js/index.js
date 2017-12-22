@@ -427,10 +427,14 @@ function referenceResizer() {
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '275px'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '275px'
         compare3Dtoggle.size = 275
-    } else {
+    } else if ( window.innerWidth > 601 ) {
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '150px'
         document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '150px'
         compare3Dtoggle.size = 150
+    } else {
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '75px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '75px'
+        compare3Dtoggle.size = 75
     }
 }
 
