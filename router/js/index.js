@@ -225,6 +225,26 @@ let toggleHTML = ( ( which ) => {
     }
 } );
 
+//HERE
+let compare3Dtoggle = {
+    state: 'indicator'
+}
+let toggleCompare3D = () => {
+    if ( compare3Dtoggle.state === 'indicator' ) {
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/referenceModels/aorta/referenceModel.x3d';
+        compare3Dtoggle.state = 'reference'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '400px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '400px'
+    } else {
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/axisIndicator/axisIndicator.x3d';
+        compare3Dtoggle.state = 'indicator'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.width = '100px'
+        document.querySelector( '#x3d_gen_x3d_wrapper_ref' ).style.height = '100px'
+    }
+}
+
 let appendInfoButtons = ( () => {
     let form = document.getElementById( 'x3d_gen_info_button_wrapper' );
 
@@ -270,8 +290,7 @@ let appendInfoButtons = ( () => {
         } ) );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', ( () => {
-            document.getElementById( 'x3d_inline_ID_ref' )
-                .url = '../database/referenceModels/aorta/referenceModel.x3d';
+            toggleCompare3D()
             //HERE
         } ) );
     document.getElementById( 'htmlInfoButton' )
@@ -292,6 +311,10 @@ let appendInfoButtons = ( () => {
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 } );
+
+let runAxisIndicatorPlacement = () => {
+
+}
 
 let readXml = ( () => {
     oReq.open( 'GET', xmlFile );
@@ -374,6 +397,7 @@ document.addEventListener( "load", ( () => {
                 .load ) {
                 console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
                 clearInterval( loadAxisIndicatorScene );
+                runAxisIndicatorPlacement()
             }
             document.getElementById( 'x3d_inline_ID_ref' )
                 .url = '../database/axisIndicator/axisIndicator.x3d';
