@@ -55,6 +55,11 @@ let dataObject = {
     metaDataInfo: {}
 };
 
+let loadSequence = {
+    state: '',
+    visibility: 'hidden'
+}
+
 var oReq = new XMLHttpRequest();
 
 let parseXML = ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
@@ -355,11 +360,46 @@ let readXml = () => {
 
     function reqListener() {
         popdataObjectect( this.responseText );
+        loadSequence.state = 'Loading Buttons...'
+        loadSequence.visibility = 'visible'
+        startLoadSequence()
         console.log( 'Attempting to render buttons...' );
         document.addEventListener( "load", () => run() )
     }
     oReq.addEventListener( 'load', reqListener );
 };
+
+function createLoadSequenceModal() {
+    let modalPopup = document.createElement( 'div' )
+    modalPopup.id = 'modalPopup'
+    modalPopup.style.backgroundColor = 'white'
+    modalPopup.style.width = '33%'
+    modalPopup.style.height = '120px'
+    modalPopup.style.position = 'fixed'
+    modalPopup.style.top = '0'
+    modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
+    modalPopup.style.border = '3px solid black'
+    modalPopup.style.borderRadius = '0 0 35% 35%'
+    modalPopup.style.boxShadow = '2px 1px 3px 0px rgba(0, 0, 0, 0.75)'
+    modalPopup.style.display = 'flex'
+    modalPopup.style.justifyContent = 'center'
+    modalPopup.style.alignItems = 'center'
+    modalPopup.style.zIndex = '500'
+    modalPopup.style.visibility = loadSequence.visibility
+
+    let modalPopupText = document.createElement( 'div' )
+    modalPopupText.innerHTML = loadSequence.state
+    modalPopupText.id = 'modalPopupText'
+    modalPopupText.style.fontSize = '150%'
+    modalPopupText.style.zIndex = '501'
+
+    document.querySelector( 'body' ).appendChild( modalPopup )
+    document.querySelector( '#modalPopup' ).appendChild( modalPopupText )
+}
+
+function startLoadSequence() {
+    createLoadSequenceModal()
+}
 
 let inline = document.createElement( 'inline' );
 inline.id = 'x3d_inline_ID';
@@ -373,6 +413,8 @@ document.getElementById( 'x3d_generator_x3d_scene_reference' )
 document.addEventListener( "load", () => {
     let load = () => {
         console.log( 'Loaded Buttons' );
+        loadSequence.state = 'Loading X3D Scenes, may take a couple minutes...'
+        modalPopupText.innerHTML = loadSequence.state
         console.log( 'Attempting to set X3D Main Scene attributes...' );
         console.log( 'Attempting to set X3D Axis Indicator attributes...' );
         document.querySelector( '#x3d_generator_shape_def_button_wrapper' ).removeEventListener( 'DOMNodeInserted', load )
@@ -392,6 +434,8 @@ document.addEventListener( "load", () => {
         let loadAxisIndicatorScene = setInterval( () => {
             if ( document.getElementById( 'x3d_inline_ID_ref' )
                 .load ) {
+                loadSequence.visibility = 'hidden'
+                modalPopup.style.visibility = loadSequence.visibility
                 console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
                 clearInterval( loadAxisIndicatorScene );
                 pipPlacer()
