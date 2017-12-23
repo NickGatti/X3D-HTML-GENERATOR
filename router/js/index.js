@@ -56,9 +56,11 @@ let dataObject = {
 };
 
 let loadSequence = {
-    state: '',
-    visibility: 'hidden'
+    state: 'Loading document...',
+    visibility: 'visible'
 }
+
+startLoadSequence()
 
 var oReq = new XMLHttpRequest();
 
@@ -361,8 +363,7 @@ let readXml = () => {
     function reqListener() {
         popdataObjectect( this.responseText );
         loadSequence.state = 'Loading Buttons...'
-        loadSequence.visibility = 'visible'
-        startLoadSequence()
+        modalPopupText.innerHTML = loadSequence.state
         console.log( 'Attempting to render buttons...' );
         document.addEventListener( "load", () => run() )
     }
