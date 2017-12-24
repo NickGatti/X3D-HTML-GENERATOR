@@ -8,102 +8,40 @@
 
     <body>
 
-        <div id='x3d_gen_wrapper'>
+        <div id='x3d_generator_wrapper'>
 
-            <div id='x3d_gen_info_button_wrapper'>
+            <div id='x3d_generator_info_button_wrapper'>
             </div>
 
-            <div id="x3d_gen_shape_def_button_wrapper">
+            <div id="x3d_generator_shape_def_button_wrapper">
             </div>
 
-            <div id='x3d_gen_x3d_content_wrapper'>
-                <x3d id='x3d_gen_x3d_wrapper'>
-                    <scene id='x3d_gen_x3d_scene'>
-                    </scene>
-                </x3d>
-                <x3d id='x3d_gen_x3d_wrapper_ref'>
-                    <scene id='x3d_gen_x3d_scene_ref'>
-                        <inline nameSpaceName='referenceModel' mapDEFToID='true' url='../database/clients/example-brain/modelFile.x3d' />
+            <div id='x3d_generator_x3d_content_wrapper'>
+
+                <x3d id='x3d_generator_x3d_wrapper'>
+                    <scene id='x3d_generator_x3d_scene'>
                     </scene>
                 </x3d>
 
-                <div id='x3d_gen_image_div'>
-                    <img id='x3d_gen_image_img_element'>
+                <x3d id='x3d_generator_x3d_wrapper_reference'>
+                    <scene id='x3d_generator_x3d_scene_reference'>
+                    </scene>
+                </x3d>
+
+                <div id='x3d_generator_image_div'>
+                    <img id='x3d_generator_image_img_element'>
                 </div>
 
-                <div id='x3d_gen_html_outer_div'>
-                    <div id='x3d_gen_html_inner_div'>
+                <div id='x3d_generator_html_outer_div'>
+                    <div id='x3d_generator_html_inner_div'>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script type="text/javascript">
-            //Which X3D file to render
-            let xmlFile = '../database/clients/example-brain/modelFile.x3d';
-            //The text for the 'metaDataButton'
-            let metaDataInfoButtonText = 'MetaData Info';
-
-            //Image file extension
-            let imageFileExtension = 'png';
-
-            //The XML element to find the metaDataInfoAttribute in
-            //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
-            let metaDataInfoElement = 'MetadataInteger';
-
-            //The XML element for MetadataInteger must contain
-            //We are looking for name='IPCCCID'
-            let mustContainElement = 'name';
-
-            //The XML value for mustContainElement to look for
-            //We are looking for name = 'IPCCCID'
-            let mustContainValue = 'IPCCCID';
-
-            //Which XML attribute to look for to display on the metaDataButton
-            //Here value = "aorta"
-            let metaDataInfoAttribute = 'value';
-
-            //The text for the 'htmlInfoButton'
-            let htmlInfoButtonText = 'Diagnosis Info';
-
-            //What HTML to display when the 'displayHTMLinfo' button is clicked
-            let htmlInfoButtonHTML = [{
-                    "p": "Example p tag"
-                },
-                {
-                    "container": {
-                        "outerType": "ul",
-                        "innerType": "li",
-                        "contents": [
-                            "example list and list items",
-                            "example list and list items",
-                            "example list and list items",
-                            "example list and list items"
-                        ]
-                    }
-                }
-            ];
-            // What HTML to display when the instructions button is clicked
-            let instructionsHTML = [{
-                    "h2": "Instructions"
-                },
-                {
-                    "p": "Mouse Button"
-                },
-                {
-                    "p": "LMB (Left Mouse Button) - Rotate, hold and move"
-                },
-                {
-                    "p": "MMB (Middle Mouse Button or Wheel) -  Zoom, hold and move"
-                },
-                {
-                    "p": "RMB (Right Mouse Button) - Pan, hold and move"
-                }
-            ];
-        </script>
+        <script type='text/javascript' src='../database/clients/example-brain/settings.js'></script>
 
         <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/x3dom/release/x3dom.css' />
-
         <script type='text/javascript' src='js/index.js'></script>
         <link rel='stylesheet' type='text/css' href='css/style.css' />
         <script type='text/javascript' src='js/referenceModel.js'></script>
