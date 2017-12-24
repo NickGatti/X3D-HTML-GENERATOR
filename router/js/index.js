@@ -296,6 +296,7 @@ let appendInfoButtons = () => {
         .addEventListener( 'click', () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructionsToggle' );
+            pipPlacer()
         } );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', () => {
@@ -305,12 +306,14 @@ let appendInfoButtons = () => {
         .addEventListener( 'click', () => {
             toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
+            pipPlacer()
         } );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', () => {
             document.getElementById( 'x3d_generator_image_img_element' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
+            pipPlacer()
         } );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
