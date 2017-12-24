@@ -1,12 +1,14 @@
-# X3DOM HTML Generator:
+# X3D HTML Generator:
 ## This is not production code
 
-[logo]: http://www.codn.io/img/portfolio/x3dom.png "X3Dom HTML Generator"
+[logo]: http://www.codn.io/img/portfolio/x3dom.png "X3D HTML Generator"
 ![X3Dom HTML Generator][logo]
 
 [Running code on my site](http://www.codn.io/x3dom-html-generator/)
 
-## Auto-Render HTML From your X3Dom or 3D Printer compatible files:
+## Auto-Render HTML From your X3Dom, 3D Printer or X3D compatible files:
+
+## Note: Scaling for files must be in millimeters (or if using custom indicator must be in the same scale) when imaged for reference indicator to work correctly
 
 X3DOM HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to:
 
