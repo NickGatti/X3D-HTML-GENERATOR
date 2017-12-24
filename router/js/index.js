@@ -364,11 +364,27 @@ let readXml = () => {
         popdataObjectect( this.responseText );
         loadSequence.state = 'Loading Buttons...'
         modalPopupText.innerHTML = loadSequence.state
-        console.log( 'Attempting to render buttons...' );
-        document.addEventListener( "load", () => run() )
+        detectState() ? run() : document.addEventListener( 'readystatechange', detectRun )
     }
     oReq.addEventListener( 'load', reqListener );
 };
+
+function detectState() {
+    if ( document.readyState === "interactive" ||
+        document.readyState === "loaded" ||
+        document.readyState === "complete" ) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function detectRun() {
+    if ( detectState() ) {
+        document.removeEventListener( 'readystatechange', detectRun )
+        run()
+    }
+}
 
 function createLoadSequenceModal() {
     let modalPopup = document.createElement( 'div' )
@@ -386,6 +402,7 @@ function createLoadSequenceModal() {
     modalPopup.style.justifyContent = 'center'
     modalPopup.style.alignItems = 'flex start'
     modalPopup.style.zIndex = '500'
+    modalPopup.style.padding = '0 0.5em 0 0.5em'
     modalPopup.style.visibility = loadSequence.visibility
 
     let modalPopupText = document.createElement( 'div' )
@@ -415,16 +432,12 @@ document.getElementById( 'x3d_generator_x3d_scene_reference' )
 
 document.addEventListener( "load", () => {
     let load = () => {
-        console.log( 'Loaded Buttons' );
         loadSequence.state = 'Loading X3D Scenes, may take a couple minutes...'
         modalPopupText.innerHTML = loadSequence.state
-        console.log( 'Attempting to set X3D Main Scene attributes...' );
-        console.log( 'Attempting to set X3D Axis Indicator attributes...' );
         document.querySelector( '#x3d_generator_shape_def_button_wrapper' ).removeEventListener( 'DOMNodeInserted', load )
         let loadMainScene = setInterval( () => {
             if ( document.getElementById( 'x3d_inline_ID' )
                 .load ) {
-                console.log( 'X3D main scene attributes set, rendering scene...' );
                 clearInterval( loadMainScene );
             }
             document.getElementById( 'x3d_inline_ID' )
@@ -439,7 +452,6 @@ document.addEventListener( "load", () => {
                 .load ) {
                 loadSequence.visibility = 'hidden'
                 modalPopup.style.visibility = loadSequence.visibility
-                console.log( 'X3D Axis Indicator attributes set, rendering scene...' );
                 clearInterval( loadAxisIndicatorScene );
                 pipPlacer()
             }
