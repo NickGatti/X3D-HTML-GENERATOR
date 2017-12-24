@@ -1,5 +1,7 @@
 //Which X3D file to render
 let xmlFile = '../database/clients/example-heart/modelFile.x3d';
+let referenceFile = '../database/referenceModels/heart/referenceModel.x3d'
+
 //The text for the 'metaDataButton'
 let metaDataInfoButtonText = 'MetaData Info';
 

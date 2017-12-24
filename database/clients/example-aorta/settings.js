@@ -1,5 +1,6 @@
 //Which X3D file to render
 let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
+let referenceFile = '../database/referenceModels/aorta/referenceModel.x3d';
 
 //Image file extension
 let imageFileExtension = 'png';

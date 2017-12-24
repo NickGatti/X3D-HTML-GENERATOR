@@ -240,7 +240,7 @@ let toggleCompare3D = () => {
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( compare3Dtoggle.state === 'indicator' ) {
         document.getElementById( 'x3d_inline_ID_ref' )
-            .url = '../database/referenceModels/aorta/referenceModel.x3d';
+            .url = referenceFile;
         compare3Dtoggle.state = 'reference'
         pipPlacer()
     } else {
@@ -440,7 +440,7 @@ function applyX3Dsettings() {
             .namespacename = 'x3dModelFile';
         document.getElementById( 'x3d_inline_ID' )
             .mapdeftoid = true;
-    }, 5000 );
+    }, 100 );
     let loadAxisIndicatorScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID_ref' )
             .load ) {
@@ -455,7 +455,7 @@ function applyX3Dsettings() {
             .namespacename = 'referenceModel';
         document.getElementById( 'x3d_inline_ID_ref' )
             .mapdeftoid = true;
-    }, 5000 );
+    }, 100 );
 }
 
 function pipPlacer() {
