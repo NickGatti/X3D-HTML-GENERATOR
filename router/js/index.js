@@ -56,7 +56,7 @@ let dataObject = {
 };
 
 let loadSequence = {
-    state: 'Loading document...',
+    state: 'Generating HTML...',
     visibility: 'visible'
 }
 
@@ -349,22 +349,25 @@ let readXml = () => {
     } );
 
     let run = () => {
-        appendToggleButtons();
-        colorToggleButtons();
-        appendInfoButtons();
-        document.getElementById( 'x3d_generator_x3d_wrapper' )
-            .style.display = 'flex';
-        document.getElementById( 'x3d_generator_image_div' )
-            .style.display = 'none';
-        document.getElementById( 'x3d_generator_html_outer_div' )
-            .style.display = 'none';
+        if ( detectState() === true ) {
+            appendToggleButtons();
+            colorToggleButtons();
+            appendInfoButtons();
+            document.getElementById( 'x3d_generator_x3d_wrapper' )
+                .style.display = 'flex';
+            document.getElementById( 'x3d_generator_image_div' )
+                .style.display = 'none';
+            document.getElementById( 'x3d_generator_html_outer_div' )
+                .style.display = 'none';
+            applyX3Dsettings()
+        } else {
+            setTimeout( run, 500 )
+        }
     };
 
     function reqListener() {
         popdataObjectect( this.responseText );
-        loadSequence.state = 'Loading Buttons...'
-        modalPopupText.innerHTML = loadSequence.state
-        detectState() ? run() : document.addEventListener( 'readystatechange', detectRun )
+        run()
     }
     oReq.addEventListener( 'load', reqListener );
 };
@@ -376,13 +379,6 @@ function detectState() {
         return true
     } else {
         return false
-    }
-}
-
-function detectRun() {
-    if ( detectState() ) {
-        document.removeEventListener( 'readystatechange', detectRun )
-        run()
     }
 }
 
@@ -430,43 +426,37 @@ inline.id = 'x3d_inline_ID_ref';
 document.getElementById( 'x3d_generator_x3d_scene_reference' )
     .appendChild( inline );
 
-document.addEventListener( "load", () => {
-    let load = () => {
-        loadSequence.state = 'Loading X3D Scenes, may take a couple minutes...'
-        modalPopupText.innerHTML = loadSequence.state
-        document.querySelector( '#x3d_generator_shape_def_button_wrapper' ).removeEventListener( 'DOMNodeInserted', load )
-        let loadMainScene = setInterval( () => {
-            if ( document.getElementById( 'x3d_inline_ID' )
-                .load ) {
-                clearInterval( loadMainScene );
-            }
-            document.getElementById( 'x3d_inline_ID' )
-                .url = xmlFile;
-            document.getElementById( 'x3d_inline_ID' )
-                .namespacename = 'x3dModelFile';
-            document.getElementById( 'x3d_inline_ID' )
-                .mapdeftoid = true;
-        }, 5000 );
-        let loadAxisIndicatorScene = setInterval( () => {
-            if ( document.getElementById( 'x3d_inline_ID_ref' )
-                .load ) {
-                loadSequence.visibility = 'hidden'
-                modalPopup.style.visibility = loadSequence.visibility
-                clearInterval( loadAxisIndicatorScene );
-                pipPlacer()
-            }
-            document.getElementById( 'x3d_inline_ID_ref' )
-                .url = '../database/axisIndicator/axisIndicator.x3d';
-            document.getElementById( 'x3d_inline_ID_ref' )
-                .namespacename = 'referenceModel';
-            document.getElementById( 'x3d_inline_ID_ref' )
-                .mapdeftoid = true;
-        }, 5000 );
-    }
-
-    document.querySelector( '#x3d_generator_shape_def_button_wrapper' ).addEventListener( 'DOMNodeInserted', load )
-
-} );
+function applyX3Dsettings() {
+    loadSequence.state = 'Loading X3D Scenes, may take a couple minutes...'
+    modalPopupText.innerHTML = loadSequence.state
+    let loadMainScene = setInterval( () => {
+        if ( document.getElementById( 'x3d_inline_ID' )
+            .load ) {
+            clearInterval( loadMainScene );
+        }
+        document.getElementById( 'x3d_inline_ID' )
+            .url = xmlFile;
+        document.getElementById( 'x3d_inline_ID' )
+            .namespacename = 'x3dModelFile';
+        document.getElementById( 'x3d_inline_ID' )
+            .mapdeftoid = true;
+    }, 5000 );
+    let loadAxisIndicatorScene = setInterval( () => {
+        if ( document.getElementById( 'x3d_inline_ID_ref' )
+            .load ) {
+            loadSequence.visibility = 'hidden'
+            modalPopup.style.visibility = loadSequence.visibility
+            clearInterval( loadAxisIndicatorScene );
+            pipPlacer()
+        }
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/axisIndicator/axisIndicator.x3d';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .namespacename = 'referenceModel';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .mapdeftoid = true;
+    }, 5000 );
+}
 
 function pipPlacer() {
     if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
