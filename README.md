@@ -97,6 +97,8 @@ These values represent how button appending will work.
     //IF USING THE AORTA EXAMPLE
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
+    //Specify the X3D reference file for the PIP window
+    let referenceFile = '../database/referenceModels/aorta/referenceModel.x3d';
 
     //Image file extension
     let imageFileExtension = 'png';
