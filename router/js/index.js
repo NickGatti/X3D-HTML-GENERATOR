@@ -375,7 +375,7 @@ function createLoadSequenceModal() {
     modalPopup.id = 'modalPopup'
     modalPopup.style.backgroundColor = 'white'
     modalPopup.style.width = '33%'
-    modalPopup.style.height = '120px'
+    modalPopup.style.height = '140px'
     modalPopup.style.position = 'fixed'
     modalPopup.style.top = '0'
     modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
@@ -384,18 +384,20 @@ function createLoadSequenceModal() {
     modalPopup.style.boxShadow = '2px 1px 3px 0px rgba(0, 0, 0, 0.75)'
     modalPopup.style.display = 'flex'
     modalPopup.style.justifyContent = 'center'
-    modalPopup.style.alignItems = 'center'
+    modalPopup.style.alignItems = 'flex start'
     modalPopup.style.zIndex = '500'
     modalPopup.style.visibility = loadSequence.visibility
 
     let modalPopupText = document.createElement( 'div' )
     modalPopupText.innerHTML = loadSequence.state
     modalPopupText.id = 'modalPopupText'
-    modalPopupText.style.fontSize = '150%'
+    modalPopupText.style.height = '100px'
+    modalPopupText.style.overflow = 'hidden'
     modalPopupText.style.zIndex = '501'
 
     document.querySelector( 'body' ).appendChild( modalPopup )
     document.querySelector( '#modalPopup' ).appendChild( modalPopupText )
+    modalPopupTextSizer()
 }
 
 function startLoadSequence() {
@@ -510,7 +512,23 @@ window.onresize = () => {
         document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
             .style.display = 'block';
     }
+    let modalPopup = document.querySelector( '#modalPopup' )
+    modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
+    modalPopup.style.width = '33%'
+    modalPopupTextSizer()
 };
+
+function modalPopupTextSizer() {
+    let modalPopup = document.querySelector( '#modalPopup' )
+    let modalTextSize = Math.round( ( window.innerWidth ) / ( 40 + window.innerWidth / 400 ) )
+    if ( modalTextSize <= 38 && modalTextSize > 11 ) {
+        modalPopupText.style.fontSize = `${(window.innerWidth) / (40 + window.innerWidth / 400)}px`
+    } else if ( modalTextSize <= 11 ) {
+        modalPopupText.style.fontSize = '12px'
+    } else {
+        modalPopupText.style.fontSize = '38px'
+    }
+}
 
 let loadScript = ( url, callback ) => {
 
