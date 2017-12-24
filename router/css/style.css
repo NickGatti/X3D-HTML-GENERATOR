@@ -167,34 +167,37 @@ body {
         border: 1px solid black;
     }
     #x3d_generator_shape_def_button_wrapper, #x3d_generator_info_button_wrapper {
+        width: 98%;
+        min-width: 98%;
         display: block;
-        height: 20%;
-        min-height: 20%;
+        height: 16%;
+        min-height: 16%;
         width: auto;
         overflow: scroll;
         margin-left: 10px;
         font-size: 3vh;
         overflow-x: hidden;
     }
-    #x3d_generator_html_outer_div, #x3d_generator_html_inner_div {
-        min-width: 100%;
-        min-height: 100%;
-    }
     #x3d_generator_image_img_element {
-        max-height: 60%;
+        max-height: 68%;
     }
     #x3d_generator_x3d_wrapper {
         display: flex;
-        min-height: 60%;
-        max-height: 60%;
-        width: 100%;
+        min-height: 68%;
+        max-height: 68%;
+        width: 98%;
+    }
+    #x3d_generator_html_outer_div {
+        max-width: 98%;
     }
     #x3d_generator_html_inner_div {
-        min-width: 90%;
-        max-width: 90%;
-        margin-left: -2.5%;
+        max-width: 98%;
     }
     #x3d_generator_x3d_content_wrapper {
-        max-width: none;
+        max-width: 98%;
+    }
+    #x3d_generator_wrapper {
+        width: 98%;
+        margin: 0 auto;
     }
 }
