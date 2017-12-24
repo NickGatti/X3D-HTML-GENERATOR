@@ -26,22 +26,34 @@ SOFTWARE.
 
 */
 
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     border-top: 4px solid black;
     max-width: 100vw;
     background: white;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
 }
 
 #x3d_generator_wrapper {
-    width: 100%;
+    width: 99%;
     height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
 #x3d_generator_info_button_wrapper, #x3d_generator_shape_def_button_wrapper {
@@ -67,6 +79,10 @@ body {
     margin-left: 10px;
 }
 
+#x3d_generator_x3d_content_wrapper {
+    min-width: 79%;
+}
+
 #x3d_generator_html_outer_div, #x3d_generator_x3d_wrapper {
     width: 100%;
     height: auto;
@@ -84,16 +100,6 @@ body {
     object-fit: contain;
 }
 
-#x3d_generator_html_inner_div {
-    width: 100%;
-    height: 100%;
-    padding-right: 2rem;
-    margin-right: 2rem;
-    padding-left: 2rem;
-    overflow: auto;
-    overflow-x: hidden;
-}
-
 #x3d_generator_x3d_wrapper {
     display: flex;
     border: none;
@@ -106,9 +112,11 @@ body {
     max-width: 12em;
 }
 
-#x3d_generator_x3d_content_wrapper {
-    min-width: 79%;
-    overflow: auto;
+#x3d_generator_html_inner_div {
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
 }
 
 .selectTab {
@@ -197,7 +205,16 @@ body {
         max-width: 98%;
     }
     #x3d_generator_wrapper {
-        width: 98%;
+        width: 97%;
         margin: 0 auto;
+        overflow-x: hidden;
+    }
+    #x3d_generator_x3d_content_wrapper {
+        min-width: 99%;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
