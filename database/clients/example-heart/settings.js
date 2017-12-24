@@ -23,6 +23,7 @@ SOFTWARE.
 
 //Which X3D file to render
 let xmlFile = '../database/clients/example-heart/modelFile.x3d';
+//Specify the X3D reference file for the PIP window
 let referenceFile = '../database/referenceModels/heart/referenceModel.x3d'
 
 //The text for the 'metaDataButton'
