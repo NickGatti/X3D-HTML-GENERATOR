@@ -15,7 +15,7 @@
         </MetadataSet>
       </MetadataSet>
     </WorldInfo>
-    <Background skyColor="1 1 1"/>
+    <Background transparency="1"/>
     <Viewpoint DEF="default" centerOfRotation="0 0 0" description="defaultCamera" orientation="1 0 0 -1.571" position="0 200 0"/>
     <Transform rotation='0 0.707107 0.707107 3.14159'>
       <Transform>

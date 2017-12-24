@@ -7,7 +7,7 @@
     <meta content="CIX-S https://Cardiac3DPrintLab.com" name="generator"/>
   </head>
   <Scene>
-    <Background skyColor="1 1 1"/>
+    <Background transparency="1"/>
     <Viewpoint DEF="default" centerOfRotation="0 0 0" description="defaultCamera" orientation="1 0 0 -1.571" position="0 0.013822741189153403 0"/>
     <Transform translation="0.0 1.2087255716323853E-5 -1.0380983352661132E-5">
       <Transform center="-0.0 -1.2087255716323853E-5 1.0380983352661132E-5" rotation="1 0 0 0.0">
