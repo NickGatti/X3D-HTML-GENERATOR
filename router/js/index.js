@@ -523,12 +523,12 @@ window.onresize = () => {
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
     let modalTextSize = Math.round( ( window.innerWidth ) / ( 40 + window.innerWidth / 400 ) )
-    if ( modalTextSize <= 38 && modalTextSize > 11 ) {
+    if ( modalTextSize <= 30 && modalTextSize > 11 ) {
         modalPopupText.style.fontSize = `${(window.innerWidth) / (40 + window.innerWidth / 400)}px`
     } else if ( modalTextSize <= 11 ) {
         modalPopupText.style.fontSize = '12px'
     } else {
-        modalPopupText.style.fontSize = '38px'
+        modalPopupText.style.fontSize = '30px'
     }
 }
 
