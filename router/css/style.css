@@ -60,6 +60,7 @@ body {
     padding-bottom: 20px;
     padding-top: 10px;
     overflow-x: hidden;
+    overflow: auto;
 }
 
 #x3d_generator_info_button_wrapper {
@@ -97,6 +98,17 @@ body {
     display: flex;
     border: none;
     width: 100%;
+}
+
+#x3d_generator_info_button_wrapper, #x3d_generator_shape_def_button_wrapper {
+    width: 10%;
+    min-width: 10em;
+    max-width: 12em;
+}
+
+#x3d_generator_x3d_content_wrapper {
+    min-width: 79%;
+    overflow: auto;
 }
 
 .selectTab {
