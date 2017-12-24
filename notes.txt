@@ -1,1 +1,2 @@
-
+Make PIP window Dragable
+Then add animations for the PIP and the modal
