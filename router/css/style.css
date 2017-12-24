@@ -35,7 +35,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-#x3d_gen_wrapper {
+#x3d_generator_wrapper {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -44,7 +44,7 @@ body {
     flex-wrap: nowrap;
 }
 
-#x3d_gen_info_button_wrapper, #x3d_gen_shape_def_button_wrapper {
+#x3d_generator_info_button_wrapper, #x3d_generator_shape_def_button_wrapper {
     box-sizing: border-box;
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 1);
     font-weight: bold;
@@ -62,11 +62,11 @@ body {
     overflow-x: hidden;
 }
 
-#x3d_gen_info_button_wrapper {
+#x3d_generator_info_button_wrapper {
     margin-left: 10px;
 }
 
-#x3d_gen_html_outer_div, #x3d_gen_x3d_wrapper {
+#x3d_generator_html_outer_div, #x3d_generator_x3d_wrapper {
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -77,13 +77,13 @@ body {
     margin-right: auto;
 }
 
-#x3d_gen_image_img_element {
+#x3d_generator_image_img_element {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
 
-#x3d_gen_html_inner_div {
+#x3d_generator_html_inner_div {
     width: 100%;
     height: 100%;
     padding-right: 2rem;
@@ -93,7 +93,7 @@ body {
     overflow-x: hidden;
 }
 
-#x3d_gen_x3d_wrapper {
+#x3d_generator_x3d_wrapper {
     display: flex;
     border: none;
     width: 100%;
@@ -123,7 +123,7 @@ body {
     transition: background-color 250ms linear;
 }
 
-#x3d_gen_x3d_content_wrapper {
+#x3d_generator_x3d_content_wrapper {
     height: auto;
     width: 100%;
     max-width: 70vw;
@@ -134,7 +134,7 @@ body {
     flex-wrap: wrap;
 }
 
-#x3d_gen_x3d_wrapper_ref {
+#x3d_generator_x3d_wrapper_reference {
     position: fixed;
     visibility: hidden;
     width: 100px;
@@ -143,7 +143,7 @@ body {
 }
 
 @media only screen and (max-width: 1100px) {
-    #x3d_gen_wrapper {
+    #x3d_generator_wrapper {
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: stretch;
@@ -154,7 +154,7 @@ body {
         width: auto;
         border: 1px solid black;
     }
-    #x3d_gen_shape_def_button_wrapper, #x3d_gen_info_button_wrapper {
+    #x3d_generator_shape_def_button_wrapper, #x3d_generator_info_button_wrapper {
         display: block;
         height: 20%;
         min-height: 20%;
@@ -164,25 +164,25 @@ body {
         font-size: 3vh;
         overflow-x: hidden;
     }
-    #x3d_gen_html_outer_div, #x3d_gen_html_inner_div {
+    #x3d_generator_html_outer_div, #x3d_generator_html_inner_div {
         min-width: 100%;
         min-height: 100%;
     }
-    #x3d_gen_image_img_element {
+    #x3d_generator_image_img_element {
         max-height: 60%;
     }
-    #x3d_gen_x3d_wrapper {
+    #x3d_generator_x3d_wrapper {
         display: flex;
         min-height: 60%;
         max-height: 60%;
         width: 100%;
     }
-    #x3d_gen_html_inner_div {
+    #x3d_generator_html_inner_div {
         min-width: 90%;
         max-width: 90%;
         margin-left: -2.5%;
     }
-    #x3d_gen_x3d_content_wrapper {
+    #x3d_generator_x3d_content_wrapper {
         max-width: none;
     }
 }

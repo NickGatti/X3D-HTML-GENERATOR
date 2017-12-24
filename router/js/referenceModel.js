@@ -12,13 +12,13 @@ var vp_anatomicalModel, vp_referenceModel;
 
 document.onload = function () {
 
-    document.querySelector( '#x3d_gen_x3d_wrapper inline' ).onload = function () {
+    document.querySelector( '#x3d_generator_x3d_wrapper inline' ).onload = function () {
         //vp_anatomicalModel = document.querySelector('#x3dwrapper').runtime.viewpoint()._xmlNode;
         vp_anatomicalModel = document.getElementById( 'x3dModelFile__default' ); //looking into nameSpaceName of inline and name of viewpoint (e.g., default)
         vp_anatomicalModel.addEventListener( 'viewpointChanged', syncViews );
     };
 
-    document.querySelector( '#x3d_gen_x3d_wrapper_ref inline' ).onload = function () {
+    document.querySelector( '#x3d_generator_x3d_wrapper_reference inline' ).onload = function () {
         //vp_referenceModel = document.querySelector('#reference').runtime.viewpoint()._xmlNode;
         vp_referenceModel = document.getElementById( 'referenceModel__default' );
     };
