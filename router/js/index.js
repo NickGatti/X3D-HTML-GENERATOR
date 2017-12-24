@@ -427,7 +427,7 @@ document.getElementById( 'x3d_generator_x3d_scene_reference' )
     .appendChild( inline );
 
 function applyX3Dsettings() {
-    loadSequence.state = 'Loading X3D Scenes, may take a couple minutes...'
+    loadSequence.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
     modalPopupText.innerHTML = loadSequence.state
     let loadMainScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID' )
