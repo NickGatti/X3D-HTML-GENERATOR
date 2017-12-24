@@ -88,13 +88,12 @@ I use Lato as a nice readable text and viewport.
 </div>
 ```
 
-#### At the bottom of the body:
-Then this JavaScript must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery).
-
+#### At the bottom of the HTML:
+Then this JavaScript file must be inserted before we include the script that appends the buttons, or else we get errors (like jQuery).
+Current this is a separate settings file it can be put straight into the HTML inside a script tag or not.
 These values represent how button appending will work.
 
-```html
-<script type="text/javascript">
+```javascript
     //IF USING THE AORTA EXAMPLE
     //Which X3D file to render
     let xmlFile = '../database/clients/example-aorta/modelFile.x3d';
@@ -159,7 +158,6 @@ These values represent how button appending will work.
             "p": "RMB (Right Mouse Button) - Pan, hold and move"
         }
     ];
-</script>
 ```
 
 The X3Dom script is loaded by the button appending JavaScript, but we are loading the CSS from the HTML here:
