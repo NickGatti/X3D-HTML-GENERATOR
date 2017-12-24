@@ -1,4 +1,5 @@
 # X3DOM HTML Generator:
+## This is not production code
 
 [logo]: http://www.codn.io/img/portfolio/x3dom.png "X3Dom HTML Generator"
 ![X3Dom HTML Generator][logo]
@@ -28,8 +29,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 
 ```
 1. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
-2. ~5/2018 After semester 4 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
-3. ~Unknown ETA Wait to see what to do about the Compare 3D button
+2. ~5/2018 After semester 3 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
 ```
 
 ## Patch Notes
@@ -40,6 +40,8 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 10-11-2017 Removed need to add inline X3D html tag
 10-11-2017 Added support for all extensions on the image file
 10-11-2017 No longer need to ship X3Dom with the package
+12-23-2017 Added support for compare3D button
+12-23-2017 Added loading modal window
 ```
 
 ### Documentation
@@ -54,26 +56,32 @@ I use Lato as a nice readable text and viewport.
 #### At the top of the body:
 
 ```html
-<div id='x3d_gen_wrapper'>
+<div id='x3d_generator_wrapper'>
 
-    <div id='x3d_gen_info_button_wrapper'>
+    <div id='x3d_generator_info_button_wrapper'>
     </div>
 
-    <div id="x3d_gen_shape_def_button_wrapper">
+    <div id="x3d_generator_shape_def_button_wrapper">
     </div>
 
-    <div id='x3d_gen_x3d_content_wrapper'>
-        <x3d id='x3d_gen_x3d_wrapper'>
-            <scene id='x3d_gen_x3d_scene'>
+    <div id='x3d_generator_x3d_content_wrapper'>
+
+        <x3d id='x3d_generator_x3d_wrapper'>
+            <scene id='x3d_generator_x3d_scene'>
             </scene>
         </x3d>
 
-        <div id='x3d_gen_image_div'>
-            <img id='x3d_gen_image_img_element'>
+        <x3d id='x3d_generator_x3d_wrapper_reference'>
+            <scene id='x3d_generator_x3d_scene_reference'>
+            </scene>
+        </x3d>
+
+        <div id='x3d_generator_image_div'>
+            <img id='x3d_generator_image_img_element'>
         </div>
 
-        <div id='x3d_gen_html_outer_div'>
-            <div id='x3d_gen_html_inner_div'>
+        <div id='x3d_generator_html_outer_div'>
+            <div id='x3d_generator_html_inner_div'>
             </div>
         </div>
     </div>
@@ -165,6 +173,7 @@ The next line is the button appending JavaScript and must be below the inline Ja
 ```html
 <script type='text/javascript' src='js/index.js'></script>
 <link rel='stylesheet' type='text/css' href='css/style.css' />
+<script type='text/javascript' src='js/referenceModel.js'></script>
 ```
 
 #### To get the 2D drawing to work:
