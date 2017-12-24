@@ -402,7 +402,7 @@ function createLoadSequenceModal() {
     modalPopup.style.justifyContent = 'center'
     modalPopup.style.alignItems = 'flex start'
     modalPopup.style.zIndex = '500'
-    modalPopup.style.padding = '0 0.5em 0 0.5em'
+    modalPopup.style.padding = '0 6px 0 6px'
     modalPopup.style.visibility = loadSequence.visibility
 
     let modalPopupText = document.createElement( 'div' )
