@@ -6,6 +6,8 @@
 
 [Running code on my site](http://www.codn.io/x3dom-html-generator/)
 
+[X3DOM Website](https://doc.x3dom.org/)
+
 ## Auto-Render HTML From your X3Dom, 3D Printer or X3D compatible files:
 
 ## Note: Scaling for files must be in millimeters (or if using custom indicator must be in the same scale) when imaged for reference indicator to work correctly
@@ -15,8 +17,6 @@ X3D HTML Generator parses X3Dom and 3D Print compatible XML files then appends H
 ```
 3D Render Canvas from https://doc.x3dom.org/
 ```
-
-#### https://doc.x3dom.org/
 
 * Shape element and DEF attribute
 * Material element and diffuseColor attribute
