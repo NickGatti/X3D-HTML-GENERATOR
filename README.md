@@ -1,8 +1,6 @@
 # X3D HTML Generator:
 ## This is not production code
 
-### Special Thanks to https://doc.x3dom.org/ , Justin Ryan and Andreas Plesch
-
 [logo]: http://www.codn.io/img/portfolio/x3dom.png "X3D HTML Generator"
 ![X3Dom HTML Generator][logo]
 
@@ -17,6 +15,8 @@ X3D HTML Generator parses X3Dom and 3D Print compatible XML files then appends H
 ```
 3D Render Canvas from https://doc.x3dom.org/
 ```
+
+#### https://doc.x3dom.org/
 
 * Shape element and DEF attribute
 * Material element and diffuseColor attribute
@@ -223,6 +223,8 @@ Nicholas Gatti
 
 Credit to Justin Ryan for consultation regarding X3D file specification
 ```
+
+### Special Thanks to https://doc.x3dom.org/ , Justin Ryan and Andreas Plesch
 
 ```
 MIT License
