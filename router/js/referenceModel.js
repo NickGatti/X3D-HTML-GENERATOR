@@ -26,17 +26,18 @@ document.onload = function () {
 }
 
 function syncViews( evt ) {
-    var o = evt.orientation;
-    var p = evt.position;
-    /*
-    vp2.setAttribute('orientation',[o[0].x,o[0].y,o[0].z].join()+" "+o[1]);
-    vp2.setAttribute('position', [p.x,p.y,p.z].join());
-    */
+    if ( evt ) {
+        var o = evt.orientation;
+        var p = evt.position;
+        /*
+        vp2.setAttribute('orientation',[o[0].x,o[0].y,o[0].z].join()+" "+o[1]);
+        vp2.setAttribute('position', [p.x,p.y,p.z].join());
+        */
 
-    vp_referenceModel.setFieldValue( 'orientation', // necessary to convert to quaternion
-        x3dom.fields.Quaternion.axisAngle( evt.orientation[ 0 ], evt.orientation[ 1 ] )
-    );
-    vp_referenceModel.setFieldValue( 'position', evt.position );
-
+        vp_referenceModel.setFieldValue( 'orientation', // necessary to convert to quaternion
+            x3dom.fields.Quaternion.axisAngle( evt.orientation[ 0 ], evt.orientation[ 1 ] )
+        );
+        vp_referenceModel.setFieldValue( 'position', evt.position );
+    }
     //console.log(evt);
 }

@@ -46,7 +46,8 @@ let buttonObject = {
 
 let compare3Dtoggle = {
     state: 'indicator',
-    size: 100
+    size: 100,
+    visibility: 'visible'
 }
 
 let dataObject = {
@@ -58,10 +59,6 @@ let dataObject = {
 let loadSequence = {
     state: 'Generating HTML...',
     visibility: 'visible'
-}
-
-let doNotDrag = {
-    state: false
 }
 
 startLoadSequence()
@@ -241,7 +238,7 @@ let toggleHTML = ( which ) => {
 };
 
 let toggleCompare3D = () => {
-    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( compare3Dtoggle.state === 'indicator' ) {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = referenceFile;
@@ -300,24 +297,25 @@ let appendInfoButtons = () => {
         .addEventListener( 'click', () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructionsToggle' );
-            pipPlacer()
+            compare3dVisiblityToggle()
         } );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', () => {
             toggleCompare3D()
+            compare3dVisiblityToggle()
         } );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', () => {
             toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
-            pipPlacer()
+            compare3dVisiblityToggle()
         } );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', () => {
             document.getElementById( 'x3d_generator_image_img_element' )
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
-            pipPlacer()
+            compare3dVisiblityToggle()
         } );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
@@ -326,6 +324,18 @@ let appendInfoButtons = () => {
     hoverTransition( 'imageButton', 'deepskyblue' );
     hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 };
+
+function compare3dVisiblityToggle( shouldBe ) {
+    if ( document.querySelector( '#x3d_generator_x3d_wrapper' ).style.display === 'none' ) {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'hidden'
+    } else if ( document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility === 'flex' ) {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
+        syncViews()
+    } else {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
+        syncViews()
+    }
+}
 
 let readXml = () => {
     oReq.open( 'GET', xmlFile );
@@ -422,7 +432,6 @@ function createLoadSequenceModal() {
 
 function startLoadSequence() {
     createLoadSequenceModal()
-    addDragPip()
 }
 
 let inline = document.createElement( 'inline' );
@@ -470,14 +479,14 @@ function applyX3Dsettings() {
 function pipPlacer() {
     if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
     if ( compare3Dtoggle.state === 'indicator' ) indicatorResizer()
-    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     pip.style.visibility = 'visible'
     pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
     pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
 }
 
 function indicatorResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1101 ) {
         pip.style.width = '150px'
         pip.style.height = '150px'
@@ -494,7 +503,7 @@ function indicatorResizer() {
 }
 
 function referenceResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1601 ) {
         pip.style.width = '370px'
         pip.style.height = '370px'
@@ -528,41 +537,6 @@ window.onresize = () => {
     modalPopup.style.width = '33%'
     modalPopupTextSizer()
 };
-
-document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'mouseenter', removeDragPip )
-document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'dragstart', doNotDragToggle )
-
-function doNotDragToggle() {
-    doNotDrag.state = true
-}
-
-function removeDragPip() {
-    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = false
-    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).removeEventListener( 'dragstart', dragPip )
-    document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'mouseout', function () {
-        setTimeout( addDragPip, 500 )
-    } )
-}
-
-function addDragPip() {
-    if ( doNotDrag.state === true ) {
-        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'dragend', function () {
-            doNotDrag.state = false
-        } )
-        return
-    }
-    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = true
-    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragstart', dragPip )
-}
-
-function dragPip() {
-    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
-    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragend', function ( e ) {
-        let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
-        pip.style.left = e.clientX
-        pip.style.top = e.clientY //- ( e.target.clientHeight - e.target.clientTop )
-    } )
-}
 
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
