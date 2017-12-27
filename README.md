@@ -79,12 +79,10 @@ I use Lato as a nice readable text and viewport.
             </scene>
         </x3d>
 
-        <div id="x3d_generator_x3d_reference_dragger">
-            <x3d id='x3d_generator_x3d_wrapper_reference'>
-                <scene id='x3d_generator_x3d_scene_reference'>
-                </scene>
-            </x3d>
-        </div>
+        <x3d id='x3d_generator_x3d_wrapper_reference'>
+            <scene id='x3d_generator_x3d_scene_reference'>
+            </scene>
+        </x3d>
 
         <div id='x3d_generator_image_div'>
             <img id='x3d_generator_image_img_element'>
