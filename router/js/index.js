@@ -536,7 +536,6 @@ function doNotDragToggle() {
 }
 
 function removeDragPip() {
-    console.log( 'false' );
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = false
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).removeEventListener( 'dragstart', dragPip )
     document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'mouseout', function () {
@@ -551,13 +550,11 @@ function addDragPip() {
         } )
         return
     }
-    console.log( 'State =', doNotDrag.state );
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = true
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragstart', dragPip )
 }
 
 function dragPip() {
-    console.log( 'why here' );
     let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragend', function ( e ) {
         let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
