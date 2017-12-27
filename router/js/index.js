@@ -237,7 +237,7 @@ let toggleHTML = ( which ) => {
 };
 
 let toggleCompare3D = () => {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     if ( compare3Dtoggle.state === 'indicator' ) {
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = referenceFile;
@@ -464,14 +464,14 @@ function applyX3Dsettings() {
 function pipPlacer() {
     if ( compare3Dtoggle.state === 'reference' ) referenceResizer()
     if ( compare3Dtoggle.state === 'indicator' ) indicatorResizer()
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     pip.style.visibility = 'visible'
     pip.style.left = window.innerWidth - compare3Dtoggle.size - 14
     pip.style.top = window.innerHeight - compare3Dtoggle.size - 14
 }
 
 function indicatorResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     if ( window.innerWidth > 1101 ) {
         pip.style.width = '150px'
         pip.style.height = '150px'
@@ -488,7 +488,7 @@ function indicatorResizer() {
 }
 
 function referenceResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     if ( window.innerWidth > 1601 ) {
         pip.style.width = '370px'
         pip.style.height = '370px'
@@ -522,6 +522,17 @@ window.onresize = () => {
     modalPopup.style.width = '33%'
     modalPopupTextSizer()
 };
+
+document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragstart', dragPip )
+
+function dragPip() {
+    let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragend', function ( e ) {
+        let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
+        pip.style.left = e.x
+        pip.style.top = e.y - e.target.clientHeight - e.target.clientTop
+    } )
+}
 
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
