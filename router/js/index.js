@@ -60,6 +60,10 @@ let loadSequence = {
     visibility: 'visible'
 }
 
+let doNotDrag = {
+    state: false
+}
+
 startLoadSequence()
 
 var oReq = new XMLHttpRequest();
@@ -418,6 +422,7 @@ function createLoadSequenceModal() {
 
 function startLoadSequence() {
     createLoadSequenceModal()
+    addDragPip()
 }
 
 let inline = document.createElement( 'inline' );
@@ -523,9 +528,36 @@ window.onresize = () => {
     modalPopupTextSizer()
 };
 
-document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragstart', dragPip )
+document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'mouseenter', removeDragPip )
+document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'dragstart', doNotDragToggle )
+
+function doNotDragToggle() {
+    doNotDrag.state = true
+}
+
+function removeDragPip() {
+    console.log( 'false' );
+    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = false
+    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).removeEventListener( 'dragstart', dragPip )
+    document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'mouseout', function () {
+        setTimeout( addDragPip, 500 )
+    } )
+}
+
+function addDragPip() {
+    if ( doNotDrag.state === true ) {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).addEventListener( 'dragend', function () {
+            doNotDrag.state = false
+        } )
+        return
+    }
+    console.log( 'State =', doNotDrag.state );
+    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).draggable = true
+    document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragstart', dragPip )
+}
 
 function dragPip() {
+    console.log( 'why here' );
     let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragend', function ( e ) {
         let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
