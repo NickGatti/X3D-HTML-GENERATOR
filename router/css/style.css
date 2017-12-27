@@ -142,7 +142,8 @@ body {
     background-color: lime;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
     transform: translateY(-0.50%) translateX(-0.75%);
-    transition: box-shadow 150ms linear, transform 150ms linear, background-color 250ms linear;
+    cursor: crosshair;
+    transition: box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear;
 }
 
 #x3d_generator_x3d_content_wrapper {
@@ -174,6 +175,7 @@ body {
 
 #x3d_generator_x3d_reference_dragger:hover {
     border: 12px dotted rgba(50, 205, 50, 1);
+    cursor: crosshair;
     transition: border 500ms linear;
 }
 

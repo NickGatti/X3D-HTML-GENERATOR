@@ -463,6 +463,7 @@ function applyX3Dsettings() {
             .namespacename = 'referenceModel';
         document.getElementById( 'x3d_inline_ID_ref' )
             .mapdeftoid = true;
+        syncViews()
     }, 100 );
 }
 
@@ -558,8 +559,8 @@ function dragPip() {
     let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
     document.querySelector( '#x3d_generator_x3d_reference_dragger' ).addEventListener( 'dragend', function ( e ) {
         let pip = document.querySelector( '#x3d_generator_x3d_reference_dragger' )
-        pip.style.left = e.x
-        pip.style.top = e.y - e.target.clientHeight - e.target.clientTop
+        pip.style.left = e.clientX
+        pip.style.top = e.clientY //- ( e.target.clientHeight - e.target.clientTop )
     } )
 }
 

@@ -9,10 +9,10 @@
   <Scene>
     <Background transparency="1"/>
     <Viewpoint DEF="default" centerOfRotation="0 0 0" description="defaultCamera" orientation="1 0 0 -1.571" position="0 0.013822741189153403 0"/>
-    <Transform translation="0.0 1.2087255716323853E-5 -1.0380983352661132E-5">
-      <Transform center="-0.0 -1.2087255716323853E-5 1.0380983352661132E-5" rotation="1 0 0 0.0">
-        <Transform center="-0.0 -1.2087255716323853E-5 1.0380983352661132E-5" rotation="0 1 0 0.0">
-          <Transform center="-0.0 -1.2087255716323853E-5 1.0380983352661132E-5" rotation="0 0 1 0.0">
+    <Transform scale='10000 10000 10000'>
+      <Transform center="0 0 0" rotation="1 0 0 0.0">
+        <Transform center="0 0 0" rotation="0 1 0 0.0">
+          <Transform center="0 0 0" rotation="0 0 1 0.0">
             <Shape DEF="backIndicator" render="true">
               <Appearance>
                 <Material diffuseColor="1.0 0.0 0.0" transparency="0.0"/>
