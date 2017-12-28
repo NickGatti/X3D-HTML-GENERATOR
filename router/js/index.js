@@ -437,7 +437,6 @@ function createLoadSequenceModal() {
 
 function startLoadSequence() {
     createLoadSequenceModal()
-    detectMobileOrientation()
 }
 
 let inline = document.createElement( 'inline' );
@@ -543,19 +542,6 @@ window.onresize = () => {
     modalPopup.style.width = '33%'
     modalPopupTextSizer()
 };
-
-function detectMobileOrientation() {
-    if ( window.matchMedia( "(orientation: landscape)" ).matches ) {
-        loadSequence.state = 'Please switch to portrait view'
-        loadSequence.visibility = 'visible'
-    }
-    if ( window.matchMedia( "(orientation: portrait)" ).matches ) {
-        loadSequence.state = ''
-        loadSequence.visibility = 'hidden'
-    }
-}
-
-window.addEventListener( "orientationchange", detectMobileOrientation );
 
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
