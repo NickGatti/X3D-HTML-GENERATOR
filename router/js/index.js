@@ -127,29 +127,6 @@ let appendToggleButtons = () => {
     }
 };
 
-let hoverTransition = ( id, originalColor ) => {
-    document.getElementById( id )
-        .addEventListener( 'mouseover', () => {
-            document.getElementById( id )
-                .style.backgroundColor = 'lime';
-        } );
-    document.getElementById( id )
-        .addEventListener( 'mouseout', () => {
-            document.getElementById( id )
-                .style.backgroundColor = originalColor;
-        } );
-    document.getElementById( id )
-        .addEventListener( 'touchstart', () => {
-            document.getElementById( id )
-                .style.backgroundColor = 'lime';
-        } );
-    document.getElementById( id )
-        .addEventListener( 'touchend', () => {
-            document.getElementById( id )
-                .style.backgroundColor = originalColor;
-        } );
-};
-
 let colorToggleButtons = () => {
     for ( let i = 0; i < dataObject.navBarData.ID.length; i++ ) {
         document.getElementById( dataObject.navBarData.ID[ i ] )
@@ -255,24 +232,15 @@ let toggleCompare3D = () => {
     }
 }
 
-let appendInfoButtons = () => {
-    let form = document.getElementById( 'x3d_generator_info_button_wrapper' );
+let createButton = ( node, color, text, id, form ) => {
+    node.className = 'selectTab';
+    if ( id ) node.id = id;
+    node.innerHTML = text;
+    node.style.background = 'deepskyblue';
+    form.appendChild( node );
+};
 
-    let createButton = ( node, color, text, id ) => {
-        node.className = 'selectTab';
-        if ( id ) node.id = id;
-        node.innerHTML = text;
-        node.style.background = 'deepskyblue';
-        form.appendChild( node );
-    };
-
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'comparisonButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', htmlInfoButtonText, 'htmlInfoButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton' );
-    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObject.metaDataInfo.ID );
-
+let setButtonEventsAndAttributes = () => {
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', () => {
             if ( document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
@@ -298,20 +266,17 @@ let appendInfoButtons = () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructionsToggle' );
             compare3dVisiblityToggle()
-            syncViews()
         } );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', () => {
             toggleCompare3D()
             compare3dVisiblityToggle()
-            syncViews()
         } );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', () => {
             toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
             compare3dVisiblityToggle()
-            syncViews()
         } );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', () => {
@@ -319,8 +284,58 @@ let appendInfoButtons = () => {
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
             compare3dVisiblityToggle()
-            syncViews()
         } );
+}
+
+let hoverTransition = ( id, originalColor ) => {
+    let targetButton = document.getElementById( id )
+
+    targetButton
+        .addEventListener( 'mouseenter', () => {
+            targetButton
+                .style.backgroundColor = 'lime';
+            targetButton
+                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.75)";
+            targetButton
+                .style.transform = ( 'translateY(-0.50%) translateX(-0.75%)' )
+        } );
+    targetButton
+        .addEventListener( 'mouseleave', () => {
+            targetButton
+                .style.backgroundColor = originalColor;
+            targetButton
+                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.75)";
+        } );
+    targetButton
+        .addEventListener( 'touchstart', () => {
+            targetButton
+                .style.backgroundColor = 'lime';
+            targetButton
+                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.75)";
+            targetButton
+                .style.transform = ( 'translateY(-0.50%) translateX(-0.75%)' )
+        } );
+    targetButton
+        .addEventListener( 'touchend', () => {
+            targetButton
+                .style.backgroundColor = originalColor;
+            targetButton
+                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.75)";
+        } );
+    targetButton.style.transition = 'box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear'
+};
+
+let appendInfoButtons = () => {
+    let form = document.getElementById( 'x3d_generator_info_button_wrapper' );
+
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton', form );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle', form );
+    createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'comparisonButton', form );
+    createButton( document.createElement( 'div' ), 'deepskyblue', htmlInfoButtonText, 'htmlInfoButton', form );
+    createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton', form );
+    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObject.metaDataInfo.ID, false, form );
+
+    setButtonEventsAndAttributes()
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
     hoverTransition( 'comparisonButton', 'deepskyblue' );
@@ -521,8 +536,8 @@ function referenceResizer() {
         pip.style.height = '150px'
         compare3Dtoggle.size = 150
     } else {
-        pip.style.width = '75px'
-        pip.style.height = '75px'
+        pip.style.width = '100px'
+        pip.style.height = '100px'
         compare3Dtoggle.size = 75
     }
 }

@@ -138,14 +138,6 @@ body {
     margin-top: 10px;
 }
 
-.selectTab:hover {
-    background-color: lime;
-    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-    transform: translateY(-0.50%) translateX(-0.75%);
-    cursor: crosshair;
-    transition: box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear;
-}
-
 #x3d_generator_x3d_content_wrapper {
     height: auto;
     width: 100%;
