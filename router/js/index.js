@@ -298,17 +298,20 @@ let appendInfoButtons = () => {
             toggleHTML( instructionsHTML );
             toggleDivs( 'instructionsToggle' );
             compare3dVisiblityToggle()
+            syncViews()
         } );
     document.getElementById( 'comparisonButton' )
         .addEventListener( 'click', () => {
             toggleCompare3D()
             compare3dVisiblityToggle()
+            syncViews()
         } );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', () => {
             toggleHTML( htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
             compare3dVisiblityToggle()
+            syncViews()
         } );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', () => {
@@ -316,6 +319,7 @@ let appendInfoButtons = () => {
                 .src = '../database/metaDataInfo/2Dimages/' + dataObject.metaDataInfo.ID + '.' + imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
             compare3dVisiblityToggle()
+            syncViews()
         } );
 
     hoverTransition( 'instructionsButton', 'deepskyblue' );
