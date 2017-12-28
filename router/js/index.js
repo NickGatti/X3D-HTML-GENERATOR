@@ -530,7 +530,9 @@ function referenceResizer() {
 
 window.onresize = () => {
     pipPlacer()
-    if ( window.innerWidth > 1101 ) {
+    document.getElementById( 'x3d_generator_x3d_wrapper' ).style.width = '100%'
+    document.getElementById( 'x3d_generator_x3d_wrapper' ).style.height = '100%'
+    if ( window.innerWidth > 343 ) {
         document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
             .style.display = 'flex';
     } else {

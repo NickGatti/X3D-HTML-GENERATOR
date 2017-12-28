@@ -31,10 +31,12 @@ html {
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
+    object-fit: contain;
 }
 
 *, *:before, *:after {
     box-sizing: inherit;
+    object-fit: contain;
 }
 
 body {
@@ -102,6 +104,7 @@ body {
     display: flex;
     border: none;
     width: 100%;
+    height: 100%;
 }
 
 #x3d_generator_info_button_wrapper, #x3d_generator_shape_def_button_wrapper {
@@ -154,7 +157,7 @@ body {
     border: 6px dotted rgba(0, 0, 0, .1);
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 342px) {
     #x3d_generator_wrapper {
         flex-direction: column;
         flex-wrap: nowrap;
