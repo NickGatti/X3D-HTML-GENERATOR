@@ -295,32 +295,36 @@ let createHoverAndTouchButtonEvents = ( id, originalColor ) => {
             targetButton
                 .style.backgroundColor = 'lime';
             targetButton
-                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.75)";
+                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.70)";
             targetButton
-                .style.transform = ( 'translateY(-0.50%) translateX(-0.75%)' )
+                .style.transform = ( 'translateY(-0.50%) translateX(-0.875%)' )
         } );
     targetButton
         .addEventListener( 'mouseleave', () => {
             targetButton
                 .style.backgroundColor = originalColor;
             targetButton
-                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.75)";
+                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
+            targetButton
+                .style.transform = ( 'translateY(0.50%) translateX(0.875%)' )
         } );
     targetButton
         .addEventListener( 'touchstart', () => {
             targetButton
                 .style.backgroundColor = 'lime';
             targetButton
-                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.75)";
+                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.70)";
             targetButton
-                .style.transform = ( 'translateY(-0.50%) translateX(-0.75%)' )
+                .style.transform = ( 'translateY(-0.50%) translateX(-0.875%)' )
         } );
     targetButton
         .addEventListener( 'touchend', () => {
             targetButton
                 .style.backgroundColor = originalColor;
             targetButton
-                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.75)";
+                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
+            targetButton
+                .style.transform = ( 'translateY(0.50%) translateX(0.875%)' )
         } );
     targetButton.style.transition = 'box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear'
 };
