@@ -12,10 +12,24 @@
 
 ## Note: Scaling for files must be in millimeters (or if using custom indicator must be in the same scale) when imaged for reference indicator to work correctly
 ```
-<Transform scale='10000 10000 10000'>
-  <Transform center="0 0 0" rotation="1 0 0 0.0">
-    <Transform center="0 0 0" rotation="0 1 0 0.0">
-      <Transform center="0 0 0" rotation="0 0 1 0.0">
+<X3D>
+  <Head>
+  </Head>
+  <Scene>
+    <Background ... />
+    <Viewpoint ... />
+    <Transform scale='10000 10000 10000'>
+      <Transform center="0 0 0" rotation="1 0 0 0.0">
+        <Transform center="0 0 0" rotation="0 1 0 0.0">
+          <Transform center="0 0 0" rotation="0 0 1 0.0">
+          <Shape...
+          </Shape
+          </Transform>
+        </Transform>
+      </Transform>
+    </Transform>
+  </Scene>
+</X3D>
 ```
 
 X3D HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to:
