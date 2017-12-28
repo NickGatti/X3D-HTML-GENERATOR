@@ -308,24 +308,6 @@ let createHoverAndTouchButtonEvents = ( id, originalColor ) => {
             targetButton
                 .style.transform = ( 'translateY(0.50%) translateX(0.875%)' )
         } );
-    targetButton
-        .addEventListener( 'touchstart', () => {
-            targetButton
-                .style.backgroundColor = 'lime';
-            targetButton
-                .style.boxShadow = "5px 5px 5px 0px rgba(0, 0, 0, 0.70)";
-            targetButton
-                .style.transform = ( 'translateY(-0.50%) translateX(-0.875%)' )
-        } );
-    targetButton
-        .addEventListener( 'touchend', () => {
-            targetButton
-                .style.backgroundColor = originalColor;
-            targetButton
-                .style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
-            targetButton
-                .style.transform = ( 'translateY(0.50%) translateX(0.875%)' )
-        } );
     targetButton.style.transition = 'box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear'
 };
 
@@ -542,7 +524,7 @@ function referenceResizer() {
     } else {
         pip.style.width = '100px'
         pip.style.height = '100px'
-        compare3Dtoggle.size = 75
+        compare3Dtoggle.size = 100
     }
 }
 
@@ -564,10 +546,10 @@ window.onresize = () => {
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
     let modalTextSize = Math.round( ( window.innerWidth ) / ( 45 + window.innerWidth / 400 ) )
-    if ( modalTextSize <= 26 && modalTextSize > 12 ) {
+    if ( modalTextSize <= 26 && modalTextSize > 11 ) {
         modalPopupText.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
-    } else if ( modalTextSize <= 12 ) {
-        modalPopupText.style.fontSize = '13px'
+    } else if ( modalTextSize <= 11 ) {
+        modalPopupText.style.fontSize = '12px'
     } else {
         modalPopupText.style.fontSize = '26px'
     }
