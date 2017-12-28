@@ -134,7 +134,7 @@ let colorToggleButtons = () => {
                       ${Math.round( ( dataObject.navBarData.color[i][0]) * 255 )} ,
                       ${Math.round( ( dataObject.navBarData.color[i][1]) * 255 )} ,
                       ${Math.round( ( dataObject.navBarData.color[i][2]) * 255 )}`;
-        hoverTransition( dataObject.navBarData.ID[ i ], `rgb(
+        createHoverAndTouchButtonEvents( dataObject.navBarData.ID[ i ], `rgb(
                   ${Math.round( ( dataObject.navBarData.color[i][0]) * 255 )} ,
                   ${Math.round( ( dataObject.navBarData.color[i][1]) * 255 )} ,
                   ${Math.round( ( dataObject.navBarData.color[i][2]) * 255 )}` );
@@ -240,7 +240,7 @@ let createButton = ( node, color, text, id, form ) => {
     form.appendChild( node );
 };
 
-let setButtonEventsAndAttributes = () => {
+let createButtonClickEventsAndAttributes = () => {
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', () => {
             if ( document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
@@ -287,7 +287,7 @@ let setButtonEventsAndAttributes = () => {
         } );
 }
 
-let hoverTransition = ( id, originalColor ) => {
+let createHoverAndTouchButtonEvents = ( id, originalColor ) => {
     let targetButton = document.getElementById( id )
 
     targetButton
@@ -335,13 +335,13 @@ let appendInfoButtons = () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton', form );
     createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + dataObject.metaDataInfo.ID, false, form );
 
-    setButtonEventsAndAttributes()
+    createButtonClickEventsAndAttributes()
 
-    hoverTransition( 'instructionsButton', 'deepskyblue' );
-    hoverTransition( 'comparisonButton', 'deepskyblue' );
-    hoverTransition( 'htmlInfoButton', 'deepskyblue' );
-    hoverTransition( 'imageButton', 'deepskyblue' );
-    hoverTransition( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
+    createHoverAndTouchButtonEvents( 'instructionsButton', 'deepskyblue' );
+    createHoverAndTouchButtonEvents( 'comparisonButton', 'deepskyblue' );
+    createHoverAndTouchButtonEvents( 'htmlInfoButton', 'deepskyblue' );
+    createHoverAndTouchButtonEvents( 'imageButton', 'deepskyblue' );
+    createHoverAndTouchButtonEvents( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 };
 
 function compare3dVisiblityToggle( shouldBe ) {
