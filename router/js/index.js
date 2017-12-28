@@ -437,6 +437,7 @@ function createLoadSequenceModal() {
 
 function startLoadSequence() {
     createLoadSequenceModal()
+    detectMobileOrientation()
 }
 
 let inline = document.createElement( 'inline' );
@@ -492,117 +493,69 @@ function pipPlacer() {
 
 function indicatorResizer() {
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
-    if ( window.matchMedia( "(orientation: portrait)" ).matches ) {
-        if ( window.innerWidth > 1101 ) {
-            pip.style.width = '150px'
-            pip.style.height = '150px'
-            compare3Dtoggle.size = 150
-        } else if ( window.innerWidth > 601 ) {
-            pip.style.width = '100px'
-            pip.style.height = '100px'
-            compare3Dtoggle.size = 100
-        } else {
-            pip.style.width = '75px'
-            pip.style.height = '75px'
-            compare3Dtoggle.size = 75
-        }
-    } else if ( window.matchMedia( "(orientation: landscape)" ).matches ) {
+    if ( window.innerWidth > 1101 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        compare3Dtoggle.size = 150
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '100px'
+        pip.style.height = '100px'
+        compare3Dtoggle.size = 100
+    } else {
         pip.style.width = '75px'
         pip.style.height = '75px'
         compare3Dtoggle.size = 75
-    } else {
-        if ( window.innerWidth > 1101 ) {
-            pip.style.width = '150px'
-            pip.style.height = '150px'
-            compare3Dtoggle.size = 150
-        } else if ( window.innerWidth > 601 ) {
-            pip.style.width = '100px'
-            pip.style.height = '100px'
-            compare3Dtoggle.size = 100
-        } else {
-            pip.style.width = '75px'
-            pip.style.height = '75px'
-            compare3Dtoggle.size = 75
-        }
     }
 }
 
 function referenceResizer() {
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
-    if ( window.matchMedia( "(orientation: portrait)" ).matches ) {
-        if ( window.innerWidth > 1601 ) {
-            pip.style.width = '370px'
-            pip.style.height = '370px'
-            compare3Dtoggle.size = 370
-        } else if ( window.innerWidth > 1101 ) {
-            pip.style.width = '275px'
-            pip.style.height = '275px'
-            compare3Dtoggle.size = 275
-        } else if ( window.innerWidth > 601 ) {
-            pip.style.width = '150px'
-            pip.style.height = '150px'
-            compare3Dtoggle.size = 150
-        } else {
-            pip.style.width = '100px'
-            pip.style.height = '100px'
-            compare3Dtoggle.size = 100
-        }
-    } else if ( window.matchMedia( "(orientation: landscape)" ).matches ) {
+    if ( window.innerWidth > 1601 ) {
+        pip.style.width = '370px'
+        pip.style.height = '370px'
+        compare3Dtoggle.size = 370
+    } else if ( window.innerWidth > 1101 ) {
+        pip.style.width = '275px'
+        pip.style.height = '275px'
+        compare3Dtoggle.size = 275
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        compare3Dtoggle.size = 150
+    } else {
         pip.style.width = '100px'
         pip.style.height = '100px'
         compare3Dtoggle.size = 100
-    } else {
-        if ( window.innerWidth > 1601 ) {
-            pip.style.width = '370px'
-            pip.style.height = '370px'
-            compare3Dtoggle.size = 370
-        } else if ( window.innerWidth > 1101 ) {
-            pip.style.width = '275px'
-            pip.style.height = '275px'
-            compare3Dtoggle.size = 275
-        } else if ( window.innerWidth > 601 ) {
-            pip.style.width = '150px'
-            pip.style.height = '150px'
-            compare3Dtoggle.size = 150
-        } else {
-            pip.style.width = '100px'
-            pip.style.height = '100px'
-            compare3Dtoggle.size = 100
-        }
     }
 }
 
 window.onresize = () => {
     pipPlacer()
-    document.getElementById( 'x3d_generator_x3d_wrapper' ).style.width = '100%'
-    document.getElementById( 'x3d_generator_x3d_wrapper' ).style.height = '100%'
-    let stage = document.getElementById( 'x3d_generator_wrapper' )
-    if ( window.matchMedia( "(orientation: portrait)" ).matches ) {
-        if ( window.innerWidth > 1100 ) {
-            document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
-                .style.display = 'flex';
-        } else {
-            document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
-                .style.display = 'block';
-        }
-    } else if ( window.matchMedia( "(orientation: landscape)" ).matches ) {
+    if ( window.innerWidth > 1101 ) {
+        document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
+            .style.display = 'flex';
+    } else {
         document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
             .style.display = 'block';
-    } else {
-        if ( window.innerWidth > 1100 ) {
-            document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
-                .style.display = 'flex';
-        } else {
-            document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
-                .style.display = 'block';
-        }
     }
-
     let modalPopup = document.querySelector( '#modalPopup' )
     modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
     modalPopup.style.width = '33%'
     modalPopupTextSizer()
 };
+
+function detectMobileOrientation() {
+    if ( window.matchMedia( "(orientation: landscape)" ).matches ) {
+        loadSequence.state = 'Please switch to portrait view'
+        loadSequence.visibility = 'visible'
+    }
+    if ( window.matchMedia( "(orientation: portrait)" ).matches ) {
+        loadSequence.state = ''
+        loadSequence.visibility = 'hidden'
+    }
+}
+
+window.addEventListener( "orientationchange", detectMobileOrientation );
 
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
