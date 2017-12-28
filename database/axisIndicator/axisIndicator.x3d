@@ -8,7 +8,7 @@
   </head>
   <Scene>
     <Background transparency="1"/>
-    <Viewpoint DEF="default" centerOfRotation="0 0 0" description="defaultCamera" orientation="1 0 0 -1.571" position="0 0.013822741189153403 0"/>
+    <Viewpoint DEF="default" centerOfRotation="0 0 0" description="defaultCamera" orientation="1 0 0 -1.571" position="0 200 0"/>
     <Transform scale='10000 10000 10000'>
       <Transform center="0 0 0" rotation="1 0 0 0.0">
         <Transform center="0 0 0" rotation="0 1 0 0.0">
