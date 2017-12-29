@@ -595,12 +595,32 @@ function modalPopupTextSizer() {
 }
 
 function X3DmodalInfoClickAppender() {
-    // console.log( 'here' );
-    // let shapes = document.querySelectorAll( 'shape' )
-    // console.log( shapes );
-    // for ( let shape in shapes ) {
-    //     console.log( shapes );
-    // }
+    let shapes = document.querySelectorAll( 'shape' )
+    for ( let shape in shapes ) {
+        if ( shapes[ shape ].id ) {
+            if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
+
+                function infoWindowEducationPopupOn() {
+                    console.log( 'here' );
+                    GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
+                    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+                    GLOBALLOADSEQUENCE.visibility = 'visible'
+                    modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                }
+
+                function infoWindowEducationPopupOff() {
+                    GLOBALLOADSEQUENCE.state = ''
+                    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+                    GLOBALLOADSEQUENCE.visibility = 'hidden'
+                    modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                }
+
+                shapes[ shape ].addEventListener( 'mouseover', infoWindowEducationPopupOn )
+                shapes[ shape ].addEventListener( 'mouseout', infoWindowEducationPopupOff )
+            }
+        }
+    }
+
 }
 
 let loadScript = ( url, callback ) => {
