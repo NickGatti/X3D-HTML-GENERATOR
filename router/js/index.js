@@ -57,7 +57,7 @@ let GLOBALDATAOBJECT = {
 };
 
 let GLOBALLOADSEQUENCE = {
-    state: 'Downloading files and Generating HTML...',
+    state: 'Downloading files...',
     visibility: 'visible'
 }
 
@@ -217,14 +217,15 @@ let toggleHTML = ( which ) => {
 };
 
 let toggleCompare3D = () => {
+    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) {
-        document.getElementById( 'x3d_inline_ID_ref' )
+        X3DreferenceInline
             .url = referenceFile;
         GLOBALCOMPARE3DTOGGLE.state = 'reference'
         pipPlacer()
     } else {
-        document.getElementById( 'x3d_inline_ID_ref' )
+        X3DreferenceInline
             .url = '../database/axisIndicator/axisIndicator.x3d';
         GLOBALCOMPARE3DTOGGLE.state = 'indicator'
         pip.style.width = '100px'
@@ -376,6 +377,8 @@ let readXml = () => {
 
     let run = () => {
         if ( detectState() === true ) {
+            GLOBALLOADSEQUENCE.state = 'Generating HTML...'
+            modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
             appendToggleButtons();
             colorToggleButtons();
             appendInfoButtons();
@@ -459,10 +462,37 @@ function appendInlineX3DHTML() {
 function applyX3Dsettings() {
     GLOBALLOADSEQUENCE.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+
+    let mainX3Dinline = document.getElementById( 'x3d_inline_ID' )
+    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
+
+    let completeLoading = 0
+
+    let completeFullLoadDetect = setInterval( () => {
+        if ( completeLoading === 3 ) {
+            pipPlacer()
+            syncViews()
+            X3DmodalInfoClickAppender()
+            GLOBALLOADSEQUENCE.visibility = 'hidden'
+            modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+            clearInterval( completeFullLoadDetect )
+        }
+    }, 100 )
+
+    let completeHalfLoadDetect = setInterval( () => {
+        if ( completeLoading === 2 ) {
+            pipPlacer()
+            syncViews()
+            clearInterval( completeHalfLoadDetect )
+            completeLoading++
+        }
+    }, 100 )
+
     let loadMainScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID' )
             .load ) {
             clearInterval( loadMainScene );
+            completeLoading++
         }
         document.getElementById( 'x3d_inline_ID' )
             .url = xmlFile;
@@ -471,13 +501,12 @@ function applyX3Dsettings() {
         document.getElementById( 'x3d_inline_ID' )
             .mapdeftoid = true;
     }, 100 );
+
     let loadAxisIndicatorScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID_ref' )
             .load ) {
-            GLOBALLOADSEQUENCE.visibility = 'hidden'
-            modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
             clearInterval( loadAxisIndicatorScene );
-            pipPlacer()
+            completeLoading++
         }
         document.getElementById( 'x3d_inline_ID_ref' )
             .url = '../database/axisIndicator/axisIndicator.x3d';
@@ -485,7 +514,6 @@ function applyX3Dsettings() {
             .namespacename = 'referenceModel';
         document.getElementById( 'x3d_inline_ID_ref' )
             .mapdeftoid = true;
-        syncViews()
     }, 100 );
 }
 
@@ -564,6 +592,15 @@ function modalPopupTextSizer() {
     } else {
         modalPopupText.style.fontSize = '26px'
     }
+}
+
+function X3DmodalInfoClickAppender() {
+    // console.log( 'here' );
+    // let shapes = document.querySelectorAll( 'shape' )
+    // console.log( shapes );
+    // for ( let shape in shapes ) {
+    //     console.log( shapes );
+    // }
 }
 
 let loadScript = ( url, callback ) => {
