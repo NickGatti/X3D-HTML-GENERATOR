@@ -59,6 +59,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 ## Future Plans and TODO list
 
 ```
+Current: Integrate Information Views (modals) for event actions
 1. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
 2. ~5/2018 After semester 3 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
 ```
