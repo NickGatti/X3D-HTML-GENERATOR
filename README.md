@@ -1,5 +1,4 @@
 # X3D HTML Generator:
-## This is not production code
 
 [logo]: http://www.codn.io/img/portfolio/view.jpg "X3D HTML Generator"
 ![X3Dom HTML Generator][logo]
