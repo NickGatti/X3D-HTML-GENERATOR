@@ -62,6 +62,10 @@ let GLOBALLOADSEQUENCE = {
     modalState: false
 }
 
+let GLOBALMODAL = {
+    width: 80
+}
+
 startLoadSequence()
 
 var GLOBALOREQ = new XMLHttpRequest();
@@ -416,17 +420,18 @@ function createLoadSequenceModal() {
     let modalPopup = document.createElement( 'div' )
     modalPopup.id = 'modalPopup'
     modalPopup.style.backgroundColor = 'white'
-    modalPopup.style.width = '33%'
+    modalPopup.style.width = `${GLOBALMODAL.width}%`
     modalPopup.style.height = '140px'
     modalPopup.style.position = 'fixed'
     modalPopup.style.top = '0'
-    modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
+    modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2 ) * window.innerWidth)}px`
     modalPopup.style.border = '3px solid black'
-    modalPopup.style.borderRadius = '0 0 35% 35%'
-    modalPopup.style.boxShadow = '2px 1px 3px 0px rgba(0, 0, 0, 0.75)'
+    modalPopup.style.borderRadius = '0 0 25% 25%'
+    modalPopup.style.boxShadow = '3px 2px 3px 0px rgba(0, 0, 0, 0.55)'
     modalPopup.style.display = 'flex'
     modalPopup.style.justifyContent = 'center'
-    modalPopup.style.alignItems = 'flex start'
+    modalPopup.style.alignItems = 'center'
+    modalPopup.style.flexFlow = 'column'
     modalPopup.style.zIndex = '500'
     modalPopup.style.padding = '0 6px 0 6px'
     modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
@@ -438,8 +443,21 @@ function createLoadSequenceModal() {
     modalPopupText.style.overflow = 'hidden'
     modalPopupText.style.zIndex = '501'
 
+    let modalCloseButton = document.createElement( 'div' )
+    modalCloseButton.innerHTML = 'Close'
+    modalCloseButton.id = 'modalCloseButton'
+    modalCloseButton.style.border = '1px solid black'
+    modalCloseButton.style.padding = '3px'
+    modalCloseButton.style.borderRadius = '10%'
+    modalCloseButton.style.boxShadow = '1px 1px 2px 0px rgba(0, 0, 0, 0.65)'
+    modalCloseButton.style.pointer = 'pointer'
+    modalCloseButton.style.userSelect = 'none'
+    modalCloseButton.width = '100px'
+    modalCloseButton.height = '40px'
+
     document.querySelector( 'body' ).appendChild( modalPopup )
     document.querySelector( '#modalPopup' ).appendChild( modalPopupText )
+    document.querySelector( '#modalPopup' ).appendChild( modalCloseButton )
     modalPopupTextSizer()
 }
 
@@ -577,8 +595,8 @@ function startWindowResizeEvent() {
                 .style.display = 'block';
         }
         let modalPopup = document.querySelector( '#modalPopup' )
-        modalPopup.style.left = `${(window.innerWidth / 2) - ((.33 /2) * window.innerWidth)}px`
-        modalPopup.style.width = '33%'
+        modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2) * window.innerWidth)}px`
+        modalPopup.style.width = `${GLOBALMODAL.width}%`
         modalPopupTextSizer()
     };
 }
@@ -608,15 +626,6 @@ function X3DmodalInfoClickAppender() {
                         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                         GLOBALLOADSEQUENCE.visibility = 'visible'
                         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
-                        shapes[ shape ].addEventListener( 'mouseout', removeEducationClick )
-                    }
-
-                    function removeEducationClick() {
-                        GLOBALLOADSEQUENCE.state = ''
-                        modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
-                        GLOBALLOADSEQUENCE.visibility = 'hidden'
-                        modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
-                        shapes[ shape ].removeEventListener( 'mouseout', removeEducationClick )
                     }
 
                 }
@@ -624,6 +633,14 @@ function X3DmodalInfoClickAppender() {
                 shapes[ shape ].addEventListener( 'click', infoWindowEducationPopupOn )
             }
         }
+    }
+    document.getElementById( 'modalCloseButton' ).addEventListener( 'click', removeEducationModalWindow )
+
+    function removeEducationModalWindow() {
+        GLOBALLOADSEQUENCE.state = ''
+        modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+        GLOBALLOADSEQUENCE.visibility = 'hidden'
+        modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
     }
 }
 
