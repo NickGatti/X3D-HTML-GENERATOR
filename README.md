@@ -192,6 +192,13 @@ These values represent how button appending will work.
             "p": "RMB (Right Mouse Button) - Pan, hold and move"
         }
     ];
+
+    // What to display when a X3D Element gets clicked on
+    // Object Key must be the same name as the Shape DEF name in the X3D file
+    let SETTINGS_FILE_modalWindowInfo = {
+        'Aorta': 'Aorta info...',
+        'Calcification': 'Calcification info...'
+    }
 ```
 
 The X3Dom script is loaded by the button appending JavaScript, but we are loading the CSS from the HTML here:
