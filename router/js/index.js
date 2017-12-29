@@ -622,7 +622,7 @@ function X3DmodalInfoClickAppender() {
                 function infoWindowEducationPopupOn() {
 
                     if ( this === shapes[ shape ] ) {
-                        GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
+                        GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF + ': ' + SETTINGS_FILE_modalWindowInfo[ shapes[ shape ]._x3domNode._DEF ]
                         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                         GLOBALLOADSEQUENCE.visibility = 'visible'
                         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility

@@ -281,3 +281,8 @@ let SETTINGS_FILE_instructionsHTML = [ {
         "p": "RMB (Right Mouse Button) - Pan, hold and move"
     }
 ];
+
+let SETTINGS_FILE_modalWindowInfo = {
+    'Aorta': 'Aorta info...',
+    'Calcification': 'Calcification info...'
+}

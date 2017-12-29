@@ -85,3 +85,12 @@ let SETTINGS_FILE_instructionsHTML = [ {
         "p": "RMB (Right Mouse Button) - Pan, hold and move"
     }
 ];
+
+let SETTINGS_FILE_modalWindowInfo = {
+    'Left Ventricle': 'Left Ventricle info...',
+    'Right Ventricle': 'Right Ventricle info...',
+    'Pulmonary Arteries': 'Pulmonary Arteries info...',
+    'Aorta': 'Aorta info...',
+    'Left Atrium': 'Left Atrium info...',
+    'Right Atrium': 'Right Atrium info...'
+}
