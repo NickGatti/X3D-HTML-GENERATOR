@@ -8,9 +8,17 @@
 
 [X3DOM Website](https://doc.x3dom.org/)
 
-## Auto-Render HTML From your X3Dom, 3D Printer or X3D compatible files:
+## Auto-Render a HTML View From your X3Dom, 3D Printer or X3D compatible files:
 
-## Note: Scaling for files must be in millimeters (or if using custom indicator must be in the same scale) when imaged for reference indicator to work correctly
+```
+HTML View Layout based on education of the current X3D file.
+Ex: X3D file is a heart, goal is to education about a heart
+Ex: X3D file is a car, goal is to education about the car
+Ex: X3D file is a model of a person, goal is about how to perform exercises
+Ex: X3D file is a drone, goal is to instruct on how to build the drone
+```
+
+### Note: Scaling for files must be in millimeters (or if using custom indicator must be in the same scale) when imaged for reference indicator to work correctly
 ```
 <X3D>
   <Head>
@@ -33,10 +41,6 @@
 ```
 
 X3D HTML Generator parses X3Dom and 3D Print compatible XML files then appends HTML to a page according to:
-
-```
-3D Render Canvas from https://doc.x3dom.org/
-```
 
 * Shape element and DEF attribute
 * Material element and diffuseColor attribute
@@ -244,7 +248,11 @@ Nicholas Gatti
 Credit to Justin Ryan for consultation regarding X3D file specification
 ```
 
-### Special Thanks to https://doc.x3dom.org/ , Justin Ryan and Andreas Plesch
+#### Special Thanks to https://doc.x3dom.org/ Justin Ryan and Andreas Plesch
+
+```
+3D Render Canvas from https://doc.x3dom.org/
+```
 
 ```
 MIT License
