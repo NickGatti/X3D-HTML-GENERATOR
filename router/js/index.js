@@ -99,6 +99,7 @@ let appendToggleButtons = () => {
         div = document.createElement( 'div' );
     for ( let i = 0; i < GLOBALDATAOBJECT.navBarData.ID.length; i++ ) {
         div.className = 'selectTab';
+        div.style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
         div.innerHTML = GLOBALDATAOBJECT.navBarData.text[ i ] + '<br> ON';
         div.id = GLOBALDATAOBJECT.navBarData.ID[ i ];
         form.appendChild( div );
