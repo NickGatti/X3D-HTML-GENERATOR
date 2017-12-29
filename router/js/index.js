@@ -601,7 +601,6 @@ function X3DmodalInfoClickAppender() {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
                 function infoWindowEducationPopupOn() {
-                    console.log( 'here' );
                     GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
                     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                     GLOBALLOADSEQUENCE.visibility = 'visible'
