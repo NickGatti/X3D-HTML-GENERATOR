@@ -22,37 +22,37 @@ SOFTWARE.
 */
 
 //Which X3D file to render
-let xmlFile = '../database/clients/example-brain/modelFile.x3d';
+let SETTINGS_FILE_xmlFile = '../database/clients/example-brain/modelFile.x3d';
 //Specify the X3D reference file for the PIP window
-let referenceFile = '../database/referenceModels/brain/referenceModel.x3d'
+let SETTINGS_FILE_referenceFile = '../database/referenceModels/brain/referenceModel.x3d'
 
 //The text for the 'metaDataButton'
-let metaDataInfoButtonText = 'MetaData Info';
+let SETTINGS_FILE_metaDataInfoButtonText = 'MetaData Info';
 
 //Image file extension
-let imageFileExtension = 'png';
+let SETTINGS_FILE_imageFileExtension = 'png';
 
 //The XML element to find the metaDataInfoAttribute in
 //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
-let metaDataInfoElement = 'MetadataInteger';
+let SETTINGS_FILE_metaDataInfoElement = 'MetadataInteger';
 
 //The XML element for MetadataInteger must contain
 //We are looking for name='IPCCCID'
-let mustContainElement = 'name';
+let SETTINGS_FILE_mustContainElement = 'name';
 
 //The XML value for mustContainElement to look for
 //We are looking for name = 'IPCCCID'
-let mustContainValue = 'IPCCCID';
+let SETTINGS_FILE_mustContainValue = 'IPCCCID';
 
 //Which XML attribute to look for to display on the metaDataButton
 //Here value = "aorta"
-let metaDataInfoAttribute = 'value';
+let SETTINGS_FILE_metaDataInfoAttribute = 'value';
 
 //The text for the 'htmlInfoButton'
-let htmlInfoButtonText = 'Diagnosis Info';
+let SETTINGS_FILE_htmlInfoButtonText = 'Diagnosis Info';
 
 //What HTML to display when the 'displayHTMLinfo' button is clicked
-let htmlInfoButtonHTML = [ {
+let SETTINGS_FILE_htmlInfoButtonHTML = [ {
         "p": "Example p tag"
     },
     {
@@ -69,7 +69,7 @@ let htmlInfoButtonHTML = [ {
     }
 ];
 // What HTML to display when the instructions button is clicked
-let instructionsHTML = [ {
+let SETTINGS_FILE_instructionsHTML = [ {
         "h2": "Instructions"
     },
     {

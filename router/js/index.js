@@ -226,7 +226,7 @@ let toggleCompare3D = () => {
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) {
         X3DreferenceInline
-            .url = referenceFile;
+            .url = SETTINGS_FILE_referenceFile;
         GLOBALCOMPARE3DTOGGLE.state = 'reference'
         pipPlacer()
     } else {
@@ -273,7 +273,7 @@ let createButtonClickEventsAndAttributes = () => {
         } );
     document.getElementById( 'instructionsButton' )
         .addEventListener( 'click', () => {
-            toggleHTML( instructionsHTML );
+            toggleHTML( SETTINGS_FILE_instructionsHTML );
             toggleDivs( 'instructionsToggle' );
             compare3dVisiblityToggle()
         } );
@@ -284,14 +284,14 @@ let createButtonClickEventsAndAttributes = () => {
         } );
     document.getElementById( 'htmlInfoButton' )
         .addEventListener( 'click', () => {
-            toggleHTML( htmlInfoButtonHTML );
+            toggleHTML( SETTINGS_FILE_htmlInfoButtonHTML );
             toggleDivs( 'htmlInfoToggle' );
             compare3dVisiblityToggle()
         } );
     document.getElementById( 'imageButton' )
         .addEventListener( 'click', () => {
             document.getElementById( 'x3d_generator_image_img_element' )
-                .src = '../database/metaDataInfo/2Dimages/' + GLOBALDATAOBJECT.metaDataInfo.ID + '.' + imageFileExtension;
+                .src = '../database/metaDataInfo/2Dimages/' + GLOBALDATAOBJECT.metaDataInfo.ID + '.' + SETTINGS_FILE_imageFileExtension;
             toggleDivs( 'imageDisplayToggle' );
             compare3dVisiblityToggle()
         } );
@@ -327,9 +327,9 @@ let appendInfoButtons = () => {
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton', form, true );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle', form, true );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Compare 3D', 'comparisonButton', form, true );
-    createButton( document.createElement( 'div' ), 'deepskyblue', htmlInfoButtonText, 'htmlInfoButton', form, true );
+    createButton( document.createElement( 'div' ), 'deepskyblue', SETTINGS_FILE_htmlInfoButtonText, 'htmlInfoButton', form, true );
     createButton( document.createElement( 'div' ), 'deepskyblue', '2D Drawing', 'imageButton', form, true );
-    createButton( document.createElement( 'div' ), 'deepskyblue', metaDataInfoButtonText + ': ' + GLOBALDATAOBJECT.metaDataInfo.ID, false, form, false );
+    createButton( document.createElement( 'div' ), 'deepskyblue', SETTINGS_FILE_metaDataInfoButtonText + ': ' + GLOBALDATAOBJECT.metaDataInfo.ID, false, form, false );
 
     createButtonClickEventsAndAttributes()
 
@@ -353,7 +353,7 @@ function compare3dVisiblityToggle( shouldBe ) {
 }
 
 let readXml = () => {
-    GLOBALOREQ.open( 'GET', xmlFile );
+    GLOBALOREQ.open( 'GET', SETTINGS_FILE_xmlFile );
     GLOBALOREQ.send();
 
     let popdataObjectect = ( ( text ) => {
@@ -377,7 +377,7 @@ let readXml = () => {
         GLOBALDATAOBJECT.navBarData.color = value.map( ( data ) => {
             return data.split( ' ' );
         } );
-        GLOBALDATAOBJECT.metaDataInfo.ID = parseXML( text, metaDataInfoElement, metaDataInfoAttribute, mustContainElement, mustContainValue );
+        GLOBALDATAOBJECT.metaDataInfo.ID = parseXML( text, SETTINGS_FILE_metaDataInfoElement, SETTINGS_FILE_metaDataInfoAttribute, SETTINGS_FILE_mustContainElement, SETTINGS_FILE_mustContainValue );
     } );
 
     let run = () => {
@@ -514,7 +514,7 @@ function applyX3Dsettings() {
             completeLoading++
         }
         document.getElementById( 'x3d_inline_ID' )
-            .url = xmlFile;
+            .url = SETTINGS_FILE_xmlFile;
         document.getElementById( 'x3d_inline_ID' )
             .namespacename = 'x3dModelFile';
         document.getElementById( 'x3d_inline_ID' )
