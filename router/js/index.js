@@ -57,7 +57,7 @@ let GLOBALDATAOBJECT = {
 };
 
 let GLOBALLOADSEQUENCE = {
-    state: 'Downloading and Generating HTML...',
+    state: 'Downloading files and Generating HTML...',
     visibility: 'visible'
 }
 
