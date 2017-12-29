@@ -602,24 +602,23 @@ function X3DmodalInfoClickAppender() {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
                 function infoWindowEducationPopupOn() {
-                    GLOBALLOADSEQUENCE.modalState = false
-                    GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
-                    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
-                    GLOBALLOADSEQUENCE.visibility = 'visible'
-                    modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
-                    document.addEventListener( 'click', removeEducationClick )
-                }
 
-                function removeEducationClick() {
-                    if ( GLOBALLOADSEQUENCE.visibility === 'visible' && GLOBALLOADSEQUENCE.modalState === true ) {
+                    if ( this === shapes[ shape ] ) {
+                        GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
+                        modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+                        GLOBALLOADSEQUENCE.visibility = 'visible'
+                        modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                        shapes[ shape ].addEventListener( 'mouseout', removeEducationClick )
+                    }
+
+                    function removeEducationClick() {
                         GLOBALLOADSEQUENCE.state = ''
                         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                         GLOBALLOADSEQUENCE.visibility = 'hidden'
                         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
-                        GLOBALLOADSEQUENCE.modalState = false
-                        document.removeEventListener( 'click', removeEducationClick )
+                        shapes[ shape ].removeEventListener( 'mouseout', removeEducationClick )
                     }
-                    GLOBALLOADSEQUENCE.modalState = true
+
                 }
 
                 shapes[ shape ].addEventListener( 'click', infoWindowEducationPopupOn )
