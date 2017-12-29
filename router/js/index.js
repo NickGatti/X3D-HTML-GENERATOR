@@ -58,7 +58,8 @@ let GLOBALDATAOBJECT = {
 
 let GLOBALLOADSEQUENCE = {
     state: 'Downloading files...',
-    visibility: 'visible'
+    visibility: 'visible',
+    modalState: false
 }
 
 startLoadSequence()
@@ -601,25 +602,30 @@ function X3DmodalInfoClickAppender() {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
                 function infoWindowEducationPopupOn() {
+                    GLOBALLOADSEQUENCE.modalState = false
                     GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF
                     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                     GLOBALLOADSEQUENCE.visibility = 'visible'
                     modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                    document.addEventListener( 'click', removeEducationClick )
                 }
 
-                function infoWindowEducationPopupOff() {
-                    GLOBALLOADSEQUENCE.state = ''
-                    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
-                    GLOBALLOADSEQUENCE.visibility = 'hidden'
-                    modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                function removeEducationClick() {
+                    if ( GLOBALLOADSEQUENCE.visibility === 'visible' && GLOBALLOADSEQUENCE.modalState === true ) {
+                        GLOBALLOADSEQUENCE.state = ''
+                        modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+                        GLOBALLOADSEQUENCE.visibility = 'hidden'
+                        modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+                        GLOBALLOADSEQUENCE.modalState = false
+                        document.removeEventListener( 'click', removeEducationClick )
+                    }
+                    GLOBALLOADSEQUENCE.modalState = true
                 }
 
-                shapes[ shape ].addEventListener( 'mouseover', infoWindowEducationPopupOn )
-                shapes[ shape ].addEventListener( 'mouseout', infoWindowEducationPopupOff )
+                shapes[ shape ].addEventListener( 'click', infoWindowEducationPopupOn )
             }
         }
     }
-
 }
 
 let loadScript = ( url, callback ) => {
