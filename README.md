@@ -11,9 +11,9 @@
 
 ```
 HTML View Layout based on education of the current X3D file.
-Ex: X3D file is a heart, goal is to education about a heart
-Ex: X3D file is a car, goal is to education about the car
-Ex: X3D file is a model of a person, goal is about how to perform exercises
+Ex: X3D file is a heart, goal is to educate about a heart
+Ex: X3D file is a car, goal is to educate about the car
+Ex: X3D file is a model of a person, goal is to instruct how to perform exercises
 Ex: X3D file is a drone, goal is to instruct on how to build the drone
 ```
 
