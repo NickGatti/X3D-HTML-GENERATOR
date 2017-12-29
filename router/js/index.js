@@ -63,7 +63,8 @@ let GLOBALLOADSEQUENCE = {
 }
 
 let GLOBALMODAL = {
-    width: 80
+    width: 90,
+    height: 20
 }
 
 startLoadSequence()
@@ -421,19 +422,19 @@ function createLoadSequenceModal() {
     modalPopup.id = 'modalPopup'
     modalPopup.style.backgroundColor = 'white'
     modalPopup.style.width = `${GLOBALMODAL.width}%`
-    modalPopup.style.height = '140px'
+    modalPopup.style.height = `${GLOBALMODAL.height}%`
     modalPopup.style.position = 'fixed'
     modalPopup.style.top = '0'
     modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2 ) * window.innerWidth)}px`
     modalPopup.style.border = '3px solid black'
-    modalPopup.style.borderRadius = '0 0 25% 25%'
+    modalPopup.style.borderRadius = '0 0 15px 15px'
     modalPopup.style.boxShadow = '3px 2px 3px 0px rgba(0, 0, 0, 0.55)'
     modalPopup.style.display = 'flex'
-    modalPopup.style.justifyContent = 'center'
+    modalPopup.style.justifyContent = 'space-between'
     modalPopup.style.alignItems = 'center'
     modalPopup.style.flexFlow = 'column'
     modalPopup.style.zIndex = '500'
-    modalPopup.style.padding = '0 6px 0 6px'
+    modalPopup.style.padding = '0 6px 6px 6px'
     modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
 
     let modalPopupText = document.createElement( 'div' )
