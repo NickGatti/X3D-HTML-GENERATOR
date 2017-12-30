@@ -440,9 +440,15 @@ function createLoadSequenceModal() {
     let modalPopupText = document.createElement( 'div' )
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
     modalPopupText.id = 'modalPopupText'
-    modalPopupText.style.height = '100px'
+    modalPopupText.style.height = '80%'
     modalPopupText.style.overflow = 'hidden'
     modalPopupText.style.zIndex = '501'
+
+    let modalButtonWrapper = document.createElement( 'div' )
+    modalButtonWrapper.style.display = 'flex'
+    modalButtonWrapper.style.flexFlow = 'row'
+    modalButtonWrapper.id = 'modalButtonWrapper'
+    modalButtonWrapper.style.visibility = 'hidden'
 
     let modalCloseButton = document.createElement( 'div' )
     modalCloseButton.innerHTML = 'Close'
@@ -453,12 +459,24 @@ function createLoadSequenceModal() {
     modalCloseButton.style.boxShadow = '1px 1px 2px 0px rgba(0, 0, 0, 0.65)'
     modalCloseButton.style.pointer = 'pointer'
     modalCloseButton.style.userSelect = 'none'
-    modalCloseButton.width = '100px'
-    modalCloseButton.height = '40px'
+    modalCloseButton.style.margin = '0 1rem 0 1rem'
+
+    let modalMoreButton = document.createElement( 'div' )
+    modalMoreButton.innerHTML = 'More'
+    modalMoreButton.id = 'modalMoreButton'
+    modalMoreButton.style.border = '1px solid black'
+    modalMoreButton.style.padding = '3px'
+    modalMoreButton.style.borderRadius = '10%'
+    modalMoreButton.style.boxShadow = '1px 1px 2px 0px rgba(0, 0, 0, 0.65)'
+    modalMoreButton.style.pointer = 'pointer'
+    modalMoreButton.style.userSelect = 'none'
+    modalMoreButton.style.margin = '0 1rem 0 1rem'
 
     document.querySelector( 'body' ).appendChild( modalPopup )
     document.querySelector( '#modalPopup' ).appendChild( modalPopupText )
-    document.querySelector( '#modalPopup' ).appendChild( modalCloseButton )
+    document.querySelector( '#modalPopup' ).appendChild( modalButtonWrapper )
+    document.querySelector( '#modalButtonWrapper' ).appendChild( modalCloseButton )
+    document.querySelector( '#modalButtonWrapper' ).appendChild( modalMoreButton )
     modalPopupTextSizer()
 }
 
@@ -616,6 +634,10 @@ function modalPopupTextSizer() {
 
 function X3DmodalInfoClickAppender() {
     let shapes = document.querySelectorAll( 'shape' )
+    let modalPopupText = document.getElementById( 'modalPopupText' )
+    let modalPopup = document.getElementById( 'modalPopup' )
+    let modalPopupWrapper = document.getElementById( 'modalPopupWrapper' )
+    modalButtonWrapper.style.visibility = 'inherit'
     for ( let shape in shapes ) {
         if ( shapes[ shape ].id ) {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
@@ -637,11 +659,30 @@ function X3DmodalInfoClickAppender() {
     }
     document.getElementById( 'modalCloseButton' ).addEventListener( 'click', removeEducationModalWindow )
 
+    document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonExpand )
+
     function removeEducationModalWindow() {
         GLOBALLOADSEQUENCE.state = ''
         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
         GLOBALLOADSEQUENCE.visibility = 'hidden'
         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+    }
+
+    function modalMoreButtonExpand() {
+        modalPopup.style.height = '80%'
+        modalPopupText.style.overflow = 'auto'
+        modalPopupText.style.height = 'auto'
+        modalPopupText.style.overflowX = 'hidden'
+        document.getElementById( 'modalMoreButton' ).removeEventListener( 'click', modalMoreButtonExpand )
+        document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonMinimize )
+    }
+
+    function modalMoreButtonMinimize() {
+        modalPopup.style.height = `${GLOBALMODAL.height}%`
+        modalPopupText.style.overflow = 'hidden'
+        modalPopupText.style.height = '80%'
+        document.getElementById( 'modalMoreButton' ).removeEventListener( 'click', modalMoreButtonMinimize )
+        document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonExpand )
     }
 }
 

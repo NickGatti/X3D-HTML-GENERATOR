@@ -283,6 +283,6 @@ let SETTINGS_FILE_instructionsHTML = [ {
 ];
 
 let SETTINGS_FILE_modalWindowInfo = {
-    'Aorta': 'Aorta info...',
+    'Aorta': 'The largest artery in the body, the aorta arises from the left ventricle of the heart, goes up (ascends) a little ways, bends over (arches), then goes down (descends) through the chest and through the abdomen to where ends by dividing into two arteries called the common iliac arteries that go to the legs. Anatomically, the aorta is traditionally divided into the ascending aorta, the aortic arch, and the descending aorta. The descending aorta is, in turn, subdivided into the thoracic aorta (that descends within the chest) and the abdominal aorta (that descends within the belly). The aorta gives off branches that go to the head and neck, the arms, the major organs in the chest and abdomen, and the legs. It serves to supply them all with oxygenated blood. The aorta is the central conduit from the heart to the body. Source: https://www.medicinenet.com/script/main/art.asp?articlekey=2295',
     'Calcification': 'Calcification info...'
 }
