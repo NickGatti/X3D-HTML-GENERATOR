@@ -433,7 +433,6 @@ function createLoadSequenceModal() {
     modalPopup.style.justifyContent = 'space-between'
     modalPopup.style.alignItems = 'center'
     modalPopup.style.flexFlow = 'column'
-    modalPopup.style.zIndex = '500'
     modalPopup.style.padding = '0 6px 6px 6px'
     modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
 
@@ -442,7 +441,6 @@ function createLoadSequenceModal() {
     modalPopupText.id = 'modalPopupText'
     modalPopupText.style.height = '80%'
     modalPopupText.style.overflow = 'hidden'
-    modalPopupText.style.zIndex = '501'
 
     let modalButtonWrapper = document.createElement( 'div' )
     modalButtonWrapper.style.display = 'flex'
@@ -643,7 +641,6 @@ function X3DmodalInfoClickAppender() {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
                 function infoWindowEducationPopupOn() {
-
                     if ( this === shapes[ shape ] ) {
                         GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF + ': ' + SETTINGS_FILE_modalWindowInfo[ shapes[ shape ]._x3domNode._DEF ]
                         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
