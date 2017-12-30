@@ -441,6 +441,7 @@ function createLoadSequenceModal() {
     modalPopupText.id = 'modalPopupText'
     modalPopupText.style.height = '80%'
     modalPopupText.style.overflow = 'hidden'
+    modalPopupText.style.padding = '1em'
 
     let modalButtonWrapper = document.createElement( 'div' )
     modalButtonWrapper.style.display = 'flex'
@@ -449,7 +450,7 @@ function createLoadSequenceModal() {
     modalButtonWrapper.style.visibility = 'hidden'
 
     let modalCloseButton = document.createElement( 'div' )
-    modalCloseButton.innerHTML = 'Close'
+    modalCloseButton.innerText = 'Close'
     modalCloseButton.id = 'modalCloseButton'
     modalCloseButton.style.border = '1px solid black'
     modalCloseButton.style.padding = '3px'
@@ -460,7 +461,7 @@ function createLoadSequenceModal() {
     modalCloseButton.style.margin = '0 1rem 0 1rem'
 
     let modalMoreButton = document.createElement( 'div' )
-    modalMoreButton.innerHTML = 'More'
+    modalMoreButton.innerText = 'More'
     modalMoreButton.id = 'modalMoreButton'
     modalMoreButton.style.border = '1px solid black'
     modalMoreButton.style.padding = '3px'
