@@ -435,41 +435,53 @@ function createLoadSequenceModal() {
     modalPopup.style.flexFlow = 'column'
     modalPopup.style.padding = '0 6px 6px 6px'
     modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+    modalPopup.style.overflow = 'hidden'
+    modalPopup.style.zIndex = 600
 
     let modalPopupText = document.createElement( 'div' )
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
     modalPopupText.id = 'modalPopupText'
-    modalPopupText.style.height = '80%'
+    modalPopupText.style.height = 'auto'
     modalPopupText.style.overflow = 'hidden'
-    modalPopupText.style.padding = '1em'
+    modalPopupText.style.padding = '4px'
+    modalPopupText.style.margin = '4px 0 4px 0'
 
     let modalButtonWrapper = document.createElement( 'div' )
     modalButtonWrapper.style.display = 'flex'
     modalButtonWrapper.style.flexFlow = 'row'
+    modalButtonWrapper.style.justifyContent = 'center'
+    modalButtonWrapper.style.alignItems = 'center'
     modalButtonWrapper.id = 'modalButtonWrapper'
     modalButtonWrapper.style.visibility = 'hidden'
+    modalButtonWrapper.style.overflow = 'hidden'
+    modalButtonWrapper.style.maxHeight = '20%'
+    modalButtonWrapper.style.minHeight = '28px'
 
     let modalCloseButton = document.createElement( 'div' )
     modalCloseButton.innerText = 'Close'
     modalCloseButton.id = 'modalCloseButton'
     modalCloseButton.style.border = '1px solid black'
-    modalCloseButton.style.padding = '3px'
+    modalCloseButton.style.padding = '3px 5px 3px 3px'
     modalCloseButton.style.borderRadius = '10%'
     modalCloseButton.style.boxShadow = '1px 1px 2px 0px rgba(0, 0, 0, 0.65)'
     modalCloseButton.style.pointer = 'pointer'
     modalCloseButton.style.userSelect = 'none'
-    modalCloseButton.style.margin = '0 1rem 0 1rem'
+    modalCloseButton.style.margin = '0 1rem 1px 1rem'
+    modalCloseButton.style.overflow = 'hidden'
+    modalCloseButton.style.objectFit = 'fill'
 
     let modalMoreButton = document.createElement( 'div' )
     modalMoreButton.innerText = 'More'
     modalMoreButton.id = 'modalMoreButton'
     modalMoreButton.style.border = '1px solid black'
-    modalMoreButton.style.padding = '3px'
+    modalMoreButton.style.padding = '3px 5px 3px 3px'
     modalMoreButton.style.borderRadius = '10%'
     modalMoreButton.style.boxShadow = '1px 1px 2px 0px rgba(0, 0, 0, 0.65)'
     modalMoreButton.style.pointer = 'pointer'
     modalMoreButton.style.userSelect = 'none'
-    modalMoreButton.style.margin = '0 1rem 0 1rem'
+    modalMoreButton.style.margin = '0 1rem 1px 1rem'
+    modalMoreButton.style.overflow = 'hidden'
+    modalCloseButton.style.objectFit = 'fill'
 
     document.querySelector( 'body' ).appendChild( modalPopup )
     document.querySelector( '#modalPopup' ).appendChild( modalPopupText )
@@ -513,6 +525,7 @@ function applyX3Dsettings() {
             GLOBALLOADSEQUENCE.visibility = 'hidden'
             modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
             clearInterval( completeFullLoadDetect )
+            modalPopupTextSizer()
         }
     }, 100 )
 
@@ -603,6 +616,7 @@ function referenceResizer() {
 
 function startWindowResizeEvent() {
     window.onresize = () => {
+        modalPopupTextSizer()
         pipPlacer()
         let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
         if ( window.innerWidth > 1101 ) {
@@ -621,14 +635,29 @@ function startWindowResizeEvent() {
 
 function modalPopupTextSizer() {
     let modalPopup = document.querySelector( '#modalPopup' )
+    let modalMoreButton = document.getElementById( 'modalMoreButton' )
+    let modalCloseButton = document.getElementById( 'modalCloseButton' )
     let modalTextSize = Math.round( ( window.innerWidth ) / ( 45 + window.innerWidth / 400 ) )
+
     if ( modalTextSize <= 26 && modalTextSize > 11 ) {
         modalPopupText.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
-    } else if ( modalTextSize <= 11 ) {
+    } else if ( modalTextSize < 11 ) {
         modalPopupText.style.fontSize = '12px'
     } else {
         modalPopupText.style.fontSize = '26px'
     }
+
+    if ( modalTextSize <= 13 && modalTextSize > 9 ) {
+        modalMoreButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
+        modalCloseButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
+    } else if ( modalTextSize < 9 ) {
+        modalMoreButton.style.fontSize = '10px'
+        modalCloseButton.style.fontSize = '10px'
+    } else {
+        modalMoreButton.style.fontSize = '14px'
+        modalCloseButton.style.fontSize = '14px'
+    }
+
 }
 
 function X3DmodalInfoClickAppender() {
@@ -643,21 +672,29 @@ function X3DmodalInfoClickAppender() {
 
                 function infoWindowEducationPopupOn() {
                     if ( this === shapes[ shape ] ) {
+                        modalPopupTextSizer()
                         GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF + ': ' + SETTINGS_FILE_modalWindowInfo[ shapes[ shape ]._x3domNode._DEF ]
                         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
                         GLOBALLOADSEQUENCE.visibility = 'visible'
                         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
                     }
-
                 }
 
                 shapes[ shape ].addEventListener( 'click', infoWindowEducationPopupOn )
             }
         }
     }
-    document.getElementById( 'modalCloseButton' ).addEventListener( 'click', removeEducationModalWindow )
 
-    document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonExpand )
+    let modalMoreButton = document.getElementById( 'modalMoreButton' )
+    let modalCloseButton = document.getElementById( 'modalCloseButton' )
+
+    modalCloseButton.addEventListener( 'click', removeEducationModalWindow )
+    modalCloseButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
+    modalCloseButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
+
+    modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
+    modalMoreButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
+    modalMoreButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
 
     function removeEducationModalWindow() {
         GLOBALLOADSEQUENCE.state = ''
@@ -667,21 +704,34 @@ function X3DmodalInfoClickAppender() {
     }
 
     function modalMoreButtonExpand() {
-        modalPopup.style.height = '80%'
+        modalPopupTextSizer()
+        modalPopup.style.height = '50%'
         modalPopupText.style.overflow = 'auto'
-        modalPopupText.style.height = 'auto'
         modalPopupText.style.overflowX = 'hidden'
-        document.getElementById( 'modalMoreButton' ).removeEventListener( 'click', modalMoreButtonExpand )
-        document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonMinimize )
+        modalMoreButton.innerText = 'Less'
+        modalMoreButton.removeEventListener( 'click', modalMoreButtonExpand )
+        modalMoreButton.addEventListener( 'click', modalMoreButtonMinimize )
     }
 
     function modalMoreButtonMinimize() {
+        modalPopupTextSizer()
         modalPopup.style.height = `${GLOBALMODAL.height}%`
         modalPopupText.style.overflow = 'hidden'
-        modalPopupText.style.height = '80%'
-        document.getElementById( 'modalMoreButton' ).removeEventListener( 'click', modalMoreButtonMinimize )
-        document.getElementById( 'modalMoreButton' ).addEventListener( 'click', modalMoreButtonExpand )
+        modalMoreButton.innerText = 'More'
+        modalMoreButton.removeEventListener( 'click', modalMoreButtonMinimize )
+        modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
     }
+
+    function applyHoverColorForEducationButton() {
+        this.style.backgroundColor = 'lime'
+        this.style.transition = 'background-color 450ms linear'
+    }
+
+    function removeHoverColorForEducationButton() {
+        this.style.backgroundColor = 'inherit'
+        this.style.transition = 'background-color 450ms linear'
+    }
+    modalPopupTextSizer()
 }
 
 let loadScript = ( url, callback ) => {
