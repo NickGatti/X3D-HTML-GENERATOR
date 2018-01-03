@@ -67,9 +67,7 @@ let GLOBALMODAL = {
     height: 20
 }
 
-startLoadSequence()
-
-var GLOBALOREQ = new XMLHttpRequest();
+let GLOBALOREQ = new XMLHttpRequest();
 
 let parseXML = ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
     if ( window.DOMParser ) {
@@ -222,6 +220,53 @@ let toggleHTML = ( which ) => {
     }
 };
 
+let referenceResizer = () => {
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    if ( window.innerWidth > 1601 ) {
+        pip.style.width = '370px'
+        pip.style.height = '370px'
+        GLOBALCOMPARE3DTOGGLE.size = 370
+    } else if ( window.innerWidth > 1101 ) {
+        pip.style.width = '275px'
+        pip.style.height = '275px'
+        GLOBALCOMPARE3DTOGGLE.size = 275
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        GLOBALCOMPARE3DTOGGLE.size = 150
+    } else {
+        pip.style.width = '100px'
+        pip.style.height = '100px'
+        GLOBALCOMPARE3DTOGGLE.size = 100
+    }
+}
+
+let indicatorResizer = () => {
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    if ( window.innerWidth > 1101 ) {
+        pip.style.width = '150px'
+        pip.style.height = '150px'
+        GLOBALCOMPARE3DTOGGLE.size = 150
+    } else if ( window.innerWidth > 601 ) {
+        pip.style.width = '100px'
+        pip.style.height = '100px'
+        GLOBALCOMPARE3DTOGGLE.size = 100
+    } else {
+        pip.style.width = '75px'
+        pip.style.height = '75px'
+        GLOBALCOMPARE3DTOGGLE.size = 75
+    }
+}
+
+let pipPlacer = () => {
+    if ( GLOBALCOMPARE3DTOGGLE.state === 'reference' ) referenceResizer()
+    if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) indicatorResizer()
+    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    pip.style.visibility = 'visible'
+    pip.style.left = window.innerWidth - GLOBALCOMPARE3DTOGGLE.size - 14
+    pip.style.top = window.innerHeight - GLOBALCOMPARE3DTOGGLE.size - 14
+}
+
 let toggleCompare3D = () => {
     let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
     let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
@@ -249,6 +294,18 @@ let createButton = ( node, color, text, id, form, button ) => {
     if ( button === true ) node.style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
     form.appendChild( node );
 };
+
+let compare3dVisiblityToggle = ( shouldBe ) => {
+    if ( document.querySelector( '#x3d_generator_x3d_wrapper' ).style.display === 'none' ) {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'hidden'
+    } else if ( document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility === 'flex' ) {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
+        syncViews()
+    } else {
+        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
+        syncViews()
+    }
+}
 
 let createButtonClickEventsAndAttributes = () => {
     let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
@@ -341,15 +398,72 @@ let appendInfoButtons = () => {
     createHoverAndTouchButtonEvents( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 };
 
-function compare3dVisiblityToggle( shouldBe ) {
-    if ( document.querySelector( '#x3d_generator_x3d_wrapper' ).style.display === 'none' ) {
-        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'hidden'
-    } else if ( document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility === 'flex' ) {
-        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
-        syncViews()
+let applyX3Dsettings = () => {
+    GLOBALLOADSEQUENCE.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
+    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
+
+    let mainX3Dinline = document.getElementById( 'x3d_inline_ID' )
+    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
+
+    let completeLoading = 0
+
+    let completeFullLoadDetect = setInterval( () => {
+        if ( completeLoading === 3 ) {
+            pipPlacer()
+            syncViews()
+            X3DmodalInfoClickAppender()
+            GLOBALLOADSEQUENCE.visibility = 'hidden'
+            modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+            clearInterval( completeFullLoadDetect )
+            modalPopupTextSizer()
+        }
+    }, 100 )
+
+    let completeHalfLoadDetect = setInterval( () => {
+        if ( completeLoading === 2 ) {
+            pipPlacer()
+            syncViews()
+            clearInterval( completeHalfLoadDetect )
+            completeLoading++
+        }
+    }, 100 )
+
+    let loadMainScene = setInterval( () => {
+        if ( document.getElementById( 'x3d_inline_ID' )
+            .load ) {
+            clearInterval( loadMainScene );
+            completeLoading++
+        }
+        document.getElementById( 'x3d_inline_ID' )
+            .url = SETTINGS_FILE_xmlFile;
+        document.getElementById( 'x3d_inline_ID' )
+            .namespacename = 'x3dModelFile';
+        document.getElementById( 'x3d_inline_ID' )
+            .mapdeftoid = true;
+    }, 100 );
+
+    let loadAxisIndicatorScene = setInterval( () => {
+        if ( document.getElementById( 'x3d_inline_ID_ref' )
+            .load ) {
+            clearInterval( loadAxisIndicatorScene );
+            completeLoading++
+        }
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .url = '../database/axisIndicator/axisIndicator.x3d';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .namespacename = 'referenceModel';
+        document.getElementById( 'x3d_inline_ID_ref' )
+            .mapdeftoid = true;
+    }, 100 );
+}
+
+let detectState = () => {
+    if ( document.readyState === "interactive" ||
+        document.readyState === "loaded" ||
+        document.readyState === "complete" ) {
+        return true
     } else {
-        document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'visible'
-        syncViews()
+        return false
     }
 }
 
@@ -400,24 +514,59 @@ let readXml = () => {
         }
     };
 
-    function reqListener() {
+    let reqListener = function () {
         popdataObjectect( this.responseText );
         run()
     }
     GLOBALOREQ.addEventListener( 'load', reqListener );
 };
 
-function detectState() {
-    if ( document.readyState === "interactive" ||
-        document.readyState === "loaded" ||
-        document.readyState === "complete" ) {
-        return true
+let modalPopupTextSizer = () => {
+    let modalPopup = document.querySelector( '#modalPopup' )
+    let modalMoreButton = document.getElementById( 'modalMoreButton' )
+    let modalCloseButton = document.getElementById( 'modalCloseButton' )
+    let modalTextSize = Math.round( ( window.innerWidth ) / ( 45 + window.innerWidth / 400 ) )
+
+    if ( modalTextSize <= 26 && modalTextSize > 11 ) {
+        modalPopupText.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
+    } else if ( modalTextSize < 11 ) {
+        modalPopupText.style.fontSize = '12px'
     } else {
-        return false
+        modalPopupText.style.fontSize = '26px'
+    }
+
+    if ( modalTextSize <= 13 && modalTextSize > 9 ) {
+        modalMoreButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
+        modalCloseButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
+    } else if ( modalTextSize < 9 ) {
+        modalMoreButton.style.fontSize = '10px'
+        modalCloseButton.style.fontSize = '10px'
+    } else {
+        modalMoreButton.style.fontSize = '14px'
+        modalCloseButton.style.fontSize = '14px'
     }
 }
 
-function createLoadSequenceModal() {
+let startWindowResizeEvent = () => {
+    window.onresize = () => {
+        modalPopupTextSizer()
+        pipPlacer()
+        let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
+        if ( window.innerWidth > 1101 ) {
+            shapeDefButtonWrapper
+                .style.display = 'flex';
+        } else {
+            shapeDefButtonWrapper
+                .style.display = 'block';
+        }
+        let modalPopup = document.querySelector( '#modalPopup' )
+        modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2) * window.innerWidth)}px`
+        modalPopup.style.width = `${GLOBALMODAL.width}%`
+        modalPopupTextSizer()
+    };
+}
+
+let createLoadSequenceModal = () => {
     let modalPopup = document.createElement( 'div' )
     modalPopup.id = 'modalPopup'
     modalPopup.style.backgroundColor = 'white'
@@ -491,176 +640,7 @@ function createLoadSequenceModal() {
     modalPopupTextSizer()
 }
 
-function startLoadSequence() {
-    createLoadSequenceModal()
-    appendInlineX3DHTML()
-    startWindowResizeEvent()
-}
-
-function appendInlineX3DHTML() {
-    let inline = document.createElement( 'inline' );
-    inline.id = 'x3d_inline_ID';
-    document.getElementById( 'x3d_generator_x3d_scene' )
-        .appendChild( inline );
-    inline = document.createElement( 'inline' );
-    inline.id = 'x3d_inline_ID_ref';
-    document.getElementById( 'x3d_generator_x3d_scene_reference' )
-        .appendChild( inline );
-}
-
-function applyX3Dsettings() {
-    GLOBALLOADSEQUENCE.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
-    modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
-
-    let mainX3Dinline = document.getElementById( 'x3d_inline_ID' )
-    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
-
-    let completeLoading = 0
-
-    let completeFullLoadDetect = setInterval( () => {
-        if ( completeLoading === 3 ) {
-            pipPlacer()
-            syncViews()
-            X3DmodalInfoClickAppender()
-            GLOBALLOADSEQUENCE.visibility = 'hidden'
-            modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
-            clearInterval( completeFullLoadDetect )
-            modalPopupTextSizer()
-        }
-    }, 100 )
-
-    let completeHalfLoadDetect = setInterval( () => {
-        if ( completeLoading === 2 ) {
-            pipPlacer()
-            syncViews()
-            clearInterval( completeHalfLoadDetect )
-            completeLoading++
-        }
-    }, 100 )
-
-    let loadMainScene = setInterval( () => {
-        if ( document.getElementById( 'x3d_inline_ID' )
-            .load ) {
-            clearInterval( loadMainScene );
-            completeLoading++
-        }
-        document.getElementById( 'x3d_inline_ID' )
-            .url = SETTINGS_FILE_xmlFile;
-        document.getElementById( 'x3d_inline_ID' )
-            .namespacename = 'x3dModelFile';
-        document.getElementById( 'x3d_inline_ID' )
-            .mapdeftoid = true;
-    }, 100 );
-
-    let loadAxisIndicatorScene = setInterval( () => {
-        if ( document.getElementById( 'x3d_inline_ID_ref' )
-            .load ) {
-            clearInterval( loadAxisIndicatorScene );
-            completeLoading++
-        }
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .url = '../database/axisIndicator/axisIndicator.x3d';
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .namespacename = 'referenceModel';
-        document.getElementById( 'x3d_inline_ID_ref' )
-            .mapdeftoid = true;
-    }, 100 );
-}
-
-function pipPlacer() {
-    if ( GLOBALCOMPARE3DTOGGLE.state === 'reference' ) referenceResizer()
-    if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) indicatorResizer()
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
-    pip.style.visibility = 'visible'
-    pip.style.left = window.innerWidth - GLOBALCOMPARE3DTOGGLE.size - 14
-    pip.style.top = window.innerHeight - GLOBALCOMPARE3DTOGGLE.size - 14
-}
-
-function indicatorResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
-    if ( window.innerWidth > 1101 ) {
-        pip.style.width = '150px'
-        pip.style.height = '150px'
-        GLOBALCOMPARE3DTOGGLE.size = 150
-    } else if ( window.innerWidth > 601 ) {
-        pip.style.width = '100px'
-        pip.style.height = '100px'
-        GLOBALCOMPARE3DTOGGLE.size = 100
-    } else {
-        pip.style.width = '75px'
-        pip.style.height = '75px'
-        GLOBALCOMPARE3DTOGGLE.size = 75
-    }
-}
-
-function referenceResizer() {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
-    if ( window.innerWidth > 1601 ) {
-        pip.style.width = '370px'
-        pip.style.height = '370px'
-        GLOBALCOMPARE3DTOGGLE.size = 370
-    } else if ( window.innerWidth > 1101 ) {
-        pip.style.width = '275px'
-        pip.style.height = '275px'
-        GLOBALCOMPARE3DTOGGLE.size = 275
-    } else if ( window.innerWidth > 601 ) {
-        pip.style.width = '150px'
-        pip.style.height = '150px'
-        GLOBALCOMPARE3DTOGGLE.size = 150
-    } else {
-        pip.style.width = '100px'
-        pip.style.height = '100px'
-        GLOBALCOMPARE3DTOGGLE.size = 100
-    }
-}
-
-function startWindowResizeEvent() {
-    window.onresize = () => {
-        modalPopupTextSizer()
-        pipPlacer()
-        let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
-        if ( window.innerWidth > 1101 ) {
-            shapeDefButtonWrapper
-                .style.display = 'flex';
-        } else {
-            shapeDefButtonWrapper
-                .style.display = 'block';
-        }
-        let modalPopup = document.querySelector( '#modalPopup' )
-        modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2) * window.innerWidth)}px`
-        modalPopup.style.width = `${GLOBALMODAL.width}%`
-        modalPopupTextSizer()
-    };
-}
-
-function modalPopupTextSizer() {
-    let modalPopup = document.querySelector( '#modalPopup' )
-    let modalMoreButton = document.getElementById( 'modalMoreButton' )
-    let modalCloseButton = document.getElementById( 'modalCloseButton' )
-    let modalTextSize = Math.round( ( window.innerWidth ) / ( 45 + window.innerWidth / 400 ) )
-
-    if ( modalTextSize <= 26 && modalTextSize > 11 ) {
-        modalPopupText.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
-    } else if ( modalTextSize < 11 ) {
-        modalPopupText.style.fontSize = '12px'
-    } else {
-        modalPopupText.style.fontSize = '26px'
-    }
-
-    if ( modalTextSize <= 13 && modalTextSize > 9 ) {
-        modalMoreButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
-        modalCloseButton.style.fontSize = `${(window.innerWidth) / (45 + window.innerWidth / 400)}px`
-    } else if ( modalTextSize < 9 ) {
-        modalMoreButton.style.fontSize = '10px'
-        modalCloseButton.style.fontSize = '10px'
-    } else {
-        modalMoreButton.style.fontSize = '14px'
-        modalCloseButton.style.fontSize = '14px'
-    }
-
-}
-
-function X3DmodalInfoClickAppender() {
+let X3DmodalInfoClickAppender = () => {
     let shapes = document.querySelectorAll( 'shape' )
     let modalPopupText = document.getElementById( 'modalPopupText' )
     let modalPopup = document.getElementById( 'modalPopup' )
@@ -670,7 +650,7 @@ function X3DmodalInfoClickAppender() {
         if ( shapes[ shape ].id ) {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
-                function infoWindowEducationPopupOn() {
+                let infoWindowEducationPopupOn = function () {
                     if ( this === shapes[ shape ] ) {
                         modalPopupTextSizer()
                         GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF + ': ' + SETTINGS_FILE_modalWindowInfo[ shapes[ shape ]._x3domNode._DEF ]
@@ -688,22 +668,33 @@ function X3DmodalInfoClickAppender() {
     let modalMoreButton = document.getElementById( 'modalMoreButton' )
     let modalCloseButton = document.getElementById( 'modalCloseButton' )
 
-    modalCloseButton.addEventListener( 'click', removeEducationModalWindow )
-    modalCloseButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
-    modalCloseButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
+    let removeHoverColorForEducationButton = function () {
+        this.style.backgroundColor = 'inherit'
+        this.style.transition = 'background-color 450ms linear'
+    }
 
-    modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
-    modalMoreButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
-    modalMoreButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
+    let applyHoverColorForEducationButton = function () {
+        this.style.backgroundColor = 'lime'
+        this.style.transition = 'background-color 450ms linear'
+    }
 
-    function removeEducationModalWindow() {
+    let removeEducationModalWindow = () => {
         GLOBALLOADSEQUENCE.state = ''
         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
         GLOBALLOADSEQUENCE.visibility = 'hidden'
         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
     }
 
-    function modalMoreButtonExpand() {
+    let modalMoreButtonMinimize = () => {
+        modalPopupTextSizer()
+        modalPopup.style.height = `${GLOBALMODAL.height}%`
+        modalPopupText.style.overflow = 'hidden'
+        modalMoreButton.innerText = 'More'
+        modalMoreButton.removeEventListener( 'click', modalMoreButtonMinimize )
+        modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
+    }
+
+    let modalMoreButtonExpand = () => {
         modalPopupTextSizer()
         modalPopup.style.height = '50%'
         modalPopupText.style.overflow = 'auto'
@@ -713,24 +704,14 @@ function X3DmodalInfoClickAppender() {
         modalMoreButton.addEventListener( 'click', modalMoreButtonMinimize )
     }
 
-    function modalMoreButtonMinimize() {
-        modalPopupTextSizer()
-        modalPopup.style.height = `${GLOBALMODAL.height}%`
-        modalPopupText.style.overflow = 'hidden'
-        modalMoreButton.innerText = 'More'
-        modalMoreButton.removeEventListener( 'click', modalMoreButtonMinimize )
-        modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
-    }
+    modalCloseButton.addEventListener( 'click', removeEducationModalWindow )
+    modalCloseButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
+    modalCloseButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
 
-    function applyHoverColorForEducationButton() {
-        this.style.backgroundColor = 'lime'
-        this.style.transition = 'background-color 450ms linear'
-    }
+    modalMoreButton.addEventListener( 'click', modalMoreButtonExpand )
+    modalMoreButton.addEventListener( 'mouseenter', applyHoverColorForEducationButton )
+    modalMoreButton.addEventListener( 'mouseleave', removeHoverColorForEducationButton )
 
-    function removeHoverColorForEducationButton() {
-        this.style.backgroundColor = 'inherit'
-        this.style.transition = 'background-color 450ms linear'
-    }
     modalPopupTextSizer()
 }
 
@@ -761,3 +742,22 @@ let loadScript = ( url, callback ) => {
 loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
     return;
 } );
+
+let appendInlineX3DHTML = () => {
+    let inline = document.createElement( 'inline' );
+    inline.id = 'x3d_inline_ID';
+    document.getElementById( 'x3d_generator_x3d_scene' )
+        .appendChild( inline );
+    inline = document.createElement( 'inline' );
+    inline.id = 'x3d_inline_ID_ref';
+    document.getElementById( 'x3d_generator_x3d_scene_reference' )
+        .appendChild( inline );
+}
+
+let startLoadSequence = () => {
+    createLoadSequenceModal()
+    appendInlineX3DHTML()
+    startWindowResizeEvent()
+}
+
+startLoadSequence()
