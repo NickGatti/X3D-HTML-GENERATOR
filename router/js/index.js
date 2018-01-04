@@ -80,7 +80,7 @@ const parseXML = ( fileText, element, attribute, mustContainElement, mustContain
         xmlDoc.loadXML( fileText );
     }
 
-    let elementAttribute = xmlDoc.getElementsByTagName( element );
+    const elementAttribute = xmlDoc.getElementsByTagName( element );
 
     let output = [];
 
@@ -111,7 +111,7 @@ const appendToggleButtons = () => {
         div = document.createElement( 'div' );
         document.getElementById( GLOBALDATAOBJECT.navBarData.ID[ i ] )
             .addEventListener( 'click', () => {
-                let x3DomObject = document.getElementById( GLOBALDATAOBJECT.x3DomObject.ID[ i ] );
+                const x3DomObject = document.getElementById( GLOBALDATAOBJECT.x3DomObject.ID[ i ] );
                 if ( x3DomObject ) {
                     if ( typeof x3DomObject.renderToggle === undefined ) {
                         x3DomObject.setAttribute( 'render', false );
@@ -187,7 +187,7 @@ const toggleDivs = ( show ) => {
 };
 
 const toggleHTML = ( which ) => {
-    let innerDivHtml = document.getElementById( 'x3d_generator_html_inner_div' )
+    const innerDivHtml = document.getElementById( 'x3d_generator_html_inner_div' )
     innerDivHtml
         .innerHTML = '';
     let create = null;
@@ -221,7 +221,7 @@ const toggleHTML = ( which ) => {
 };
 
 const referenceResizer = () => {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1601 ) {
         pip.style.width = '370px'
         pip.style.height = '370px'
@@ -242,7 +242,7 @@ const referenceResizer = () => {
 }
 
 const indicatorResizer = () => {
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1101 ) {
         pip.style.width = '150px'
         pip.style.height = '150px'
@@ -261,15 +261,15 @@ const indicatorResizer = () => {
 const pipPlacer = () => {
     if ( GLOBALCOMPARE3DTOGGLE.state === 'reference' ) referenceResizer()
     if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) indicatorResizer()
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     pip.style.visibility = 'visible'
     pip.style.left = window.innerWidth - GLOBALCOMPARE3DTOGGLE.size - 14
     pip.style.top = window.innerHeight - GLOBALCOMPARE3DTOGGLE.size - 14
 }
 
 const toggleCompare3D = () => {
-    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
-    let pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
+    const X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
+    const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) {
         X3DreferenceInline
             .url = SETTINGS_FILE_referenceFile;
@@ -308,7 +308,7 @@ const compare3dVisiblityToggle = ( shouldBe ) => {
 }
 
 const createButtonClickEventsAndAttributes = () => {
-    let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
+    const shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
         .addEventListener( 'click', () => {
             if ( shapeDefButtonWrapper
@@ -356,7 +356,7 @@ const createButtonClickEventsAndAttributes = () => {
 }
 
 const createHoverAndTouchButtonEvents = ( id, originalColor ) => {
-    let targetButton = document.getElementById( id )
+    const targetButton = document.getElementById( id )
 
     targetButton
         .addEventListener( 'mouseenter', () => {
@@ -380,7 +380,7 @@ const createHoverAndTouchButtonEvents = ( id, originalColor ) => {
 };
 
 const appendInfoButtons = () => {
-    let form = document.getElementById( 'x3d_generator_info_button_wrapper' );
+    const form = document.getElementById( 'x3d_generator_info_button_wrapper' );
 
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Instructions', 'instructionsButton', form, true );
     createButton( document.createElement( 'div' ), 'deepskyblue', 'Hide/Show', 'x3dShapeDefInfoButtonWrapperToggle', form, true );
@@ -402,12 +402,12 @@ const applyX3Dsettings = () => {
     GLOBALLOADSEQUENCE.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
 
-    let mainX3Dinline = document.getElementById( 'x3d_inline_ID' )
-    let X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
+    const mainX3Dinline = document.getElementById( 'x3d_inline_ID' )
+    const X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
 
     let completeLoading = 0
 
-    let completeFullLoadDetect = setInterval( () => {
+    const completeFullLoadDetect = setInterval( () => {
         if ( completeLoading === 3 ) {
             pipPlacer()
             syncViews()
@@ -419,7 +419,7 @@ const applyX3Dsettings = () => {
         }
     }, 100 )
 
-    let completeHalfLoadDetect = setInterval( () => {
+    const completeHalfLoadDetect = setInterval( () => {
         if ( completeLoading === 2 ) {
             pipPlacer()
             syncViews()
@@ -428,7 +428,7 @@ const applyX3Dsettings = () => {
         }
     }, 100 )
 
-    let loadMainScene = setInterval( () => {
+    const loadMainScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID' )
             .load ) {
             clearInterval( loadMainScene );
@@ -442,7 +442,7 @@ const applyX3Dsettings = () => {
             .mapdeftoid = true;
     }, 100 );
 
-    let loadAxisIndicatorScene = setInterval( () => {
+    const loadAxisIndicatorScene = setInterval( () => {
         if ( document.getElementById( 'x3d_inline_ID_ref' )
             .load ) {
             clearInterval( loadAxisIndicatorScene );
@@ -471,7 +471,7 @@ const readXml = () => {
     GLOBALOREQ.open( 'GET', SETTINGS_FILE_xmlFile );
     GLOBALOREQ.send();
 
-    let popdataObjectect = ( ( text ) => {
+    const popdataObjectect = ( ( text ) => {
         let value = parseXML( text, 'Shape', 'DEF' );
         GLOBALDATAOBJECT.navBarData.text = value.map( ( data ) => {
             return data;
@@ -522,9 +522,9 @@ const readXml = () => {
 };
 
 const modalPopupTextSizer = () => {
-    let modalPopup = document.querySelector( '#modalPopup' )
-    let modalMoreButton = document.getElementById( 'modalMoreButton' )
-    let modalCloseButton = document.getElementById( 'modalCloseButton' )
+    const modalPopup = document.querySelector( '#modalPopup' )
+    const modalMoreButton = document.getElementById( 'modalMoreButton' )
+    const modalCloseButton = document.getElementById( 'modalCloseButton' )
     let modalTextSize = Math.round( ( window.innerWidth ) / ( 45 + window.innerWidth / 400 ) )
 
     if ( modalTextSize <= 26 && modalTextSize > 11 ) {
@@ -551,7 +551,7 @@ const startWindowResizeEvent = () => {
     window.onresize = () => {
         modalPopupTextSizer()
         pipPlacer()
-        let shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
+        const shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
         if ( window.innerWidth > 1101 ) {
             shapeDefButtonWrapper
                 .style.display = 'flex';
@@ -559,7 +559,7 @@ const startWindowResizeEvent = () => {
             shapeDefButtonWrapper
                 .style.display = 'block';
         }
-        let modalPopup = document.querySelector( '#modalPopup' )
+        const modalPopup = document.querySelector( '#modalPopup' )
         modalPopup.style.left = `${(window.innerWidth / 2) - (( ( GLOBALMODAL.width / 100 ) / 2) * window.innerWidth)}px`
         modalPopup.style.width = `${GLOBALMODAL.width}%`
         modalPopupTextSizer()
@@ -567,7 +567,7 @@ const startWindowResizeEvent = () => {
 }
 
 const createLoadSequenceModal = () => {
-    let modalPopup = document.createElement( 'div' )
+    const modalPopup = document.createElement( 'div' )
     modalPopup.id = 'modalPopup'
     modalPopup.style.backgroundColor = 'white'
     modalPopup.style.width = `${GLOBALMODAL.width}%`
@@ -587,7 +587,7 @@ const createLoadSequenceModal = () => {
     modalPopup.style.overflow = 'hidden'
     modalPopup.style.zIndex = 600
 
-    let modalPopupText = document.createElement( 'div' )
+    const modalPopupText = document.createElement( 'div' )
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
     modalPopupText.id = 'modalPopupText'
     modalPopupText.style.height = 'auto'
@@ -595,7 +595,7 @@ const createLoadSequenceModal = () => {
     modalPopupText.style.padding = '4px'
     modalPopupText.style.margin = '4px 0 4px 0'
 
-    let modalButtonWrapper = document.createElement( 'div' )
+    const modalButtonWrapper = document.createElement( 'div' )
     modalButtonWrapper.style.display = 'flex'
     modalButtonWrapper.style.flexFlow = 'row'
     modalButtonWrapper.style.justifyContent = 'center'
@@ -606,7 +606,7 @@ const createLoadSequenceModal = () => {
     modalButtonWrapper.style.maxHeight = '20%'
     modalButtonWrapper.style.minHeight = '28px'
 
-    let modalCloseButton = document.createElement( 'div' )
+    const modalCloseButton = document.createElement( 'div' )
     modalCloseButton.innerText = 'Close'
     modalCloseButton.id = 'modalCloseButton'
     modalCloseButton.style.border = '1px solid black'
@@ -619,7 +619,7 @@ const createLoadSequenceModal = () => {
     modalCloseButton.style.overflow = 'hidden'
     modalCloseButton.style.objectFit = 'fill'
 
-    let modalMoreButton = document.createElement( 'div' )
+    const modalMoreButton = document.createElement( 'div' )
     modalMoreButton.innerText = 'More'
     modalMoreButton.id = 'modalMoreButton'
     modalMoreButton.style.border = '1px solid black'
@@ -641,16 +641,16 @@ const createLoadSequenceModal = () => {
 }
 
 const X3DmodalInfoClickAppender = () => {
-    let shapes = document.querySelectorAll( 'shape' )
-    let modalPopupText = document.getElementById( 'modalPopupText' )
-    let modalPopup = document.getElementById( 'modalPopup' )
-    let modalPopupWrapper = document.getElementById( 'modalPopupWrapper' )
+    const shapes = document.querySelectorAll( 'shape' )
+    const modalPopupText = document.getElementById( 'modalPopupText' )
+    const modalPopup = document.getElementById( 'modalPopup' )
+    const modalPopupWrapper = document.getElementById( 'modalPopupWrapper' )
     modalButtonWrapper.style.visibility = 'inherit'
     for ( let shape in shapes ) {
         if ( shapes[ shape ].id ) {
             if ( shapes[ shape ].id.match( 'x3dModelFile__' ) ) {
 
-                let infoWindowEducationPopupOn = function () {
+                const infoWindowEducationPopupOn = function () {
                     if ( this === shapes[ shape ] ) {
                         modalPopupTextSizer()
                         GLOBALLOADSEQUENCE.state = shapes[ shape ]._x3domNode._DEF + ': ' + SETTINGS_FILE_modalWindowInfo[ shapes[ shape ]._x3domNode._DEF ]
@@ -665,8 +665,8 @@ const X3DmodalInfoClickAppender = () => {
         }
     }
 
-    let modalMoreButton = document.getElementById( 'modalMoreButton' )
-    let modalCloseButton = document.getElementById( 'modalCloseButton' )
+    const modalMoreButton = document.getElementById( 'modalMoreButton' )
+    const modalCloseButton = document.getElementById( 'modalCloseButton' )
 
     const removeHoverColorForEducationButton = function () {
         this.style.backgroundColor = 'inherit'
@@ -717,7 +717,7 @@ const X3DmodalInfoClickAppender = () => {
 
 const loadScript = ( url, callback ) => {
 
-    let script = document.createElement( 'script' );
+    const script = document.createElement( 'script' );
     script.type = 'text/javascript';
 
     if ( script.readyState ) { //IE
