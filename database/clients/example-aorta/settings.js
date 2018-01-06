@@ -22,37 +22,37 @@ SOFTWARE.
 */
 
 //Which X3D file to render
-let SETTINGS_FILE_xmlFile = '../database/clients/example-aorta/modelFile.x3d';
+const SETTINGS_FILE_xmlFile = '../database/clients/example-aorta/modelFile.x3d';
 //Specify the X3D reference file for the PIP window
-let SETTINGS_FILE_referenceFile = '../database/referenceModels/aorta/referenceModel.x3d';
+const SETTINGS_FILE_referenceFile = '../database/referenceModels/aorta/referenceModel.x3d';
 
 //The text for the 'metaDataButton'
-let SETTINGS_FILE_metaDataInfoButtonText = 'MetaData Info';
+const SETTINGS_FILE_metaDataInfoButtonText = 'MetaData Info';
 
 //Image file extension
-let SETTINGS_FILE_imageFileExtension = 'png';
+const SETTINGS_FILE_imageFileExtension = 'png';
 
 //The XML element to find the metaDataInfoAttribute in
 //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
-let SETTINGS_FILE_metaDataInfoElement = 'MetadataInteger';
+const SETTINGS_FILE_metaDataInfoElement = 'MetadataInteger';
 
 //The XML element for MetadataInteger must contain
 //We are looking for name='IPCCCID'
-let SETTINGS_FILE_mustContainElement = 'name';
+const SETTINGS_FILE_mustContainElement = 'name';
 
 //The XML value for mustContainElement to look for
 //We are looking for name = 'IPCCCID'
-let SETTINGS_FILE_mustContainValue = 'IPCCCID';
+const SETTINGS_FILE_mustContainValue = 'IPCCCID';
 
 //Which XML attribute to look for to display on the metaDataButton
 //Here value = "aorta"
-let SETTINGS_FILE_metaDataInfoAttribute = 'value';
+const SETTINGS_FILE_metaDataInfoAttribute = 'value';
 
 //The text for the 'htmlInfoButton'
-let SETTINGS_FILE_htmlInfoButtonText = 'Diagnosis Info';
+const SETTINGS_FILE_htmlInfoButtonText = 'Diagnosis Info';
 
 //What HTML to display when the 'displayHTMLinfo' button is clicked
-let SETTINGS_FILE_htmlInfoButtonHTML = [ {
+const SETTINGS_FILE_htmlInfoButtonHTML = [ {
         "p": "Example p tag"
     }, {
         "p": "Example p tag"
@@ -265,7 +265,7 @@ let SETTINGS_FILE_htmlInfoButtonHTML = [ {
     }
 ];
 // What HTML to display when the instructions button is clicked
-let SETTINGS_FILE_instructionsHTML = [ {
+const SETTINGS_FILE_instructionsHTML = [ {
         "h2": "Instructions"
     },
     {
@@ -282,7 +282,7 @@ let SETTINGS_FILE_instructionsHTML = [ {
     }
 ];
 
-let SETTINGS_FILE_modalWindowInfo = {
+const SETTINGS_FILE_modalWindowInfo = {
     'Aorta': '<p>The largest artery in the body, the aorta arises from the left ventricle of the heart, goes up (ascends) a little ways, bends over (arches), then goes down (descends) through the chest and through the abdomen to where ends by dividing into two arteries called the common iliac arteries that go to the legs.</p><p>Anatomically, the aorta is traditionally divided into the ascending aorta, the aortic arch, and the descending aorta. The descending aorta is, in turn, subdivided into the thoracic aorta (that descends within the chest) and the abdominal aorta (that descends within the belly).</p><p>The aorta gives off branches that go to the head and neck, the arms, the major organs in the chest and abdomen, and the legs.</p><p>It serves to supply them all with oxygenated blood.</p><p>The aorta is the central conduit from the heart to the body.</p><p>Source: <a target="_blank" href="https://www.medicinenet.com/script/main/art.asp?articlekey=2295">http://www.medicinenet.com/script/main/art.asp?articlekey=2295</a></p>',
     'Calcification': 'Calcification info...'
 }
