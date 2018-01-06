@@ -739,10 +739,6 @@ const loadScript = ( url, callback ) => {
     readXml();
 };
 
-loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
-    return;
-} );
-
 const appendInlineX3DHTML = () => {
     let inline = document.createElement( 'inline' );
     inline.id = 'x3d_inline_ID';
@@ -760,4 +756,12 @@ const startLoadSequence = () => {
     startWindowResizeEvent()
 }
 
-startLoadSequence()
+const initProgram = () => {
+    startLoadSequence()
+
+    loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
+        return;
+    } );
+}
+
+initProgram()
