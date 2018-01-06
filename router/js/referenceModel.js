@@ -7,7 +7,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var vp_anatomicalModel, vp_referenceModel;
+let vp_anatomicalModel, vp_referenceModel;
 //vp stands for viewpoint
 
 document.onload = function () {
@@ -27,8 +27,8 @@ document.onload = function () {
 
 function syncViews( evt ) {
     if ( evt ) {
-        var o = evt.orientation;
-        var p = evt.position;
+        let o = evt.orientation;
+        let p = evt.position;
         /*
         vp2.setAttribute('orientation',[o[0].x,o[0].y,o[0].z].join()+" "+o[1]);
         vp2.setAttribute('position', [p.x,p.y,p.z].join());
