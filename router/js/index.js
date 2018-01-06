@@ -21,6 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+//START GLOBAL DECLARATIONS
 const GLOBALBUTTONOBJECT = {
     x3dwrapperToggle: {
         id: 'x3d_generator_x3d_wrapper',
@@ -43,32 +44,34 @@ const GLOBALBUTTONOBJECT = {
         state: false
     }
 };
-
+//GLOBAL DECLARATIONS
 const GLOBALCOMPARE3DTOGGLE = {
     state: 'indicator',
     size: 100,
     visibility: 'visible'
 }
-
+//GLOBAL DECLARATIONS
 const GLOBALDATAOBJECT = {
     navBarData: {},
     x3DomObject: {},
     metaDataInfo: {}
 };
-
+//GLOBAL DECLARATIONS
 const GLOBALLOADSEQUENCE = {
     state: 'Downloading files...',
     visibility: 'visible',
     modalState: false
 }
-
+//GLOBAL DECLARATIONS
 const GLOBALMODAL = {
     width: 90,
     height: 20
 }
-
+//GLOBAL DECLARATIONS
 const GLOBALOREQ = new XMLHttpRequest();
+//END GLOBAL DECLARATIONS
 
+//START PARSE XML FUNCTION
 const parseXML = ( fileText, element, attribute, mustContainElement, mustContainValue ) => {
     if ( window.DOMParser ) {
         parser = new DOMParser();
@@ -97,7 +100,9 @@ const parseXML = ( fileText, element, attribute, mustContainElement, mustContain
 
     return output;
 };
+//END PARSE XML FUNCTION
 
+//START APPEND X3D ELEMENT RENDER ON/OFF BUTTONS TO (RIGHT BUTTON DIV)
 const appendToggleButtons = () => {
     let form = document.getElementById( 'x3d_generator_shape_def_button_wrapper' ),
         div = document.createElement( 'div' );
@@ -131,7 +136,9 @@ const appendToggleButtons = () => {
             } );
     }
 };
+//END APPEND X3D ELEMENT RENDER ON/OFF BUTTONS TO (RIGHT BUTTON DIV)
 
+//START COLOR X3D ELEMENT RENDER ON/OFF BUTTONS TO (RIGHT BUTTON DIV)
 const colorToggleButtons = () => {
     for ( let i = 0; i < GLOBALDATAOBJECT.navBarData.ID.length; i++ ) {
         document.getElementById( GLOBALDATAOBJECT.navBarData.ID[ i ] )
@@ -145,7 +152,9 @@ const colorToggleButtons = () => {
                   ${Math.round( ( GLOBALDATAOBJECT.navBarData.color[i][2]) * 255 )}` );
     }
 };
+//END COLOR X3D ELEMENT RENDER ON/OFF BUTTONS TO (RIGHT BUTTON DIV)
 
+//START FUNCTIONS FOR BUTTON TOGGLE SWITCHES
 const usebuttonObject = () => {
     let output = '';
     for ( let key in GLOBALBUTTONOBJECT ) {
@@ -160,6 +169,7 @@ const usebuttonObject = () => {
         .style.display = 'flex';
 };
 
+//TOGGLE FUNCTIONS
 const switchDefaultButton = () => {
     if ( GLOBALBUTTONOBJECT.x3dwrapperToggle.state ) {
         GLOBALBUTTONOBJECT.x3dwrapperToggle.state = false;
@@ -168,6 +178,7 @@ const switchDefaultButton = () => {
     }
 };
 
+//TOGGLE FUNCTIONS
 const switchSelectedButton = ( show ) => {
     if ( GLOBALBUTTONOBJECT[ show ].state ) {
         GLOBALBUTTONOBJECT[ 'x3dwrapperToggle' ].state = true;
@@ -180,12 +191,14 @@ const switchSelectedButton = ( show ) => {
     GLOBALBUTTONOBJECT[ show ].state = true;
 };
 
+//TOGGLE FUNCTIONS
 const toggleDivs = ( show ) => {
     switchDefaultButton();
     switchSelectedButton( show );
     usebuttonObject( show );
 };
 
+//TOGGLE FUNCTIONS
 const toggleHTML = ( which ) => {
     const innerDivHtml = document.getElementById( 'x3d_generator_html_inner_div' )
     innerDivHtml
@@ -219,7 +232,10 @@ const toggleHTML = ( which ) => {
         }
     }
 };
+//END FUNCTIONS FOR BUTTON TOGGLE SWITCHES
 
+//START COMPARE 3D (REFERENCE / AXIS INDICATOR) DIV RESIZER
+//REFRENCE IS OTHER X3D FILE
 const referenceResizer = () => {
     const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1601 ) {
@@ -240,7 +256,7 @@ const referenceResizer = () => {
         GLOBALCOMPARE3DTOGGLE.size = 100
     }
 }
-
+//INDICATOR IS THE DUDE
 const indicatorResizer = () => {
     const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
     if ( window.innerWidth > 1101 ) {
@@ -257,7 +273,9 @@ const indicatorResizer = () => {
         GLOBALCOMPARE3DTOGGLE.size = 75
     }
 }
+//END COMPARE 3D (REFERENCE / AXIS INDICATOR) DIV RESIZER
 
+//START MAKE SURE THE PIP WINDOW IS IN THE RIGHT SPOT
 const pipPlacer = () => {
     if ( GLOBALCOMPARE3DTOGGLE.state === 'reference' ) referenceResizer()
     if ( GLOBALCOMPARE3DTOGGLE.state === 'indicator' ) indicatorResizer()
@@ -266,7 +284,9 @@ const pipPlacer = () => {
     pip.style.left = window.innerWidth - GLOBALCOMPARE3DTOGGLE.size - 14
     pip.style.top = window.innerHeight - GLOBALCOMPARE3DTOGGLE.size - 14
 }
+//END MAKE SURE THE PIP WINDOW IS IN THE RIGHT SPOT
 
+//START SPECIAL TOGGLE FOR THE PIP WINDOW
 const toggleCompare3D = () => {
     const X3DreferenceInline = document.getElementById( 'x3d_inline_ID_ref' )
     const pip = document.querySelector( '#x3d_generator_x3d_wrapper_reference' )
@@ -285,7 +305,9 @@ const toggleCompare3D = () => {
         pipPlacer()
     }
 }
+//END SPECIAL TOGGLE FOR THE PIP WINDOW
 
+//START GENERAL CREATE BUTTON FUNCTION TAKES TONS OF PARAMS
 const createButton = ( node, color, text, id, form, button ) => {
     node.className = 'selectTab';
     if ( id ) node.id = id;
@@ -294,7 +316,9 @@ const createButton = ( node, color, text, id, form, button ) => {
     if ( button === true ) node.style.boxShadow = "2px 2px 5px 0px rgba(0, 0, 0, 0.70)";
     form.appendChild( node );
 };
+//END GENERAL CREATE BUTTON FUNCTION TAKES TONS OF PARAMS
 
+//START MORE PIP WINDOW VISBILITY TOGGLE FUNCTIONS
 const compare3dVisiblityToggle = ( shouldBe ) => {
     if ( document.querySelector( '#x3d_generator_x3d_wrapper' ).style.display === 'none' ) {
         document.querySelector( '#x3d_generator_x3d_wrapper_reference' ).style.visibility = 'hidden'
@@ -306,7 +330,9 @@ const compare3dVisiblityToggle = ( shouldBe ) => {
         syncViews()
     }
 }
+//END MORE PIP WINDOW VISBILITY TOGGLE FUNCTIONS
 
+//START CREATE OUR CLICK EVENTS AND INIT ANY ATTRIBUES WE NEED TO SET FOR BUTTONS TO RUN
 const createButtonClickEventsAndAttributes = () => {
     const shapeDefButtonWrapper = document.getElementById( 'x3d_generator_shape_def_button_wrapper' )
     document.getElementById( 'x3dShapeDefInfoButtonWrapperToggle' )
@@ -354,7 +380,9 @@ const createButtonClickEventsAndAttributes = () => {
             compare3dVisiblityToggle()
         } );
 }
+//END CREATE OUR CLICK EVENTS AND INIT ANY ATTRIBUES WE NEED TO SET FOR BUTTONS TO RUN
 
+//START CREATE OUR INTERACTIVE EVENTS FOR OUR BUTTONS
 const createHoverAndTouchButtonEvents = ( id, originalColor ) => {
     const targetButton = document.getElementById( id )
 
@@ -378,7 +406,9 @@ const createHoverAndTouchButtonEvents = ( id, originalColor ) => {
         } );
     targetButton.style.transition = 'box-shadow 250ms linear, transform 250ms linear, background-color 250ms linear'
 };
+//END CREATE OUR INTERACTIVE EVENTS FOR OUR BUTTONS
 
+//START DADDY FUNCTION FOR BUTTONS
 const appendInfoButtons = () => {
     const form = document.getElementById( 'x3d_generator_info_button_wrapper' );
 
@@ -397,7 +427,9 @@ const appendInfoButtons = () => {
     createHoverAndTouchButtonEvents( 'imageButton', 'deepskyblue' );
     createHoverAndTouchButtonEvents( 'x3dShapeDefInfoButtonWrapperToggle', 'deepskyblue' );
 };
+//END DADDY FUNCTION FOR BUTTONS
 
+//START LOAD STATE DETECTION FOR SMOOTH LOADING AND USER NOTIFICATIONS
 const applyX3Dsettings = () => {
     GLOBALLOADSEQUENCE.state = 'Loading X3D Scenes, may take a couple minutes. Indicator may stop spinning, please be patient...'
     modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
@@ -456,6 +488,7 @@ const applyX3Dsettings = () => {
             .mapdeftoid = true;
     }, 100 );
 }
+//LOAD STATE DETECTIONS
 
 const detectState = () => {
     if ( document.readyState === "interactive" ||
@@ -466,7 +499,9 @@ const detectState = () => {
         return false
     }
 }
+//END LOAD STATE DETECTION FOR SMOOTH LOADING AND USER NOTIFICATIONS
 
+//START HTTP REQUEST TO GET, PARSE AND START TO USE DATA FROM THE XML FILE FOR BUTTONS
 const readXml = () => {
     GLOBALOREQ.open( 'GET', SETTINGS_FILE_xmlFile );
     GLOBALOREQ.send();
@@ -520,7 +555,9 @@ const readXml = () => {
     }
     GLOBALOREQ.addEventListener( 'load', reqListener );
 };
+//END HTTP REQUEST TO GET, PARSE AND START TO USE DATA FROM THE XML FILE FOR BUTTONS
 
+//START MODAL WINDOW TEXT RESIZING
 const modalPopupTextSizer = () => {
     const modalPopup = document.querySelector( '#modalPopup' )
     const modalMoreButton = document.getElementById( 'modalMoreButton' )
@@ -546,7 +583,9 @@ const modalPopupTextSizer = () => {
         modalCloseButton.style.fontSize = '14px'
     }
 }
+//END MODAL WINDOW TEXT RESIZING
 
+//START WHOLE WINDOW RESIZE EVENT DETECTIONS
 const startWindowResizeEvent = () => {
     window.onresize = () => {
         modalPopupTextSizer()
@@ -565,7 +604,9 @@ const startWindowResizeEvent = () => {
         modalPopupTextSizer()
     };
 }
+//END WHOLE WINDOW RESIZE EVENT DETECTIONS
 
+//START JAVASCRIPT OUR MODAL WINDOW ENTIRELY
 const createLoadSequenceModal = () => {
     const modalPopup = document.createElement( 'div' )
     modalPopup.id = 'modalPopup'
@@ -639,7 +680,9 @@ const createLoadSequenceModal = () => {
     document.querySelector( '#modalButtonWrapper' ).appendChild( modalMoreButton )
     modalPopupTextSizer()
 }
+//END JAVASCRIPT OUR MODAL WINDOW ENTIRELY
 
+//START APPLY INTERACTIVE EVENTS TO OUR MODAL WINDOW
 const X3DmodalInfoClickAppender = () => {
     const shapes = document.querySelectorAll( 'shape' )
     const modalPopupText = document.getElementById( 'modalPopupText' )
@@ -714,7 +757,9 @@ const X3DmodalInfoClickAppender = () => {
 
     modalPopupTextSizer()
 }
+//END APPLY INTERACTIVE EVENTS TO OUR MODAL WINDOW
 
+//START THIS IS SO WE CAN LOAD THE X3DOM SCRIPT WITHOUT USING HTML
 const loadScript = ( url, callback ) => {
 
     const script = document.createElement( 'script' );
@@ -738,7 +783,9 @@ const loadScript = ( url, callback ) => {
     document.getElementsByTagName( 'body' )[ 0 ].appendChild( script );
     readXml();
 };
+//END THIS IS SO WE CAN LOAD THE X3DOM SCRIPT WITHOUT USING HTML
 
+//START THIS IS SO WE DONT NEED THE INLINE HTML FOR THE SCENES
 const appendInlineX3DHTML = () => {
     let inline = document.createElement( 'inline' );
     inline.id = 'x3d_inline_ID';
@@ -749,15 +796,19 @@ const appendInlineX3DHTML = () => {
     document.getElementById( 'x3d_generator_x3d_scene_reference' )
         .appendChild( inline );
 }
+//END THIS IS SO WE DONT NEED THE INLINE HTML FOR THE SCENES
 
-const startLoadSequence = () => {
+//START A LITTLE FUNCTION TO MICRO CONTROL OF A PRE-LOAD SEQUENCE
+const startPreLoadSequence = () => {
     createLoadSequenceModal()
     appendInlineX3DHTML()
     startWindowResizeEvent()
 }
+//END A LITTLE FUNCTION TO MICRO CONTROL OF A PRE-LOAD SEQUENCE
 
+//START HOW WE RUN THE PROGRAM IN THE FIRST PLACE THIS IS WHERE IT BEGINS - AT THE END
 const initProgram = () => {
-    startLoadSequence()
+    startPreLoadSequence()
 
     loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
         return;
@@ -765,3 +816,4 @@ const initProgram = () => {
 }
 
 initProgram()
+//END HOW WE RUN THE PROGRAM IN THE FIRST PLACE THIS IS WHERE IT BEGINS - AT THE END
