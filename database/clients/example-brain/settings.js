@@ -22,37 +22,37 @@ SOFTWARE.
 */
 
 //Which X3D file to render
-const SETTINGS_FILE_xmlFile = '../database/clients/example-brain/modelFile.x3d';
+let SETTINGS_FILE_xmlFile = '../database/clients/example-brain/modelFile.x3d';
 //Specify the X3D reference file for the PIP window
-const SETTINGS_FILE_referenceFile = '../database/referenceModels/brain/referenceModel.x3d'
+let SETTINGS_FILE_referenceFile = '../database/referenceModels/brain/referenceModel.x3d'
 
 //The text for the 'metaDataButton'
-const SETTINGS_FILE_metaDataInfoButtonText = 'MetaData Info';
+let SETTINGS_FILE_metaDataInfoButtonText = 'MetaData Info';
 
 //Image file extension
-const SETTINGS_FILE_imageFileExtension = 'png';
+let SETTINGS_FILE_imageFileExtension = 'png';
 
 //The XML element to find the metaDataInfoAttribute in
 //We are looking for <MetadataInteger containerField='value' name='IPCCCID' value='aorta'>
-const SETTINGS_FILE_metaDataInfoElement = 'MetadataInteger';
+let SETTINGS_FILE_metaDataInfoElement = 'MetadataInteger';
 
 //The XML element for MetadataInteger must contain
 //We are looking for name='IPCCCID'
-const SETTINGS_FILE_mustContainElement = 'name';
+let SETTINGS_FILE_mustContainElement = 'name';
 
 //The XML value for mustContainElement to look for
 //We are looking for name = 'IPCCCID'
-const SETTINGS_FILE_mustContainValue = 'IPCCCID';
+let SETTINGS_FILE_mustContainValue = 'IPCCCID';
 
 //Which XML attribute to look for to display on the metaDataButton
 //Here value = "aorta"
-const SETTINGS_FILE_metaDataInfoAttribute = 'value';
+let SETTINGS_FILE_metaDataInfoAttribute = 'value';
 
 //The text for the 'htmlInfoButton'
-const SETTINGS_FILE_htmlInfoButtonText = 'Diagnosis Info';
+let SETTINGS_FILE_htmlInfoButtonText = 'Diagnosis Info';
 
 //What HTML to display when the 'displayHTMLinfo' button is clicked
-const SETTINGS_FILE_htmlInfoButtonHTML = [ {
+let SETTINGS_FILE_htmlInfoButtonHTML = [ {
         "p": "Example p tag"
     },
     {
@@ -69,7 +69,7 @@ const SETTINGS_FILE_htmlInfoButtonHTML = [ {
     }
 ];
 // What HTML to display when the instructions button is clicked
-const SETTINGS_FILE_instructionsHTML = [ {
+let SETTINGS_FILE_instructionsHTML = [ {
         "h2": "Instructions"
     },
     {
@@ -86,6 +86,6 @@ const SETTINGS_FILE_instructionsHTML = [ {
     }
 ];
 
-const SETTINGS_FILE_modalWindowInfo = {
+let SETTINGS_FILE_modalWindowInfo = {
     'Brain': 'Brain info...',
 }
