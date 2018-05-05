@@ -66,7 +66,7 @@ Then the parser appends HTML using .appendChild() with data out of an array of o
 10-11-2017 No longer need to ship X3Dom with the package
 12-23-2017 Added support for compare3D button
 12-23-2017 Added loading modal window and info window
-5-5-2018   Added smooth scrolling to modal window
+5-5-2018   Added smooth scrolling animation to modal window
 ```
 
 ### Documentation
