@@ -3,7 +3,7 @@
 [logo]: http://www.codn.io/img/portfolio/view.jpg "X3D HTML Generator"
 ![X3Dom HTML Generator][logo]
 
-[Running code on my site](http://www.codn.io/x3dom-html-generator/)
+[Running code on my site](http://www.codn.io/x3d-html-generator/)
 
 [X3DOM Website](https://doc.x3dom.org/)
 
@@ -56,14 +56,6 @@ This is set in the HTML.
 
 Then the parser appends HTML using .appendChild() with data out of an array of objects for buttons like 'Diagnosis Info' to work around not using an iFrame. In the future will use a framework to accomplish more of the appending.
 
-## Future Plans and TODO list
-
-```
-Current: Integrate Information Views (modals) for event actions
-1. ~3/2018 After semester 2 at Galvanize and more understanding of databases and the full stack, rewrite the structure so it's easier to implement into a full stack
-2. ~5/2018 After semester 3 at Galvanize and more understanding of frameworks, add a framework like react.js, angular or vue
-```
-
 ## Patch Notes
 
 ```
@@ -73,7 +65,8 @@ Current: Integrate Information Views (modals) for event actions
 10-11-2017 Added support for all extensions on the image file
 10-11-2017 No longer need to ship X3Dom with the package
 12-23-2017 Added support for compare3D button
-12-23-2017 Added loading modal window
+12-23-2017 Added loading modal window and info window
+5-5-2018   Added smooth scrolling to modal window
 ```
 
 ### Documentation

@@ -726,11 +726,19 @@ let X3DmodalInfoClickAppender = () => {
         modalPopupText.innerHTML = GLOBALLOADSEQUENCE.state
         GLOBALLOADSEQUENCE.visibility = 'hidden'
         modalPopup.style.visibility = GLOBALLOADSEQUENCE.visibility
+        modalMoreButtonMinimize()
     }
 
     let modalMoreButtonMinimize = () => {
         modalPopupTextSizer()
-        modalPopup.style.height = `${GLOBALMODAL.height}%`
+        let modalHeight = parseInt(document.getElementById('modalPopup').style.height)
+        let h = 0
+        for (let i = 50; i > GLOBALMODAL.height; i = i - 0.25) {
+            h++
+            setTimeout(() => {
+                modalPopup.style.height = `${i}%`
+            }, h )
+        }
         modalPopupText.style.overflow = 'hidden'
         modalMoreButton.innerText = 'More'
         modalMoreButton.removeEventListener( 'click', modalMoreButtonMinimize )
@@ -739,7 +747,13 @@ let X3DmodalInfoClickAppender = () => {
 
     let modalMoreButtonExpand = () => {
         modalPopupTextSizer()
-        modalPopup.style.height = '50%'
+        let h = 0
+        for (let i = GLOBALMODAL.height; i < 51; i = i + 0.25) {
+            h++
+            setTimeout(() => {
+                modalPopup.style.height = `${i}%`
+            }, h)
+        }
         modalPopupText.style.overflow = 'auto'
         modalPopupText.style.overflowX = 'hidden'
         modalMoreButton.innerText = 'Less'
