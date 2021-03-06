@@ -822,7 +822,7 @@ let startPreLoadSequence = () => {
 let initProgram = () => {
     startPreLoadSequence()
 
-    loadScript( 'http://www.x3dom.org/download/x3dom.js', () => {
+    loadScript( 'https://www.x3dom.org/download/x3dom.js', () => {
         return;
     } );
 }

@@ -1,5 +1,5 @@
 <html>
-    <!-- /*
+  <!-- /*
 ** Author  : Nick Gatti
 ** Contact : https://www.linkedin.com/in/nick-gatti/
 ** Nick    : https://github.com/NickGatti
@@ -22,51 +22,52 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */ -->
 
-    <head>
-        <title>X3D Play Room - X3D-DOM-GENERATOR</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    </head>
+  <head>
+    <title>X3D Play Room - X3D-DOM-GENERATOR</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-    <body>
+  <body>
+    <div id="x3d_generator_wrapper">
+      <div id="x3d_generator_info_button_wrapper"></div>
 
-        <div id='x3d_generator_wrapper'>
+      <div id="x3d_generator_shape_def_button_wrapper"></div>
 
-            <div id='x3d_generator_info_button_wrapper'>
-            </div>
+      <div id="x3d_generator_x3d_content_wrapper">
+        <x3d id="x3d_generator_x3d_wrapper">
+          <scene id="x3d_generator_x3d_scene"> </scene>
+        </x3d>
 
-            <div id="x3d_generator_shape_def_button_wrapper">
-            </div>
+        <x3d id="x3d_generator_x3d_wrapper_reference">
+          <scene id="x3d_generator_x3d_scene_reference"> </scene>
+        </x3d>
 
-            <div id='x3d_generator_x3d_content_wrapper'>
-
-                <x3d id='x3d_generator_x3d_wrapper'>
-                    <scene id='x3d_generator_x3d_scene'>
-                    </scene>
-                </x3d>
-
-                <x3d id='x3d_generator_x3d_wrapper_reference'>
-                    <scene id='x3d_generator_x3d_scene_reference'>
-                    </scene>
-                </x3d>
-
-                <div id='x3d_generator_image_div'>
-                    <img id='x3d_generator_image_img_element'>
-                </div>
-
-                <div id='x3d_generator_html_outer_div'>
-                    <div id='x3d_generator_html_inner_div'>
-                    </div>
-                </div>
-            </div>
+        <div id="x3d_generator_image_div">
+          <img id="x3d_generator_image_img_element" />
         </div>
 
-        <script type='text/javascript' src='../database/clients/example-playRoom/settings.js'></script>
+        <div id="x3d_generator_html_outer_div">
+          <div id="x3d_generator_html_inner_div"></div>
+        </div>
+      </div>
+    </div>
 
-        <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/x3dom/release/x3dom.css' />
-        <script type='text/javascript' src='js/index.js'></script>
-        <link rel='stylesheet' type='text/css' href='css/style.css' />
-        <script type='text/javascript' src='js/referenceModel.js'></script>
-    </body>
+    <script
+      type="text/javascript"
+      src="../database/clients/example-playRoom/settings.js"
+    ></script>
 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://www.x3dom.org/x3dom/release/x3dom.css"
+    />
+    <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/referenceModel.js"></script>
+  </body>
 </html>
